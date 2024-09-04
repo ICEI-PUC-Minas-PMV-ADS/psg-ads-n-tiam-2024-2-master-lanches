@@ -12,6 +12,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 * Diego Rodrigues da Cruz
 * Fredson Marinho Almeida Borges Filho
+* Joao Severino Vieira Neto
 * Matheus Campos Pereira
 * Paulo Augusto Freitas de Sousa
 * Paulo Roberto Leite
