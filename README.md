@@ -12,9 +12,11 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 
 * Diego Rodrigues da Cruz
 * Fredson Marinho Almeida Borges Filho
+* Matheus Campos Pereira
 * Paulo Augusto Freitas de Sousa
 * Paulo Roberto Leite
-* Thiago Augusto da Cunha Parreiras
+* Thiago Augusto da Cunha Parreiras´
+
 
 ## Orientador
 
