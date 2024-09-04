@@ -119,6 +119,24 @@ O gerenciamento adequado de tarefas contribuirá para que o projeto alcance alto
 
 ## Gestão de Orçamento
 
+####    Informações do orçamento
+#####     Recursos Humanos:
+ `Diego Rodrigues - 2.500,00 R$` <br>
+
+ `Fredson Marinho - 2.500,00 R$` <br>
+ 
+ `João Severino - 2.500,00 R$` <br>
+ 
+ `Matheus Campos - 2.500,00 R$` <br>
+ 
+ `Paulo Augusto - 2.500,00 R$` <br>
+ 
+ `Paulo Roberto - 2.500,00 R$` <br>
+ 
+ `Thiago Augusto - 2.500,00 R$`
+
+#####     Hardware:
+ `Notebook - 2.500,00 R$ * 7
 O processo de determinar o orçamento do projeto é uma tarefa que depende, além dos produtos (saídas) dos processos anteriores do gerenciamento de custos, também de produtos oferecidos por outros processos de gerenciamento, como o escopo e o tempo.
 
-![Orçamento](img/02-orcamento.png)
+![Orçamento](img/Orçamento.png)
