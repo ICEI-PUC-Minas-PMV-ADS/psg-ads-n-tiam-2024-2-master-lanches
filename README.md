@@ -1,23 +1,24 @@
-# TÍTULO DO PROJETO
+# Master Lanches Delivery
 
-`CURSO`
+`Analise e Desenvolvimento de Sistemas`
 
-`DISCIPLINA`
+`Trabalho Interdisciplinar: Aplicação Movel`
 
-`SEMESTRE`
+`4° Semestre`
 
 Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
 
 ## Integrantes
 
-* Nome completo do aluno 1
-* Nome completo do aluno 2
-* Nome completo do aluno 3
-* Nome completo do aluno 4
+* Diego Rodrigues da Cruz
+* Fredson Marinho Almeida Borges Filho
+* Paulo Augusto Freitas de Sousa
+* Paulo Roberto Leite
+* Thiago Augusto da Cunha Parreiras
 
-## Orientador
+## Pedro Felipe
 
-* Nome completo do professor 1
+* Pedro Felipe Alves de Oliveira
 
 ## Instruções de utilização
 
