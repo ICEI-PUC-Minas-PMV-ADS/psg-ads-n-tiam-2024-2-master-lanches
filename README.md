@@ -16,7 +16,7 @@ Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo de
 * Paulo Roberto Leite
 * Thiago Augusto da Cunha Parreiras
 
-## Pedro Felipe
+## Orientador
 
 * Pedro Felipe Alves de Oliveira
 
