@@ -36,10 +36,10 @@ O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estat�
 
 ### 1. Estudantes Universitários
 #### 1.1 Características Demográficas
-Idade: 18-45 anos <br>
-Gênero: Todos os gêneros <br>
-Localização: Residentes em áreas urbanas e suburbanas, preferencialmente em regiões onde o serviço de entrega é viável. <br>
-Renda: Baixa a média-alta, que pode gastar com refeições fora de casa. <br>
+* Idade: 18-45 anos 
+* Gênero: Todos os gêneros 
+* Localização: Residentes em áreas urbanas e suburbanas, preferencialmente em regiões onde o serviço de entrega é viável.
+* Renda: Baixa a média-alta, que pode gastar com refeições fora de casa. 
 
 #### 1.2 Características Comportamentais
 * Conhecimentos Prévios: Usuários com experiências do basico ou avançado, que tenham uma certa familiaridade com aplicativos móveis e serviçoes de delivery.
