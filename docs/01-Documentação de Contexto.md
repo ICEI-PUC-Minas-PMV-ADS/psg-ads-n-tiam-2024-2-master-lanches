@@ -34,7 +34,7 @@ O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estat�
 
 ## Público-Alvo
 
-### 1. Estudantes Universitários
+### 1. Descrição Textual
 #### 1.1 Características Demográficas
 * Idade: 18-45 anos 
 * Gênero: Todos os gêneros 
