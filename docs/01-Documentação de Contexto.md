@@ -35,23 +35,20 @@ O grupo de trabalho pode fazer uso de questionários, entrevistas e dados estat�
 ## Público-Alvo
 
 ### 1. Estudantes Universitários
-#### Características Demográficas
-Idade: 18-25 anos
+#### 1.1 Características Demográficas
+Idade: 18-45 anos
 Gênero: Todos os gêneros
-Localização: Próximo a universidades e centros educacionais.
-Renda: Baixa a média-alta, geralmente dependente de orçamentos estudantis ou de trabalhos de meio período.
+Localização: Residentes em áreas urbanas e suburbanas, preferencialmente em regiões onde o serviço de entrega é viável.
+Renda: Baixa a média-alta, que pode gastar com refeições fora de casa.
 
-#### Características Comportamentais
+#### 1.2 Características Comportamentais
 * Conhecimentos Prévios: Usuários com experiências do basico ou avançado, que tenham uma certa familiaridade com aplicativos móveis e serviçoes de delivery.
-# NÃO MEXER - 04/09/2024 - Diego Rodrigues
 
-Descreva quem serão as pessoas que usarão a sua aplicação indicando os diferentes perfis. O objetivo aqui não é definir quem serão os clientes ou quais serão os papéis dos usuários na aplicação. A ideia é, dentro do possível, conhecer um pouco mais sobre o perfil dos usuários: conhecimentos prévios, relação com a tecnologia, relações
-hierárquicas, etc.
+* Relação com a tecnologia: Usuários com smartphones modernos, e com acesso frequente a internet. Eles utilizam aplicativos de forma cotidiana para diversas funções, compras online, entretenimento e redes sociais.
 
-Faça o público alvo seguindo esse conceito abaixo, o aplicativo é de uma hamburgueria, chamada Master Lanches Delivery:
+* Preferências Alimentares: Interessados em alimentos rápidos e saborosos, com uma inclinação para alimentos de conforto como hambúrgueres. Alguns podem ter preferências por opções gourmet ou saudáveis.
 
-
-O seu público-alvo possui uma série de características relevantes o suficiente para que indiquem a maior ou menor chance de que potenciais clientes que pertençam a esse grupo queiram comprar o seu produto ou serviço. As características de seu público-alvo são de duas naturezas principais. Demográficas e comportamentais.
+* Comportamento de Compra: Tendem a buscar conveniência e rapidez. Podem usar o aplicativo em momentos de fome ou quando desejam uma refeição sem sair de casa, especialmente durante horários de pico ou em dias de trabalho.
 
 
 Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
