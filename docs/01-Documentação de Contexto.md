@@ -59,7 +59,9 @@ Em suma, a motivação para este projeto é desenvolver uma solução que alinhe
 
 * Comportamento de Compra: Tendem a buscar conveniência e rapidez. Podem usar o aplicativo em momentos de fome ou quando desejam uma refeição sem sair de casa, especialmente durante horários de pico ou em dias de trabalho.
 
-### 1.3 Diagrama de Personas
+#### 1.3 Diagrama de Personas
+##### Persona 1:
+![Maria Oliveira](img/Persona1.png)
 
 
 
