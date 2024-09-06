@@ -63,7 +63,8 @@ Em suma, a motivação para este projeto é desenvolver uma solução que alinhe
 ##### Persona 1:
 ![Maria Oliveira](img/Persona1.png)
 
-
+##### Persona 2:
+![Marcos Cunha](img/Persona2.png)
 
 Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
 
