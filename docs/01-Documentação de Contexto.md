@@ -39,7 +39,7 @@ A personalização dos serviços também é um fator importante. Ao permitir que
 
 Em suma, a motivação para este projeto é desenvolver uma solução que alinhe crescimento e eficiência, ao mesmo tempo em que proporciona uma experiência fluida e personalizada para o cliente.
 
-![Texto alternativo]([URL-da-imagem](https://edrone.me/pt/blog/dados-ecommerce-brasil))
+![Estatica de comércios com apps](img/estatistica.png)
 
 ## Público-Alvo
 
