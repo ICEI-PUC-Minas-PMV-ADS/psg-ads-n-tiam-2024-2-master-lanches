@@ -67,8 +67,8 @@ Em suma, a motivação para este projeto é desenvolver uma solução que alinhe
 ![Marcos Cunha](img/Persona2.png)
 
 # Mapa de Stakeholders
-
-Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
+* O mapa retrata os principais stakeholders do projeto, a pirâmide descrevre a hierarquia de decisões no projeto, sendo os Stakeholders primários, os principais responsáveis por mudanças no projeto.
+![Mapa de Stakeholders](img/mapadestakeholders.png).
 
 > **Links Úteis**:
 > - [Público-alvo](https://blog.hotmart.com/pt-br/publico-alvo/)
