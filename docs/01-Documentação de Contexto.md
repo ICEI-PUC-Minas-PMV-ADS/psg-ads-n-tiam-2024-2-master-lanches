@@ -66,6 +66,8 @@ Em suma, a motivação para este projeto é desenvolver uma solução que alinhe
 ##### Persona 2:
 ![Marcos Cunha](img/Persona2.png)
 
+# Mapa de Stakeholders
+
 Adicione informações sobre o público-alvo por meio de uma descrição textual, diagramas de personas e mapa de stakeholders.
 
 > **Links Úteis**:
