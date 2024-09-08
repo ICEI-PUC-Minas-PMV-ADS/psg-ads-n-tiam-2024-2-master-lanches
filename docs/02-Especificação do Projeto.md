@@ -22,7 +22,35 @@ Nesta seção, abordaremos tópicos que partem da perspectiva do usuário, organ
 
 ## Personas
 
-Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se desenvolver profissionalmente através de um mestrado fora do país, pois adora viajar, é solteiro e sempre quis fazer um intercâmbio. Está buscando uma agência que o ajude a encontrar universidades na Europa que aceitem alunos estrangeiros.
+1_Marcos Cunha da Silva
+Idade: 22 anos
+Profissão: Estudante de Engenharia
+Marcos está completamente focado em seus estudos e, para maximizar seu tempo, optou por morar sozinho e não cozinhar. Utiliza constantemente aplicativos de delivery para se alimentar de maneira prática e rápida, permitindo-lhe dedicar mais tempo aos seus estudos.
+
+2_João Silva
+Idade: 28 anos
+Profissão: Não especificada
+João é um apaixonado por gastronomia e está sempre em busca de novos sabores. Ele gosta de experimentar hambúrgueres artesanais, especialmente aqueles com combinações mais clássicas.
+
+3_Maria Oliveira
+Idade: 32 anos
+Profissão: Personal Trainer
+Maria é uma pessoa ativa e valoriza uma alimentação saudável. No entanto, ela também aprecia a indulgência ocasional de um bom hambúrguer, equilibrando sua dieta com prazer.
+
+4_Carlos Souza
+Idade: 45 anos
+Profissão: Advogado
+Carlos prefere hambúrgueres simples, mas bem feitos, com carne de alta qualidade e acompanhamentos tradicionais. Ele valoriza a simplicidade e o sabor autêntico em suas refeições.
+
+5_Pedro Ferreira
+Idade: 30 anos
+Profissão: Viajante
+Pedro adora explorar novos sabores e combinações em suas viagens. Ele está sempre em busca de hambúrgueres artesanais únicos e inovadores, que proporcionem uma experiência gastronômica diferenciada.
+
+6_Alexandre Talim
+Idade: 35 anos
+Profissão: Gestor de Suporte
+Alexandre é um entusiasta de lanches artesanais e tem uma paixão especial por hambúrgueres com muito queijo. Ele busca constantemente novas e deliciosas variações desse prato clássico.
 
 
 ## Histórias de Usuários
