@@ -27,13 +27,17 @@ Pedro Paulo tem 26 anos, é arquiteto recém-formado e autônomo. Pensa em se de
 
 ## Histórias de Usuários
 
-Com base na análise das personas forma identificadas as seguintes histórias de usuários:
+Com base na análise das personas, foram identificadas as seguintes histórias de usuários:
 
-|EU COMO... `PERSONA`| QUERO/PRECISO ... `FUNCIONALIDADE` |PARA ... `MOTIVO/VALOR`                 |
-|--------------------|------------------------------------|----------------------------------------|
-|Usuário do sistema  | Registrar minhas tarefas           | Não esquecer de fazê-las               |
-|Administrador       | Alterar permissões                 | Permitir que possam administrar contas |
-
+| **Eu como... `PERSONA`**    | **Quero/Preciso... `FUNCIONALIDADE`**                         | **Para... `MOTIVO/VALOR`**                                                           |
+|-----------------------------|---------------------------------------------------------------|---------------------------------------------------------------------------------------|
+| Estudante                   | Fazer pedidos de forma rápida e simples                      | Poder me concentrar mais nos meus estudos e não desperdiçar tanto tempo nisso         |
+| Amante de Gastronomia       | Explorar e experimentar novos sabores de hambúrgueres artesanais | Satisfazer minha paixão por gastronomia e descobrir combinações inovadoras            |
+| Dono de Hambúrgueria        | Gerir meu estabelecimento maximizando o alcance de atendimento  | Aumentar os lucros e facilitar o controle sobre minha hamburgueria                     |
+| Consumidor de Hambúrgueres  | Fazer pedidos de hambúrgueres simples, mas bem preparados com carne de qualidade e acompanhamentos clássicos | Desfrutar de uma refeição autêntica e de qualidade sem complicações                    |
+| Explorador de Sabores       | Encontrar hambúrgueres artesanais únicos e inovadores em cada pedido | Experimentar novos sabores e combinações em cada refeição                             |
+| Entusiasta de Queijo        | Pedir hambúrgueres artesanais com muito queijo                  | Satisfazer meu desejo por um hambúrguer indulgente e cheio de queijo                   |
+| Profissional ocupado    | Realizar pedidos com agilidade e através de uma interface intuitiva | Economizar tempo durante a pausa para o almoço e minimizar o estresse no trabalho       |
 ## Requisitos
 
 As tabelas que se seguem apresentam os requisitos funcionais e não funcionais que detalham o escopo do projeto. Para determinar a prioridade de requisitos, aplicar uma técnica de priorização de requisitos e detalhar como a técnica foi aplicada.
