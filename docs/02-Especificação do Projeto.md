@@ -2,23 +2,23 @@
 
 Nesta seção, abordaremos tópicos que partem da perspectiva do usuário, organizados da seguinte forma:
 
-1_ **Personas**
+1. **Personas**
 
-2_ **Histórias de Usuários**
+2. **Histórias de Usuários**
 
-3_ **Requisitos**
-   - 3.1_ **Requisitos Funcionais**
-   - 3.2_ **Requisitos Não Funcionais**
+3. **Requisitos**
+   - 3.1 **Requisitos Funcionais**
+   - 3.2 **Requisitos Não Funcionais**
 
-4_ **Restrições**
+4. **Restrições**
 
-5_ **Diagrama de Casos de Uso**
+5. **Diagrama de Casos de Uso**
 
-6_ **Gerenciamento de Tempo**
+6. **Gerenciamento de Tempo**
 
-7_ **Gerenciamento de Equipe**
+7. **Gerenciamento de Equipe**
 
-8_ **Gestão de Orçamento**
+8. **Gestão de Orçamento**
 
 ## Personas
 
