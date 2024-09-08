@@ -1,10 +1,24 @@
 # Especificações do Projeto
 
-<span style="color:red">Pré-requisitos: <a href="1-Documentação de Contexto.md"> Documentação de Contexto</a></span>
+Nesta seção, abordaremos tópicos que partem da perspectiva do usuário, organizados da seguinte forma:
 
-Definição do problema e ideia de solução a partir da perspectiva do usuário. É composta pela definição do  diagrama de personas, histórias de usuários, requisitos funcionais e não funcionais além das restrições do projeto.
+1_ **Personas**
 
-Apresente uma visão geral do que será abordado nesta parte do documento, enumerando as técnicas e/ou ferramentas utilizadas para realizar a especificações do projeto
+2_ **Histórias de Usuários**
+
+3_ **Requisitos**
+   - 3.1_ **Requisitos Funcionais**
+   - 3.2_ **Requisitos Não Funcionais**
+
+4_ **Restrições**
+
+5_ **Diagrama de Casos de Uso**
+
+6_ **Gerenciamento de Tempo**
+
+7_ **Gerenciamento de Equipe**
+
+8_ **Gestão de Orçamento**
 
 ## Personas
 
