@@ -117,32 +117,28 @@ O gerenciamento adequado de tarefas contribuirá para que o projeto alcance alto
 
 ## Gestão de Orçamento
 
-####    Informações do orçamento
-#####     Recursos Humanos:
- `Diego Rodrigues - 2.500,00 R$ * 5 (meses)` <br>
+### Informações do Orçamento
 
- `Fredson Marinho - 2.500,00 R$ * 5 (meses)` <br>
- 
- `João Severino - 2.500,00 R$ * 5 (meses)` <br>
+#### Recursos Humanos
+- **Diego Rodrigues**: R$ 2.500,00 * 5 meses = R$ 12.500,00
+- **Fredson Marinho**: R$ 2.500,00 * 5 meses = R$ 12.500,00
+- **João Severino**: R$ 2.500,00 * 5 meses = R$ 12.500,00
+- **Matheus Campos**: R$ 2.500,00 * 5 meses = R$ 12.500,00
+- **Paulo Augusto**: R$ 2.500,00 * 5 meses = R$ 12.500,00
+- **Paulo Roberto**: R$ 2.500,00 * 5 meses = R$ 12.500,00
+- **Thiago Augusto**: R$ 2.500,00 * 5 meses = R$ 12.500,00
 
- `Matheus Campos - 2.500,00 R$ * 5 (meses)` <br>
- 
- `Paulo Augusto - 2.500,00 R$ * 5 (meses)` <br>
+  **Total Recursos Humanos**: R$ 87.500,00
 
- `Paulo Roberto - 2.500,00 R$ * 5 (meses)` <br>
- 
- `Thiago Augusto - 2.500,00 R$ * 5 (meses)`
+#### Hardware
+- **Notebook**: R$ 2.500,00 * 7 integrantes = R$ 17.500,00
 
-#####     Hardware:
- `Notebook - 2.500,00 R$ * 7 (Integrantes)`
+#### Rede
+- **500mb**: R$ 100,00 * 7 integrantes * 5 meses = R$ 3.500,00
 
-#####     Rede:
- `500mb - 100,00 R$ * 7 (Integrantes) * 5 (meses)`
+#### Software
+- **Hospedagem**: R$ 128,45 * 5 meses = R$ 642,25
 
-#####     Software:
- `Hospedagem - 128,45 R$ * 5 (meses)`
-
-#####     Serviços:
- `0,00 R$`
-
+#### Serviços
+- **Serviços**: R$ 0,00
 ![Orçamento](img/Orçamento.png)
