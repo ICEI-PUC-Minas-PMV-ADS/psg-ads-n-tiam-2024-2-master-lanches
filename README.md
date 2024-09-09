@@ -6,9 +6,7 @@
 
 `4° Semestre`
 
-Descrever resumidamente, em um ou dois parágrafos, o projeto que está sendo desenvolvido.
-
-## Integrantes
+O Master Lanches é um aplicativo de delivery em desenvolvimento para uma hamburgueria. Utilizando React Native, o aplicativo será desenvolvido para funcionar em ambas as plataformas, iOS e Android. Firestore será responsável pelo gerenciamento de dados em tempo real, como o status dos pedidos e o inventário, assegurando atualizações instantâneas. A documentação e a gestão do código-fonte serão realizadas no GitHub, enquanto o Git será utilizado para o controle de versão.
 
 * Diego Rodrigues da Cruz
 * Fredson Marinho Almeida Borges Filho
