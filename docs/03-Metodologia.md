@@ -67,7 +67,7 @@ As ferramentas escolhidas para o desenvolvimento incluem:
 Editor de código: Visual Studio Code, devido à sua integração com Git e suporte a múltiplas linguagens de programação.
 Ferramentas de comunicação: Slack, para facilitar a comunicação em tempo real e integração com outros serviços.
 Wireframing: Figma, para o desenvolvimento de protótipos e design de interfaces, escolhido pela sua capacidade colaborativa.   
-> - [Figma](https://www.figma.com/design/XYdN16MI6skcOA8dcGuiMP/Master-Lanches-team-library?node-id=0-1&t=NtrYFMkBk343msor-1)
+> - [Link Master Lanches Figma] < -(https://www.figma.com/design/XYdN16MI6skcOA8dcGuiMP/Master-Lanches-team-library?node-id=0-1&t=NtrYFMkBk343msor-1)
 
 O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas possuem integração semelhante e por isso foram selecionadas. Por fim, para criar diagramas utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
 
