@@ -116,7 +116,7 @@ Enumere as restrições à sua solução. Lembre-se de que as restrições geral
 
 ## Diagrama de Casos de Uso
 
-![Diagrama de caso de uso](img/casosdeusoTIdefinitivomesmo)
+![Diagrama de caso de uso](img/[casosdeusoTIdefinitivomesmo](https://github.com/ICEI-PUC-Minas-PMV-ADS/psg-ads-n-tiam-2024-2-master-lanches/blob/main/docs/img/Casos%20de%20uso%20TI%20definitivo%20mesmo.png))
 
 ### Nome do caso de uso: CADASTRO DE USUÁRIO
 ### Ator: Usuário
