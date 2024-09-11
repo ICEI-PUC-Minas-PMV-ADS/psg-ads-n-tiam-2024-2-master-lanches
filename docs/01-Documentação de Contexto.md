@@ -67,6 +67,6 @@ Em suma, a motivação para este projeto é desenvolver uma solução que alinhe
 ![Marcos Cunha](img/Persona2.png)
 
 # Mapa de Stakeholders
-* O mapa retrata os principais stakeholders do projeto, a pirâmide descrevre a hierarquia de decisões no projeto, sendo os Stakeholders primários, os principais responsáveis por mudanças no projeto.
+* O mapa retrata os principais stakeholders do projeto, a pirâmide descreve a hierarquia de decisões no projeto, sendo os Stakeholders primários, os principais responsáveis por mudanças no projeto.
   
 ![Mapa de Stakeholders](img/mapadeStakeholders.png).
