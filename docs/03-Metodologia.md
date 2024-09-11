@@ -31,15 +31,13 @@ etiquetas:
 - `enhancement`: uma funcionalidade precisa ser melhorada
 - `feature`: uma nova funcionalidade precisa ser introduzida
 
-Discuta como a configuração do projeto foi feita na ferramenta de versionamento escolhida. Exponha como a gerência de tags, merges, commits e branchs é realizada. Discuta como a gerência de issues foi realizada.
+Quanto à gerência de commits, o projeto adota a seguinte convenção para
+nomeação:
 
-> **Links Úteis**:
-> - [Microfundamento: Gerência de Configuração](https://pucminas.instructure.com/courses/87878/)
-> - [Tutorial GitHub](https://guides.github.com/activities/hello-world/)
-> - [Git e Github](https://www.youtube.com/playlist?list=PLHz_AreHm4dm7ZULPAmadvNhH6vk9oNZA)
->  - [Comparando fluxos de trabalho](https://www.atlassian.com/br/git/tutorials/comparing-workflows)
-> - [Understanding the GitHub flow](https://guides.github.com/introduction/flow/)
-> - [The gitflow workflow - in less than 5 mins](https://www.youtube.com/watch?v=1SXpE08hvGs)
+- (documentação) - {descrição mudança}: melhorias ou acréscimos à documentação
+- (bug encontrado) - {descrição mudança}: uma funcionalidade encontra-se com problemas
+- (bug resolvido) - {descrição mudança}: um bug foi resolvido
+- (funcionalidade) - {descrição mudança}: uma nova funcionalidade precisa ser introduzida
 
 ## Gerenciamento de Projeto
 
@@ -59,14 +57,12 @@ Ferramentas
 As ferramentas escolhidas para o desenvolvimento incluem:
 
 > - Editor de código: Visual Studio Code, devido à sua integração com Git e suporte a múltiplas linguagens de programação.
-> - Ferramentas de comunicação: Slack, para facilitar a comunicação em tempo real e integração com outros serviços.
+> - Ferramentas de comunicação: Discord, para facilitar a comunicação em tempo real e integração com outros serviços.
 > - Wireframing: Figma, para o desenvolvimento de protótipos e design de interfaces, escolhido pela sua capacidade colaborativa.   
 > - [Link Master Lanches Figma](https://www.figma.com/design/XYdN16MI6skcOA8dcGuiMP/Master-Lanches-team-library?node-id=0-1&t=NtrYFMkBk343msor-1)
 
-O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas possuem integração semelhante e por isso foram selecionadas. Por fim, para criar diagramas utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
+O editor de código foi escolhido porque ele possui uma integração com o sistema de versão. As ferramentas de comunicação utilizadas são facéis de serem usadas e por isso foram selecionadas. Por fim, para criar designs/prototipos utilizamos essa ferramenta por melhor captar as necessidades da nossa solução.
 
-Liste quais ferramentas foram empregadas no desenvolvimento do projeto, justificando a escolha delas, sempre que possível.
- 
 > **Possíveis Ferramentas que auxiliarão no gerenciamento**: 
-> - [Slack](https://slack.com/)
+> - [Discord](https://discord.com/)
 > - [Github](https://github.com/)
