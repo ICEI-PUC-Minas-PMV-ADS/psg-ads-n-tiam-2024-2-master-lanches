@@ -116,16 +116,218 @@ Enumere as restrições à sua solução. Lembre-se de que as restrições geral
 
 ## Diagrama de Casos de Uso
 
-O diagrama de casos de uso é o próximo passo após a elicitação de requisitos, que utiliza um modelo gráfico e uma tabela com as descrições sucintas dos casos de uso e dos atores. Ele contempla a fronteira do sistema e o detalhamento dos requisitos funcionais com a indicação dos atores, casos de uso e seus relacionamentos. 
+### Nome do caso de uso: CADASTRO DE USUÁRIO
+### Ator: Usuário
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Casos de Uso”.
+PRÉ-REQUISITOS: ...
 
-> **Links Úteis**:
-> - [Criando Casos de Uso](https://www.ibm.com/docs/pt-br/elm/6.0?topic=requirements-creating-use-cases)
-> - [Como Criar Diagrama de Caso de Uso: Tutorial Passo a Passo](https://gitmind.com/pt/fazer-diagrama-de-caso-uso.html/)
-> - [Lucidchart](https://www.lucidchart.com/)
-> - [Astah](https://astah.net/)
-> - [Diagrams](https://app.diagrams.net/)
+FLUXO PRINCIPAL:
+1.	Usuário acessa a página de cadastro.
+2.	O sistema exibe um formulário para preenchimento dos dados.
+3.	Usuário preenche os dados solicitados e confirma.
+4.	Sistema armazena os dados do usuário com sucesso e exibe a mensagem de confirmação ao usuário.
+
+PÓS-CONDIÇÃO: 
+Usuário está cadastrado e pode fazer autenticação no aplicativo.
+
+FLUXOS ALTERNATIVOS:
+
+FLUXO ALTERNATIVO 1 – E-mail já cadastrado:
+1.	O sistema detecta que já existe um usuário cadastrado com o e-mail informado.
+2.	O sistema exibe a mensagem de erro ao usuário.
+3.	O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o usuário corrija o e-mail.
+
+FLUXO ALTERNATIVO 2 – Campos obrigatórios não preenchidos:
+1.	O sistema detecta que há campos obrigatórios não preenchidos.
+2.	O sistema exibe a mensagem de erro ao usuário.
+3.	O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o usuário complete os campos faltantes.
+
+FLUXO ALTERNATIVO 3 – Falha no armazenamento dos dados:
+1.	O sistema não consegue armazenar os dados do usuário por algum motivo técnico.
+2.	O sistema exibe a mensagem de erro ao usuário.
+3.	O sistema retorna ao passo 3 do Fluxo Principal para que o usuário tente novamente.¬¬
+
+### Nome do caso de uso: Autenticação do usuário
+### Ator: Usuário
+
+PRÉ-REQUISITOS: 
+Usuário deve estar cadastrado na plataforma.
+
+FLUXO PRINCIPAL:
+1.	Usuário acessa a página de autenticação.
+2.	O sistema exibe um formulário solicitando o e-mail e a senha.
+3.	Usuário preenche os dados solicitados e confirma.
+4.	O sistema autentica o usuário com sucesso e envia a mensagem sucesso ao usuário.
+
+PÓS-CONDIÇÃO:
+Usuário autenticado pode acessar os dados de sua conta no aplicativo.
+
+FLUXOS ALTERNATIVOS:
+
+FLUXO ALTERNATIVO 1 – Dados inválidos:
+1.	O sistema detecta que o e-mail ou a senha informados estão incorretos.
+2.	O sistema exibe a mensagem de erro ao usuário.
+3.	O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o usuário corrija os dados informados.
+
+FLUXO ALTERNATIVO 2 – Campos obrigatórios não preenchidos:
+1.	O sistema detecta que há campos obrigatórios não preenchidos.
+2.	O sistema exibe a mensagem de erro ao usuário.
+3.	O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o usuário complete os campos faltantes.
+
+FLUXO ALTERNATIVO 3 – Falha na autenticação:
+5.	O sistema enfrenta um problema técnico e não consegue autenticar o usuário.
+6.	O sistema exibe a mensagem de erro ao usuário.
+7.	O sistema retorna ao passo 3 do Fluxo Principal para que o usuário tente novamente.¬¬
+
+### Nome do caso de uso: Controle de estoque
+### Ator: Gestor
+
+PRÉ-REQUISITOS: 
+Usuário deve estar autenticado com uma conta de gestor da aplicação.
+
+FLUXO PRINCIPAL:
+1.	O gestor acessa a página de controle de estoque.
+2.	O sistema exibe a lista de produtos cadastrados.
+3.	O gestor ativa ou desativa a disponibilidade de um produto e confirma a alteração.
+4.	O sistema processa o comando e envia a mensagem de confirmação ao gestor.
+
+PÓS-CONDIÇÃO:
+A disponibilidade do produto estara atualizada conforme solicitado pelo gestor (ativada ou desativada).
+
+FLUXO ALTERNATIVO – Falha na alteração:
+1.	O sistema enfrenta um problema técnico e não consegue ativar ou desativar o produto.
+2.	O sistema exibe a mensagem de erro ao gestor.
+3.	O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o gestor tente novamente.
+
+### Nome do caso de uso: Controle de Funcionamento
+### Ator: Gestor
+
+PRÉ-REQUISITOS:
+Usuário deve estar autenticado com uma conta de gestor da aplicação.
+
+FLUXO PRINCIPAL:
+1.	O gestor acessa a opção de controle de funcionamento da loja.
+2.	O sistema exibe as opções ativar ou desativar a loja.
+3.	O gestor seleciona a opção desejada (ativar ou desativar) e confirma.
+4.	O sistema processa o comando e envia a mensagem de confirmação ao gestor.
+
+PÓS-CONDIÇÃO: 
+A loja estara ativada ou desativada conforme a solicitação do gestor.
+
+FLUXO ALTERNATIVO – Falha na alteração:
+1.	O sistema enfrenta um problema técnico e não consegue ativar ou desativar o loja.
+2.	O sistema exibe a mensagem de erro ao gestor.
+3.	O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o gestor tente novamente.
+
+### Nome do caso de uso: Adicionar produto
+### Ator: Gestor
+
+PRÉ-REQUISITOS:
+Usuário deve estar autenticado com uma conta de gestor da aplicação.
+
+FLUXO PRINCIPAL:
+1.	O gestor acessa a opção de adicionar produto.
+2.	O gestor insere os dados do produto (nome, preço, descrição, etc.).
+3.	O sistema processa o comando e envia a mensagem de confirmação ao gestor.
+
+PÓS-CONDIÇÃO: 
+O produto esta disponivel na loja.
+
+FLUXO ALTERNATIVO – Falha na adição:
+4.	O sistema enfrenta um problema técnico e não cadastrar o produto.
+5.	O sistema exibe a mensagem de erro ao gestor.
+6.	O sistema retorna ao passo 2 do Fluxo Principal, permitindo que o gestor tente novamente.
+
+### Nome do caso de uso: Comprar produto
+### Ator: Usuário
+
+PRÉ-REQUISITOS:
+Usuário deve estar autenticado na aplicação.
+
+FLUXO PRINCIPAL:
+1. O usuário acessa a aplicação e navega até a seção de produtos.
+2. O usuário seleciona os produtos desejados e adiciona ao carrinho.
+3. O usuário escolhe o pedido será para entrega ou retirada na loja.
+4. O usuário confirma o pedido e escolhe o método de pagamento.
+5. O sistema processa o pedido e exibe a mensagem de confirmação ao usuário.
+6. O sistema registra o pedido e envia a loja.
+
+PÓS-CONDIÇÃO: 
+O sistema aguarda a confirmação do pagamento.
+
+FLUXO ALTERNATIVO – Falha na seleção de produtos:
+1. O sistema enfrenta um problema técnico e não consegue adicionar os produtos ao carrinho.
+2. O sistema exibe a mensagem de erro ao usuário.
+3. O sistema retorna ao passo 2 do Fluxo Principal, permitindo que o usuário tente novamente.
+
+### Nome do caso de uso: Aplicar Cupom (Extend do Caso de Uso: Comprar produto)
+### Ator: Usuário
+
+PRÉ-REQUISITOS: 
+Usuário deve estar autenticado e ter um cupom válido.
+
+FLUXO PRINCIPAL:
+1. Durante a compra (após a seleção dos produtos), o usuário opta por aplicar um cupom de desconto.
+2. O sistema solicita que o usuário insira o código do cupom.
+3. O usuário insere o código e confirma.
+4. O sistema aplica o cupom ao valor total da compra.
+
+
+PÓS-CONDIÇÃO: 
+O valor da compra é atualizado com o desconto do cupom, se válido.
+
+FLUXOS ALTERNATIVO - Cumpom Inválido:
+1. o Sistema detecta que o cupom é inválido.
+2. O sistema envia mensagem de erro ao usuário.
+3. O sistema retorna ao passo 3 do fluxo principal para que o usuário possa tentar novamente.
+
+### Nome do caso de uso: Pagamento
+### Ator: Usuário
+
+PRÉ-REQUISITOS: Usuário deve estar autenticado e ter finalizado a seleção dos produtos.
+
+FLUXO PRINCIPAL:
+1. O usuário escolhe o método de pagamento: PIX ou dinheiro.
+2. O usuário seleciona PIX:
+3. O sistema exibe as informações necessárias para o pagamento via PIX (código QR ou chave PIX).
+4. O usuário realiza o pagamento via PIX.
+5. O sistema confirma a solicitação e exibe uma mensagem de sucesso ao usuário.
+
+PÓS-CONDIÇÃO: 
+O sistema conclui a compra.
+
+FLUXOS ALTERNATIVOS:
+
+FLUXOS ALTERNATIVO 1 - Falha na confirmação do pagamento:
+1. O sistema não recebe a confirmação do pagamento.
+2. O sistema exibe a mensagem de erro ao usuário.
+3. O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o usuário tente realizar o pagamento novamente.
+
+FLUXOS ALTERNATIVO 2 - pagamento em dinheiro:
+1. O usuário escolhe a opção "dinheiro".
+2. O sistema registra a escolha e exibe a mensagem de confirmação, indicando que o pagamento será feito no ato da entrega do pedido.
+3. O sistema retorna ao passo 4 do fluxo principal.
+
+### Nome do caso de uso: Confirmar pagamento
+### Ator: Gestor
+
+PRÉ-REQUISITOS: Usuário deve estar autenticado em uma conta de gestor do sistema.
+
+FLUXO PRINCIPAL:
+1. O gestor acessa a lista pedidos recebidos.
+2. O sistema exibe os pedidos pendentes de confirmação de pagamento.
+3. O gestor seleciona um pedido e confirma o pagamento (caso o pagamento via PIX já tenha sido realizado).
+4. O sistema registra a confirmação e exibe uma mensagem de sucesso ao gestor.
+
+PÓS-CONDIÇÃO: 
+O pedido é confirmado e a compra é concluída.
+
+FLUXOS ALTERNATIVO - pagamento em dinheiro:
+1. O gestor verifica que o cliente escolheu a opção "dinheiro".
+2. O gestor confirma o pedido.
+2.O sistema exibe uma mensagem de confirmação.
+
+
 
 ## Gerenciamento de Tempo
 
