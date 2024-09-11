@@ -116,7 +116,7 @@ Enumere as restrições à sua solução. Lembre-se de que as restrições geral
 
 ## Diagrama de Casos de Uso
 
-![Diagrama de caso de uso](img/[casosdeusoTIdefinitivomesmo])
+![Diagrama de caso de uso](img/casosdeusoTIdefinitivomesmo.png)
 
 ### Nome do caso de uso: CADASTRO DE USUÁRIO
 ### Ator: Usuário
