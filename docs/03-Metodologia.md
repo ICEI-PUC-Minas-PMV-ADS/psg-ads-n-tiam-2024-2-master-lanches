@@ -48,17 +48,11 @@ Discuta como a configuração do projeto foi feita na ferramenta de versionament
 Apresente a divisão de papéis entre os membros do grupo.
 
 Exemplificação: A equipe utiliza metodologias ágeis, tendo escolhido o Scrum como base para definição do processo de desenvolvimento. A equipe está organizada da seguinte maneira:
-- Scrum Master: Felipe Domingos;
-- Product Owner: Rommel Carneiro;
-- Equipe de Desenvolvimento: Pedro Penna, Pedro Ivo, Rodrigo Richard;
-- Equipe de Design: Simone Nogueira.
+- Scrum Master: João Severino;
+- Product Owner: Paulo Roberto;
+- Equipe de Desenvolvimento: Paulo Augusto, Diego Rodrigues, Matheus Campos, Thiago Augusto, Fredson Marinho.
 
-> **Links Úteis**:
-> - [11 Passos Essenciais para Implantar Scrum no seu Projeto](https://mindmaster.com.br/scrum-11-passos/)
-> - [Scrum em 9 minutos](https://www.youtube.com/watch?v=XfvQWnRgxG0)
-> - [Os papéis do Scrum e a verdade sobre cargos nessa técnica](https://www.atlassian.com/br/agile/scrum/roles)
-
-Processo
+### Processo
 O processo de trabalho segue as cerimônias do Scrum, como reuniões diárias, planejamento de sprints e retrospectivas. O GitHub Projects é utilizado para acompanhar o progresso das tarefas e gerenciar o backlog, permitindo uma visão clara das etapas do projeto.
 
 Ferramentas
