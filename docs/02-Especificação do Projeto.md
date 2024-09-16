@@ -274,39 +274,58 @@ FLUXOS ALTERNATIVO - Cumpom Inválido:
 2. O sistema envia mensagem de erro ao usuário.
 3. O sistema retorna ao passo 3 do fluxo principal para que o usuário possa tentar novamente.
 
-### Nome do caso de uso: Pagamento
-### Ator: Usuário
-
-PRÉ-REQUISITOS: Usuário deve estar autenticado e ter finalizado a seleção dos produtos.
-
-FLUXO PRINCIPAL:
-1. O usuário escolhe o método de pagamento: PIX ou dinheiro.
-2. O usuário seleciona PIX:
-3. O sistema exibe as informações necessárias para o pagamento via PIX (código QR ou chave PIX).
-4. O usuário realiza o pagamento via PIX.
-5. O sistema confirma a solicitação e exibe uma mensagem de sucesso ao usuário.
-
-PÓS-CONDIÇÃO: 
-O sistema conclui a compra.
-
-FLUXOS ALTERNATIVOS:
-
-FLUXOS ALTERNATIVO 1 - Falha na confirmação do pagamento:
-1. O sistema não recebe a confirmação do pagamento.
-2. O sistema exibe a mensagem de erro ao usuário.
-3. O sistema retorna ao passo 3 do Fluxo Principal, permitindo que o usuário tente realizar o pagamento novamente.
-
-FLUXOS ALTERNATIVO 2 - pagamento em dinheiro:
-1. O usuário escolhe a opção "dinheiro".
-2. O sistema registra a escolha e exibe a mensagem de confirmação, indicando que o pagamento será feito no ato da entrega do pedido.
-3. O sistema retorna ao passo 4 do fluxo principal.
-
 
 
 
 ## Gerenciamento de Tempo
 
+Periodo estimado 2 semanas para cumprir as tarefas a seguir.
+#### PARTE DO CLIENTE
+### Cadastro/Login
+tempo desenvolvimento front end = 5 horas --- tempo de teste = 8 horas
+tempo desenvolvimento back end = 10 horas --- tempo de teste = 12 horas
 
+### Perfil 
+tempo desenvolvimento front end = 2:30 horas --- tempo de teste = 2 horas
+tempo desenvolvimento back end = 2 horas --- tempo de teste = 3 horas
+
+### HomePage
+tempo desenvolvimento front end = 6 horas --- tempo de teste = 10 horas
+tempo desenvolvimento back end = 10 horas --- tempo de teste = 12 horas
+
+### SearchPage
+tempo desenvolvimento front end = 2 horas --- tempo de teste = 2 horas
+tempo desenvolvimento back end = 3 horas --- tempo de teste = 3 horas
+
+### Carrinho
+tempo desenvolvimento front end = 1:30 horas --- tempo de teste = 2 horas
+tempo desenvolvimento back end = 2 horas --- tempo de teste = 3 horas
+
+### telaPedido -> status do pedido
+tempo desenvolvimento front end = 1:30 horas --- tempo de teste = 1 horas
+tempo desenvolvimento back end = 2:30 horas --- tempo de teste = 5 horas
+
+#### PARTE DO GERENTE/ADMINISTRADOR
+### Login
+tempo desenvolvimento front end = 2:30 horas --- tempo de teste = 4 horas
+tempo desenvolvimento back end = 5 horas --- tempo de teste = 6 horas
+
+### Tela estoque
+tempo desenvolvimento front end = 2 horas --- tempo de teste = 2 horas
+tempo desenvolvimento back end = 5 horas --- tempo de teste = 6 horas
+
+### Tela produto
+tempo desenvolvimento front end = 1:30 horas --- tempo de teste = 3 horas
+tempo desenvolvimento back end = 2 horas --- tempo de teste = 4 horas
+
+### Tela cupom
+tempo desenvolvimento front end = 2 horas --- tempo de teste = 4 horas
+tempo desenvolvimento back end = 1:30 horas --- tempo de teste = 3 horas
+
+### Gestão de pedidos
+
+tempo desenvolvimento front end = 1:30 horas --- tempo de teste = 2 horas
+tempo desenvolvimento back end = 6 horas --- tempo de teste = 8 horas
 
 ## Gerenciamento de Equipe 
 
