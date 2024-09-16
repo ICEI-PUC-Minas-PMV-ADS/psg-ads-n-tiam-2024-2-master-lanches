@@ -107,7 +107,7 @@ O projeto está restrito pelos itens apresentados na tabela a seguir.
 
 ## Diagrama de Casos de Uso
 
-![Simple Project Timeline](img/casodeuso.png)
+![Simple Project Timeline](img/casodeusoo.png)
 
 ### Nome do caso de uso: CADASTRO DE USUÁRIO
 ### Ator: Usuário
@@ -301,36 +301,12 @@ FLUXOS ALTERNATIVO 2 - pagamento em dinheiro:
 2. O sistema registra a escolha e exibe a mensagem de confirmação, indicando que o pagamento será feito no ato da entrega do pedido.
 3. O sistema retorna ao passo 4 do fluxo principal.
 
-### Nome do caso de uso: Confirmar pagamento
-### Ator: Gestor
-
-PRÉ-REQUISITOS: Usuário deve estar autenticado em uma conta de gestor do sistema.
-
-FLUXO PRINCIPAL:
-1. O gestor acessa a lista pedidos recebidos.
-2. O sistema exibe os pedidos pendentes de confirmação de pagamento.
-3. O gestor seleciona um pedido e confirma o pagamento (caso o pagamento via PIX já tenha sido realizado).
-4. O sistema registra a confirmação e exibe uma mensagem de sucesso ao gestor.
-
-PÓS-CONDIÇÃO: 
-O pedido é confirmado e a compra é concluída.
-
-FLUXOS ALTERNATIVO - pagamento em dinheiro:
-1. O gestor verifica que o cliente escolheu a opção "dinheiro".
-2. O gestor confirma o pedido.
-2.O sistema exibe uma mensagem de confirmação.
 
 
 
 ## Gerenciamento de Tempo
 
-Com diagramas bem organizados que permitem gerenciar o tempo nos projetos, o gerente de projetos agenda e coordena tarefas dentro de um projeto para estimar o tempo necessário de conclusão.
 
-![Diagrama de rede simplificado notação francesa (método francês)](img/02-diagrama-rede-simplificado.png)
-
-O gráfico de Gantt ou diagrama de Gantt também é uma ferramenta visual utilizada para controlar e gerenciar o cronograma de atividades de um projeto. Com ele, é possível listar tudo que precisa ser feito para colocar o projeto em prática, dividir em atividades e estimar o tempo necessário para executá-las.
-
-![Gráfico de Gantt](img/02-grafico-gantt.png)
 
 ## Gerenciamento de Equipe 
 
