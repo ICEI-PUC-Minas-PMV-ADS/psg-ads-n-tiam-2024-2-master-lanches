@@ -77,25 +77,23 @@ As tabelas que se seguem apresentam os requisitos funcionais e não funcionais q
 |RF-001| O sistema deve permitir que o usuário realize o cadastro, fornecendo nome, e-mail, senha, e confirmação de senha, endereço, telefone e cpf. | ALTA | 
 |RF-002| O sistema deve permitir que o usuário faça login utilizando o e-mail e senha cadastrados. Caso as credenciais estejam incorretas, deve exibir uma mensagem de erro.   | ALTA |
 |RF-003| O sistema deve permitir que o usuário navegue pela lista de produtos e adicione itens ao carrinho. Deve haver a opção de remover produtos antes da finalização da compra.   | ALTA |
-|RF-004| O sistema deve permitir que o usuário faça pedidos, escolhendo entre entrega ou retirada na loja. A funcionalidade de escolher o método de entrega deve estar presente durante a finalização da compra.   | ALTA |
-|RF-005| O sistema deve permitir que o usuário aplique cupons de desconto durante a compra. O usuário deve inserir o código do cupom e, caso válido, o sistema deve recalcular o valor da compra com o desconto. (Opcional)   | MÉDIA |
-|RF-006| O sistema deve permitir que o usuário escolha o método de pagamento, podendo ser via PIX (exibição do QR code ou chave) ou dinheiro (pagamento no ato da entrega).   | ALTA |
-|RF-007| O sistema deve exibir uma mensagem de confirmação de sucesso após o pedido ser finalizado com sucesso, contendo os detalhes da compra (produto, valor, tempo estimado de entrega/retirada).   | ALTA |
-|RF-008| O sistema deve permitir que o gestor adicione novos produtos, fornecendo informações como nome, preço, descrição e imagem do produto. (Opcional)   | MÉDIA |
-|RF-009| O sistema deve permitir que o gestor gerencie o estoque, podendo ativar ou desativar produtos específicos para exibição no catálogo de produtos.   | MÉDIA |
-|RF-010| O sistema deve permitir que o gestor ative ou desative o funcionamento da loja, bloqueando novos pedidos quando desativada. (Opcional)   | BAIXA |
-|RF-011| O sistema deve permitir que o gestor acesse a lista de pedidos e confirme o pagamento de pedidos realizados via PIX, garantindo que o pedido possa ser processado.   | ALTA |
+|RF-004| O sistema deve permitir que o usuário aplique cupons de desconto durante a compra. O usuário deve inserir o código do cupom e, caso válido, o sistema deve recalcular o valor da compra com o desconto.   | MÉDIA |
+|RF-005| O sistema deve exibir uma mensagem de confirmação de sucesso após o pedido ser finalizado com sucesso, contendo os detalhes da compra (produto, valor, tempo estimado de entrega/retirada).   | ALTA |
+|RF-006| O sistema deve permitir que o gestor adicione novos produtos, fornecendo informações como nome, preço, descrição e imagem do produto.  | MÉDIA |
+|RF-007| O sistema deve permitir que o gestor gerencie o estoque, podendo ativar ou desativar produtos específicos para exibição no catálogo de produtos.   | MÉDIA |
+|RF-008| O sistema deve permitir que o gestor ative ou desative o funcionamento da loja, bloqueando novos pedidos quando desativada. | BAIXA |
 
 ### Requisitos não Funcionais
 
 |ID     | Descrição do Requisito  |Prioridade |
 |-------|-------------------------|----|
 |RNF-001| O sistema deve ser totalmente responsivo, ajustando a interface para diferentes resoluções de tela em dispositivos móveis, tablets e desktops. | ALTA | 
-|RNF-002| O sistema deve garantir que cada transação seja processada em no máximo 3 segundos, para evitar frustração do usuário. |  MÉDIA |
-|RNF-003| O sistema deve suportar até 1.000 usuários simultâneos, sem degradação significativa de desempenho. (Opcional) |  BAIXA |
-|RNF-004| Todos os dados sensíveis dos usuários, como senha e informações de pagamento, devem ser protegidos por criptografia (por exemplo, SSL/TLS). |  ALTA |
-|RNF-005| O sistema deve garantir uma disponibilidade mínima de 99,9% durante o horário de funcionamento da loja, evitando interrupções. (Opcional) |  MÉDIA |
-|RNF-006| O sistema deve ser compatível com os navegadores mais utilizados, como Google Chrome, Mozilla Firefox, e Safari. |  ALTA |
+|RNF-002| O sistema deve garantir que cada transição seja processada em no máximo 3 segundos, para evitar frustração do usuário. |  MÉDIA |
+|RNF-003| O sistema deve suportar até 1.000 usuários simultâneos, sem degradação de desempenho.  |  BAIXA |
+|RNF-004| As senhas do usuário deve ser criptografada |  ALTA |
+|RNF-005| O sistema deve garantir uma disponibilidade mínima de 99,9% durante o horário de funcionamento da loja, evitando interrupções.
+|  MÉDIA |
+
 
 ## Restrições
 
