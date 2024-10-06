@@ -3,7 +3,6 @@
 
 Nesta seção iremos passar pela visão geral da interação do usuário pelas telas do sistema e protótipo interativo das telas com as funcionalidades que fazem parte do sistema (wireframes).
 
-### Diego Rodrigues, responsável pelo Diagrama de Fluxo
 ## Diagrama de Fluxo
 
 ![Diagrama de Fluxo](img/diagrama_de_fluxo.png)
