@@ -6,13 +6,9 @@ Definição de como o software é estruturado em termos dos componentes que faze
 
 ## Diagrama de Classes
 
-O diagrama de classes ilustra graficamente como será a estrutura do software, e como cada uma das classes da sua estrutura estarão interligadas. Essas classes servem de modelo para materializar os objetos que executarão na memória.
+As classes do sistema de gerenciamento de lanches se organizam em uma arquitetura modular, onde os modelos representam os dados (como `Adicional`, `Bebida`, `Cliente`, `Produto`, `Pedido` e `Endereco`). Os controladores (como `AdicionalController` e `ProdutoController`) gerenciam a interação com a API REST, chamando serviços correspondentes que contêm a lógica de negócios (como `AdicionalService` e `ProdutoService`). Esses serviços interagem com o banco de dados Firestore para realizar operações CRUD. Essa estrutura permite fácil manutenção e escalabilidade, facilitando a gestão de pedidos e produtos em um ambiente de lanchonete.
 
-As referências abaixo irão auxiliá-lo na geração do artefato “Diagrama de Classes”.
-
-> - [Diagramas de Classes - Documentação da IBM](https://www.ibm.com/docs/pt-br/rational-soft-arch/9.6.1?topic=diagrams-class)
-> - [O que é um diagrama de classe UML? | Lucidchart](https://www.lucidchart.com/pages/pt/o-que-e-diagrama-de-classe-uml)
-
+![DiagramaClasses](img/DiagramaClasses.png)
 
 ## Modelo ER
 
