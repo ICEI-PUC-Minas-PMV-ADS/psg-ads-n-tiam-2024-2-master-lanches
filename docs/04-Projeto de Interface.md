@@ -5,6 +5,7 @@ Nesta seção iremos passar pela visão geral da interação do usuário pelas t
 
 ## Diagrama de Fluxo
 
+O fluxograma representa o caminho que o usuário percorre ao utilizar o site da lanchonete Master Lanches. O processo inicia com o acesso ao site, seguido pela verificação de cadastro, onde o usuário pode realizar o login ou criar uma nova conta. Após esse passo, o usuário escolhe os itens desejados, seleciona o método de pagamento, confirma o pedido e, por fim, acompanha o status do pedido até a sua entrega.
 ![Diagrama de Fluxo](img/diagrama_de_fluxo.png)
 
 ## Wireframes
