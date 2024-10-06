@@ -1,5 +1,7 @@
 # Plano de Testes de Software 
 
+Esses são alguns dos cenários de teste que vão garantir que os requisitos funcionais e não funcionais da aplicação sejam satisfeitos. Os testes foram elaborados com base nas principais funcionalidades do sistema, visando verificar a adequação do software às necessidades dos usuários e assegurar a qualidade da aplicação.
+
 ### Cenário de Teste: Cadastro de Usuário
 - **Objetivo:** Verificar se o sistema está cadastrando usuários da forma correta e eficiente.
 - **Funcionalidades Avaliadas:** 
