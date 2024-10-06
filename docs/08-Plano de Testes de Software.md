@@ -3,9 +3,9 @@
 Cenário de Teste: Cadastro de Usuário
 - Objetivo: Verificar se o sistema está cadastrando usuários da forma correta e eficiente.
 - Funcionalidades Avaliadas: 
- - Criar uma conta com dados válidos(e-mail, nome, senha)
- - Validação de dados incorretos
- - Feedback para o usuário, em caso de erro ou sucesso
+  - Criar uma conta com dados válidos(e-mail, nome, senha)
+  - Validação de dados incorretos
+  - Feedback para o usuário, em caso de erro ou sucesso
 - Grupo de usuários: Novos usuários que nunca tiveram acesso ao sistema.
 - Ferramentas utilizadas: Expo GO
 
