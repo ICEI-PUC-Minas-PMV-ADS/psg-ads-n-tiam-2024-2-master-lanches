@@ -55,8 +55,8 @@ Explique como a hospedagem e o lançamento da plataforma foi feita.
 ## Qualidade de Software
 
 **1. Adequação**
-**- Justificativa:** Esta subcaracterística garante que as funcionalidades desenvolvidas atendam aos requisitos e necessidades dos usuários, especialmente no fluxo de pedidos. Como o objetivo é fornecer um sistema que permita aos usuários fazer pedidos de forma simples e eficaz, a adequação é essencial para que o software entregue exatamente o que foi planejado.
-**- Métricas:** Percentual de cobertura dos requisitos, quantidade de funcionalidades essenciais implementadas corretamente.
+- **Justificativa:** Esta subcaracterística garante que as funcionalidades desenvolvidas atendam aos requisitos e necessidades dos usuários, especialmente no fluxo de pedidos. Como o objetivo é fornecer um sistema que permita aos usuários fazer pedidos de forma simples e eficaz, a adequação é essencial para que o software entregue exatamente o que foi planejado.
+- **Métricas:** Percentual de cobertura dos requisitos, quantidade de funcionalidades essenciais implementadas corretamente.
 
 **2. Acurácia**
 **- Justificativa:** A acurácia assegura que as funções implementadas forneçam resultados corretos e precisos, o que é crucial para que o usuário visualize corretamente os itens disponíveis, preços e status dos pedidos.
@@ -75,8 +75,8 @@ Explique como a hospedagem e o lançamento da plataforma foi feita.
 **- Métricas:** Taxa de falhas do sistema, tempo médio de recuperação após uma falha.
 
 **6. Inteligibilidade**
-**- Justificativa:** A inteligibilidade refere-se à facilidade com que os usuários entendem e utilizam o sistema. Como o público da Master Lanches pode variar em termos de experiência com tecnologia, é essencial que a interface seja clara e intuitiva.
-**- Métricas:** Número de reclamações relacionadas à dificuldade de uso, tempo médio que os usuários levam para completar um pedido.
+- **Justificativa:** A inteligibilidade refere-se à facilidade com que os usuários entendem e utilizam o sistema. Como o público da Master Lanches pode variar em termos de experiência com tecnologia, é essencial que a interface seja clara e intuitiva.
+- **Métricas:** Número de reclamações relacionadas à dificuldade de uso, tempo médio que os usuários levam para completar um pedido.
 
 **7. Capacidade para ser Instalado**
 **- Justificativa:** A facilidade de instalação é importante para garantir que o software seja acessível a todos os usuários, independente do dispositivo que utilizam. O software precisa ser fácil de configurar e utilizar, sem complicações técnicas.
