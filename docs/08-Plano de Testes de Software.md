@@ -1,10 +1,31 @@
-# Plano de Testes de Software
+# Plano de Testes de Software 
 
-<span style="color:red">Pré-requisitos: <a href="2-Especificação do Projeto.md"> Especificação do Projeto</a></span>, <a href="3-Projeto de Interface.md"> Projeto de Interface</a>
+Cenário de Teste: Cadastro de Usuário
+- Objetivo: Verificar se o sistema está cadastrando usuários da forma correta e eficiente.
+- Funcionalidades Avaliadas: 
+ - Criar uma conta com dados válidos(e-mail, nome, senha)
+ - Validação de dados incorretos
+ - Feedback para o usuário, em caso de erro ou sucesso
+- Grupo de usuários: Novos usuários que nunca tiveram acesso ao sistema.
+- Ferramentas utilizadas: Expo GO
 
-Apresente os cenários de testes utilizados na realização dos testes da sua aplicação. Escolha cenários de testes que demonstrem os requisitos sendo satisfeitos.
+Cenário de Teste: Login de Usuário
+Objetivo: Verificar se usuários já cadastrados no sistema, conseguem realizar o login na conta de forma segura e eficiente
+Funcionalidades Avaliadas:
+Login com credenciais corretas
+Tentativas de Login com senha incorreta e/ou e-mail inexistente
+Grupo de usuários: Usuários já cadastrados no APP
+Ferramentas utilizadas: Validação por meio da API
 
-Enumere quais cenários de testes foram selecionados para teste. Neste tópico o grupo deve detalhar quais funcionalidades avaliadas, o grupo de usuários que foi escolhido para participar do teste e as ferramentas utilizadas.
+Cenário de Teste: Escolha e Adição de Itens ao Carrinho
+Objetivo: Permitir que os usuários consigam acessar a Home Page do aplicativo e possam adicionar itens no carrinho de compras
+Funcionalidades Avaliadas:
+Navegação pelo cardápio e visualização dos detalhes dos itens.
+Adição de itens ao carrinho.
+Atualização do carrinho ao modificar a quantidade de itens.
+Grupo de Usuários: Usuários cadastrados e novos usuários realizando o primeiro pedido.
+Ferramentas utilizadas: Expo GO
+
  
 ## Ferramentas de Testes (Opcional)
 
