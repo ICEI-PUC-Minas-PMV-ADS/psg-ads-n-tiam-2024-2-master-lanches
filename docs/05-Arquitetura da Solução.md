@@ -30,7 +30,7 @@ Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do ba
 ## Tecnologias Utilizadas
 ### Linguagens : C#, JavaScript.
 ### Banco de dados : Firebase
-### bibliotecas :  React, React Native.
+### Bibliotecas :  React, React Native.
 ### IDEs : Visual Studio Code, ou a ferramenta web expo (Devido a restriçÕes de recursos tecnológicos nem todos conseguiram umas VSCode)
 ### Ferramentas de criação de diagramas : Lucidchart, Draw.IO.
 
