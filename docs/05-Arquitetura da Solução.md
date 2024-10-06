@@ -36,6 +36,7 @@ Entregar um arquivo banco.sql contendo os scripts de criação das tabelas do ba
 ### bibliotecas :  React, React Native.
 ### IDEs : Visual Studio Code, ou a ferramenta web expo (Devido a restriçÕes de recursos tecnológicos nem todos conseguiram umas VSCode)
 
+![Diagrama de interação](img/interacao.png)
 
 Apresente também uma figura explicando como as tecnologias estão relacionadas ou como uma interação do usuário com o sistema vai ser conduzida, por onde ela passa até retornar uma resposta ao usuário.
 
