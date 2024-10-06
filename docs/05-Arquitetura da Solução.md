@@ -59,37 +59,37 @@ Explique como a hospedagem e o lançamento da plataforma foi feita.
 - **Métricas:** Percentual de cobertura dos requisitos, quantidade de funcionalidades essenciais implementadas corretamente.
 
 **2. Acurácia**
-**- Justificativa:** A acurácia assegura que as funções implementadas forneçam resultados corretos e precisos, o que é crucial para que o usuário visualize corretamente os itens disponíveis, preços e status dos pedidos.
-**- Métricas:** Taxa de erro nas informações mostradas ao usuário, precisão dos cálculos de preços e totais.
+- **Justificativa:** A acurácia assegura que as funções implementadas forneçam resultados corretos e precisos, o que é crucial para que o usuário visualize corretamente os itens disponíveis, preços e status dos pedidos.
+- **Métricas:** Taxa de erro nas informações mostradas ao usuário, precisão dos cálculos de preços e totais.
 
 **3. Conformidade**
-**- Justificativa:** A conformidade garante que o software siga normas e regulamentos, como leis de proteção ao consumidor e requisitos fiscais para lanchonetes, assegurando que o projeto atenda a todas as regulamentações legais necessárias.
-**- Métricas:** Número de violações de conformidade, tempo médio para corrigir problemas de conformidade.
+- **Justificativa:** A conformidade garante que o software siga normas e regulamentos, como leis de proteção ao consumidor e requisitos fiscais para lanchonetes, assegurando que o projeto atenda a todas as regulamentações legais necessárias.
+- **Métricas:** Número de violações de conformidade, tempo médio para corrigir problemas de conformidade.
 
 **4. Segurança de Acesso**
-**- Justificativa:** A segurança é fundamental, especialmente para proteger os dados pessoais e financeiros dos usuários, como informações de login e métodos de pagamento. A segurança de acesso assegura que apenas usuários autorizados tenham acesso ao sistema e aos dados sensíveis.
-**- Métricas:** Número de vulnerabilidades de segurança identificadas, tempo de resposta a incidentes de segurança.
+- **Justificativa:** A segurança é fundamental, especialmente para proteger os dados pessoais e financeiros dos usuários, como informações de login e métodos de pagamento. A segurança de acesso assegura que apenas usuários autorizados tenham acesso ao sistema e aos dados sensíveis.
+- **Métricas:** Número de vulnerabilidades de segurança identificadas, tempo de resposta a incidentes de segurança.
 
 **5. Tolerância a Falhas**
-**- Justificativa:** Esta subcaracterística é crucial para garantir que o sistema funcione de forma contínua, mesmo em casos de erros inesperados. A tolerância a falhas é importante para evitar interrupções na experiência do usuário, especialmente durante o processo de pedido ou pagamento.
-**- Métricas:** Taxa de falhas do sistema, tempo médio de recuperação após uma falha.
+- **Justificativa:** Esta subcaracterística é crucial para garantir que o sistema funcione de forma contínua, mesmo em casos de erros inesperados. A tolerância a falhas é importante para evitar interrupções na experiência do usuário, especialmente durante o processo de pedido ou pagamento.
+- **Métricas:** Taxa de falhas do sistema, tempo médio de recuperação após uma falha.
 
 **6. Inteligibilidade**
 - **Justificativa:** A inteligibilidade refere-se à facilidade com que os usuários entendem e utilizam o sistema. Como o público da Master Lanches pode variar em termos de experiência com tecnologia, é essencial que a interface seja clara e intuitiva.
 - **Métricas:** Número de reclamações relacionadas à dificuldade de uso, tempo médio que os usuários levam para completar um pedido.
 
 **7. Capacidade para ser Instalado**
-**- Justificativa:** A facilidade de instalação é importante para garantir que o software seja acessível a todos os usuários, independente do dispositivo que utilizam. O software precisa ser fácil de configurar e utilizar, sem complicações técnicas.
-**- Métricas:** Tempo médio de instalação, número de problemas relatados durante a instalação.
+- **Justificativa:** A facilidade de instalação é importante para garantir que o software seja acessível a todos os usuários, independente do dispositivo que utilizam. O software precisa ser fácil de configurar e utilizar, sem complicações técnicas.
+- **Métricas:** Tempo médio de instalação, número de problemas relatados durante a instalação.
 
 **8. Modificabilidade**
-**- Justificativa:** A modificabilidade garante que o software possa ser atualizado e adaptado facilmente conforme surgem novas demandas ou alterações nos requisitos. Isso é essencial para acompanhar a evolução do negócio e dos hábitos dos consumidores.
-**- Métricas:** Tempo e esforço necessário para realizar modificações, quantidade de código reutilizável.
+- **Justificativa:** A modificabilidade garante que o software possa ser atualizado e adaptado facilmente conforme surgem novas demandas ou alterações nos requisitos. Isso é essencial para acompanhar a evolução do negócio e dos hábitos dos consumidores.
+- **Métricas:** Tempo e esforço necessário para realizar modificações, quantidade de código reutilizável.
 
 **9. Estabilidade**
-**- Justificativa:** A estabilidade assegura que o sistema não sofra grandes mudanças que comprometam seu funcionamento com o passar do tempo, mantendo uma performance constante e confiável.
-**- Métricas:** Número de falhas após atualizações, tempo de inatividade do sistema.
+- **Justificativa:** A estabilidade assegura que o sistema não sofra grandes mudanças que comprometam seu funcionamento com o passar do tempo, mantendo uma performance constante e confiável.
+- **Métricas:** Número de falhas após atualizações, tempo de inatividade do sistema.
 
 **10. Testabilidade**
-**- Justificativa:** A testabilidade é essencial para garantir que o software possa ser testado facilmente, identificando e corrigindo erros de forma eficaz antes que estes cheguem aos usuários finais. Isso aumenta a qualidade e reduz a incidência de falhas.
-**- Métricas:** Cobertura de testes automatizados, tempo necessário para a execução de testes e validação.
+- **Justificativa:** A testabilidade é essencial para garantir que o software possa ser testado facilmente, identificando e corrigindo erros de forma eficaz antes que estes cheguem aos usuários finais. Isso aumenta a qualidade e reduz a incidência de falhas.
+- **Métricas:** Cobertura de testes automatizados, tempo necessário para a execução de testes e validação.
