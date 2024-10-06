@@ -51,6 +51,8 @@ Explique como a hospedagem e o lançamento da plataforma foi feita.
 
 ## Qualidade de Software
 
+As subcaraterísticas que estão listadas a baixo, foram selecionadas porque cobrem aspectos críticos de qualidade que garantem um software funcional, seguro, confiável e fácil de usar para o público-alvo da Master Lanches.
+
 **1. Adequação**
 - **Justificativa:** Esta subcaracterística garante que as funcionalidades desenvolvidas atendam aos requisitos e necessidades dos usuários, especialmente no fluxo de pedidos. Como o objetivo é fornecer um sistema que permita aos usuários fazer pedidos de forma simples e eficaz, a adequação é essencial para que o software entregue exatamente o que foi planejado.
 - **Métricas:** Percentual de cobertura dos requisitos, quantidade de funcionalidades essenciais implementadas corretamente.
