@@ -1,32 +1,41 @@
 # Plano de Testes de Software 
 
-Cenário de Teste: Cadastro de Usuário
-- Objetivo: Verificar se o sistema está cadastrando usuários da forma correta e eficiente.
-- Funcionalidades Avaliadas: 
-  - Criar uma conta com dados válidos(e-mail, nome, senha)
-  - Validação de dados incorretos
-  - Feedback para o usuário, em caso de erro ou sucesso
-- Grupo de usuários: Novos usuários que nunca tiveram acesso ao sistema.
-- Ferramentas utilizadas: Expo GO
+**Cenário de Teste: Cadastro de Usuário**
+- **Objetivo:** Verificar se o sistema está cadastrando usuários da forma correta e eficiente.
+- **Funcionalidades Avaliadas:** 
+  - Criar uma conta com dados válidos (e-mail, nome, senha).
+  - Validação de dados incorretos.
+  - Feedback para o usuário, em caso de erro ou sucesso.
+- **Grupo de usuários:** Novos usuários que nunca tiveram acesso ao sistema.
+- **Ferramentas utilizadas:** Expo GO
 
-Cenário de Teste: Login de Usuário
-Objetivo: Verificar se usuários já cadastrados no sistema, conseguem realizar o login na conta de forma segura e eficiente
-Funcionalidades Avaliadas:
-Login com credenciais corretas
-Tentativas de Login com senha incorreta e/ou e-mail inexistente
-Grupo de usuários: Usuários já cadastrados no APP
-Ferramentas utilizadas: Validação por meio da API
+**Cenário de Teste: Login de Usuário**
+- **Objetivo:** Verificar se usuários já cadastrados no sistema, conseguem realizar o login na conta de forma segura e eficiente
+- **Funcionalidades Avaliadas:**
+  - Login com credenciais corretas
+  - Tentativas de Login com senha incorreta e/ou e-mail inexistente
+- **Grupo de usuários:** Usuários já cadastrados no APP
+- **Ferramentas utilizadas:** Validação por meio da API
 
-Cenário de Teste: Escolha e Adição de Itens ao Carrinho
-Objetivo: Permitir que os usuários consigam acessar a Home Page do aplicativo e possam adicionar itens no carrinho de compras
-Funcionalidades Avaliadas:
-Navegação pelo cardápio e visualização dos detalhes dos itens.
-Adição de itens ao carrinho.
-Atualização do carrinho ao modificar a quantidade de itens.
-Grupo de Usuários: Usuários cadastrados e novos usuários realizando o primeiro pedido.
-Ferramentas utilizadas: Expo GO
+**Cenário de Teste: Escolha e Adição de Itens ao Carrinho**
+- **Objetivo:** Permitir que os usuários consigam acessar a Home Page do aplicativo e possam adicionar itens no carrinho de compras
+- **Funcionalidades Avaliadas:**
+  - Navegação pelo cardápio e visualização dos detalhes dos itens.
+  - Adição de itens ao carrinho.
+  - Atualização do carrinho ao modificar a quantidade de itens.
+- **Grupo de Usuários:** Usuários cadastrados e novos usuários realizando o primeiro pedido.
+- **Ferramentas utilizadas:** Expo GO
 
- 
+Cenário de Teste: Finalização do Pedido
+- **Objetivo:** Testar o fluxo completo de finalização do pedido, desde a escolha dos itens até a confirmação do pagamento.
+- **Funcionalidades Avaliadas:**
+  - Escolha do método de pagamento.
+  - Validação de dados de pagamento.
+  - Mensagem de confirmação de pedido e exibição do status do pedido.
+- **Grupo de Usuários:** Usuários cadastrados realizando pedidos pela primeira vez e usuários recorrentes.
+- **Ferramentas Utilizadas:** Testes manuais com usuários reais.
+
+
 ## Ferramentas de Testes (Opcional)
 
 Comente sobre as ferramentas de testes utilizadas.
