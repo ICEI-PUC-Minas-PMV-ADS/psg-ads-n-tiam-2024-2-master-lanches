@@ -11,7 +11,6 @@ O Master Lanches é um aplicativo de delivery em desenvolvimento para uma hambur
 * Diego Rodrigues da Cruz
 * Fredson Marinho Almeida Borges Filho
 * Joao Severino Vieira Neto
-* Matheus Campos Pereira
 * Paulo Augusto Freitas de Sousa
 * Paulo Roberto Leite
 * Thiago Augusto da Cunha Parreiras
