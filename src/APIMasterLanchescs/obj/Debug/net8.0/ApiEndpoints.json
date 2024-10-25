@@ -1,0 +1,18 @@
+[
+  {
+    "ContainingType": "APIMasterLanchescs.Controllers.ClienteController",
+    "Method": "SaveCliente",
+    "RelativePath": "",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "cliente",
+        "Type": "APIMasterLanchescs.Models.Cliente",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": []
+  }
+]
