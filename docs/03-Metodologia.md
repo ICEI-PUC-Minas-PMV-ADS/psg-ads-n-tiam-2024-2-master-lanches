@@ -40,7 +40,8 @@ nomeação:
 - (bug encontrado) - {descrição mudança}: uma funcionalidade encontra-se com problemas
 - (bug resolvido) - {descrição mudança}: um bug foi resolvido
 - (funcionalidade) - {descrição mudança}: uma nova funcionalidade precisa ser introduzida
-
+- (refatoração) - {descrição mudança}: alteração ou modificação de uma funcionalidade
+  
 ## Gerenciamento de Projeto
 
 ### Divisão de Papéis
