@@ -1,32 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\paulo.sousa\\source\\repos\\APIMasterLanchescs\\APIMasterLanchescs.csproj": {}
+    "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj": {}
   },
   "projects": {
-    "C:\\Users\\paulo.sousa\\source\\repos\\APIMasterLanchescs\\APIMasterLanchescs.csproj": {
+    "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\paulo.sousa\\source\\repos\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
+        "projectUniqueName": "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
         "projectName": "APIMasterLanchescs",
-        "projectPath": "C:\\Users\\paulo.sousa\\source\\repos\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
-        "packagesPath": "C:\\Users\\paulo.sousa\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\paulo.sousa\\source\\repos\\APIMasterLanchescs\\obj\\",
+        "projectPath": "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
+        "packagesPath": "C:\\Users\\Nandinha\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
-        ],
         "configFilePaths": [
-          "C:\\Users\\paulo.sousa\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Nandinha\\AppData\\Roaming\\NuGet\\NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net8.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -39,11 +32,6 @@
           "warnAsError": [
             "NU1605"
           ]
-        },
-        "restoreAuditProperties": {
-          "enableAudit": "true",
-          "auditLevel": "low",
-          "auditMode": "direct"
         }
       },
       "frameworks": {
@@ -94,7 +82,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.403/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.3.23178.7\\RuntimeIdentifierGraph.json"
         }
       }
     }
