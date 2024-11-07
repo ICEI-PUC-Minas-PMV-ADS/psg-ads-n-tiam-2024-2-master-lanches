@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using Google.Cloud.Firestore;
 
 namespace APIMasterLanchescs.Models
@@ -29,26 +28,5 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("ingredientes")]
         public List<Ingrediente> Ingredientes { get; set; }
-=======
-﻿namespace APIMasterLanchescs.Models
-{
-    public class Produto
-    {
-        public string IdProduto { get; set; }
-
-        public string Nome { get; set; }
-        
-        public string Descricao { get; set; }
-        
-        public decimal Preco { get; set; }
-        
-        public string CategoriaId { get; set; }
-        
-        public int QuantidadeEstoque { get; set; }
-        
-        public string ImagemUrl { get; set; }
-        
-        public bool StatusDisponibilidade { get; set; }
->>>>>>> 54866c0cc72941591972efd00305fdd91ba73824
     }
 }

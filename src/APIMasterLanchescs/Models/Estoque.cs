@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using Google.Cloud.Firestore;
 
 namespace APIMasterLanchescs.Models
@@ -19,20 +18,6 @@ namespace APIMasterLanchescs.Models
         public string UnidadeMedida { get; set; }
 
         [FirestoreProperty("dataUltimaAtualizacao")]
-=======
-﻿namespace APIMasterLanchescs.Models
-{
-    public class Estoque
-    {
-        public string IdEstoque { get; set; }
-     
-        public string ProdutoId { get; set; }
-        
-        public int QuantidadeDisponivel { get; set; }
-        
-        public string UnidadeMedida { get; set; }
-        
->>>>>>> 54866c0cc72941591972efd00305fdd91ba73824
         public DateTime DataUltimaAtualizacao { get; set; }
     }
 }

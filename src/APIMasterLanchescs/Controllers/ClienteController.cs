@@ -5,11 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 namespace APIMasterLanchescs.Controllers
 {
     [ApiController]
-<<<<<<< HEAD
     [Route("/v1/clientes")]
-=======
-    [Route("/v1/[controller]")]
->>>>>>> 54866c0cc72941591972efd00305fdd91ba73824
     public class ClienteController : Controller
     {
         private readonly ClienteService _clienteService;
@@ -19,13 +15,8 @@ namespace APIMasterLanchescs.Controllers
             _clienteService = clienteService;
         }
 
-<<<<<<< HEAD
         [HttpPost]
         public async Task<IActionResult> SalvarCliente([FromBody] Cliente cliente)
-=======
-        [HttpPost("/")]
-        public async Task<IActionResult> SaveCliente([FromBody] Cliente cliente)
->>>>>>> 54866c0cc72941591972efd00305fdd91ba73824
         {
             if (cliente == null)
             {
@@ -33,11 +24,7 @@ namespace APIMasterLanchescs.Controllers
             }
             try
             {
-<<<<<<< HEAD
                 await _clienteService.SalvarClienteAsync(cliente);
-=======
-                await _clienteService.SaveClienteAsync(cliente);
->>>>>>> 54866c0cc72941591972efd00305fdd91ba73824
                 return Ok(cliente);
             }
             catch (Exception ex)
@@ -46,7 +33,6 @@ namespace APIMasterLanchescs.Controllers
             }
         }
 
-<<<<<<< HEAD
         [HttpPost("login")]
         public async Task<IActionResult> LoginCliente([FromBody] ClienteLogin clienteLogin)
         {
@@ -66,8 +52,4 @@ namespace APIMasterLanchescs.Controllers
             }
         }
     }
-=======
-    }
-
->>>>>>> 54866c0cc72941591972efd00305fdd91ba73824
 }

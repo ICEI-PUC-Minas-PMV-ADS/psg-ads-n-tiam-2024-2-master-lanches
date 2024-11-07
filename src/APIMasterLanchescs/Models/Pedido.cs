@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 ﻿using Google.Cloud.Firestore;
 
 namespace APIMasterLanchescs.Models
@@ -25,24 +24,6 @@ namespace APIMasterLanchescs.Models
         public Endereco EnderecoEntrega { get; set; }
 
         [FirestoreProperty("metodoPagamento")]
-=======
-﻿namespace APIMasterLanchescs.Models
-{
-    public class Pedido
-    {
-        public string IdPedido { get; set; }
-        
-        public string ClienteId { get; set; }
-        
-        public decimal ValorTotal { get; set; }
-        
-        public DateTime DataPedido { get; set; }
-        
-        public string Status { get; set; }
-        
-        public Endereco EnderecoEntrega { get; set; }
-        
->>>>>>> 54866c0cc72941591972efd00305fdd91ba73824
         public string MetodoPagamento { get; set; }
     }
 }
