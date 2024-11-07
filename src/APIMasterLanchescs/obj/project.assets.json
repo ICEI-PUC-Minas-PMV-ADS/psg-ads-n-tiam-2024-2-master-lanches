@@ -6499,19 +6499,19 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Nandinha\\.nuget\\packages\\": {}
+    "C:\\Users\\diego\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
+      "projectUniqueName": "C:\\Users\\diego\\Desktop\\MASTERLANCHESPUC\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
       "projectName": "APIMasterLanchescs",
-      "projectPath": "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
-      "packagesPath": "C:\\Users\\Nandinha\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Nandinha\\Documents\\GitHub\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\obj\\",
+      "projectPath": "C:\\Users\\diego\\Desktop\\MASTERLANCHESPUC\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\APIMasterLanchescs.csproj",
+      "packagesPath": "C:\\Users\\diego\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\diego\\Desktop\\MASTERLANCHESPUC\\psg-ads-n-tiam-2024-2-master-lanches\\src\\APIMasterLanchescs\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Nandinha\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\diego\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net8.0"
@@ -6529,6 +6529,11 @@
         "warnAsError": [
           "NU1605"
         ]
+      },
+      "restoreAuditProperties": {
+        "enableAudit": "true",
+        "auditLevel": "low",
+        "auditMode": "direct"
       }
     },
     "frameworks": {
@@ -6579,7 +6584,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.100-preview.3.23178.7\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\8.0.201/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

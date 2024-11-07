@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("APIMasterLanchescs")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+54866c0cc72941591972efd00305fdd91ba73824")]
 [assembly: System.Reflection.AssemblyProductAttribute("APIMasterLanchescs")]
 [assembly: System.Reflection.AssemblyTitleAttribute("APIMasterLanchescs")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
