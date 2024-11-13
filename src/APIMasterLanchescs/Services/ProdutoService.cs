@@ -14,7 +14,7 @@ namespace APIMasterLanchescs.Services
 
         public async Task SalvarProdutoAsync(Produto produto)
         {
-            try { await _firestoreContext.GetFirestoreDb().Collection("produto").Document(produto.IdProduto).SetAsync(produto); }
+            try { await _firestoreContext.GetFirestoreDb().Collection("produto").Document(produto.Id).SetAsync(produto); }
             catch (Exception ex) { throw new Exception("Erro ao salvar produto: " + ex.Message); }
         }
 
