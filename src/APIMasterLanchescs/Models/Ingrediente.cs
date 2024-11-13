@@ -5,8 +5,8 @@ namespace APIMasterLanchescs.Models
     [FirestoreData]
     public class Ingrediente
     {
-        [FirestoreProperty("idIngrediente")]
-        public string IdIngrediente { get; set; }
+        [FirestoreProperty("id")]
+        public string Id { get; set; }
 
         [FirestoreProperty("nome")]
         public string Nome { get; set; }

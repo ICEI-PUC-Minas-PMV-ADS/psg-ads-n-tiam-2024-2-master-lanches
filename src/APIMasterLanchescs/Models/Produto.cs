@@ -1,12 +1,13 @@
 ﻿using Google.Cloud.Firestore;
+using System.Collections.Generic;
 
 namespace APIMasterLanchescs.Models
 {
     [FirestoreData]
     public class Produto
     {
-        [FirestoreProperty("idProduto")]
-        public string IdProduto { get; set; }
+        [FirestoreProperty("id")]
+        public string Id { get; set; }
 
         [FirestoreProperty("nome")]
         public string Nome { get; set; }
@@ -16,9 +17,6 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("categoriaId")]
         public string CategoriaId { get; set; }
-
-        [FirestoreProperty("quantidade")]
-        public int Quantidade { get; set; }
 
         [FirestoreProperty("imagemUrl")]
         public string ImagemUrl { get; set; }
