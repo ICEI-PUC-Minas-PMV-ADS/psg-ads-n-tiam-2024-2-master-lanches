@@ -7,7 +7,7 @@ import SearchScreen from "./app/pages/search";
 import Cart from "./app/pages/shoppingCart";
 
 const Stack = createNativeStackNavigator();
-
+//teste
 export default function App() {
     return (
         <CartProvider>
