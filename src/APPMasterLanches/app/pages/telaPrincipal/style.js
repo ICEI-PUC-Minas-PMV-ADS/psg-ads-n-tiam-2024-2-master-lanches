@@ -5,7 +5,6 @@ const styles = StyleSheet.create({
         flex: 1,
         backgroundColor: '#1a1a1a', 
         alignItems: 'center',
-        
     },
     scrollContainer: {
         marginTop: 17,
@@ -13,10 +12,6 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingBottom: 80,
-    },
-    cardContainer: {
-        marginVertical: 20,
-        width: '95%',
     },
     categorias: {
         width: '95%', 

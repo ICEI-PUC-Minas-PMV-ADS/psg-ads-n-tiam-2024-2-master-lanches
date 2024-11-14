@@ -1,39 +1,34 @@
 import React from 'react';
 import { Text, View, FlatList, TouchableOpacity } from 'react-native';
-import BottomBar from "../../components/bottomBar";
-import { useCart } from "../../contexts/CartContext";
-import styles from "./style";
+import BottomBar from '../../components/bottomBar';
+import { useCart } from '../../contexts/CartContext';
+import styles from './style';
 
-export default function ShoppingCart() {
-    const { cart, removeFromCart } = useCart();
+const ShoppingCart = () => {
+    const { cart, incrementItemQuantity, decrementItemQuantity, removeFromCart } = useCart();
 
-    // Agrupar produtos semelhantes por nome (ou id) e somar a quantidade
-    const groupedCartItems = cart.reduce((acc, item) => {
-        const existingItem = acc.find(cartItem => cartItem.id === item.id);
-        if (existingItem) {
-            existingItem.quantidade += item.quantidade;
-        } else {
-            acc.push({ ...item });
-        }
-        return acc;
-    }, []);
-
-    // Renderizar cada item no carrinho
     const renderCartItem = ({ item }) => (
         <View style={styles.cartItem}>
             <Text style={styles.cartItemText}>{item.nome}</Text>
             <Text style={styles.cartItemText}>Quantidade: {item.quantidade}</Text>
-            <TouchableOpacity onPress={() => removeFromCart(item.id)}>
-                <Text style={styles.removeText}>Remover</Text>
-            </TouchableOpacity>
+            <View style={styles.cartActions}>
+                <TouchableOpacity onPress={() => decrementItemQuantity(item.id)}>
+                    <Text style={styles.actionText}>-</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => incrementItemQuantity(item.id)}>
+                    <Text style={styles.actionText}>+</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => removeFromCart(item.id)}>
+                    <Text style={styles.removeText}>Remover</Text>
+                </TouchableOpacity>
+            </View>
         </View>
     );
 
     return (
         <View style={styles.container}>
-            {/* Exibindo os itens agrupados do carrinho */}
             <FlatList
-                data={groupedCartItems}
+                data={cart}
                 renderItem={renderCartItem}
                 keyExtractor={(item) => item.id.toString()}
                 contentContainerStyle={styles.cartList}
@@ -42,4 +37,6 @@ export default function ShoppingCart() {
             <BottomBar />
         </View>
     );
-}
+};
+
+export default ShoppingCart;

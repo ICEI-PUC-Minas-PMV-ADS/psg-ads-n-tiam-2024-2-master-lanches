@@ -2,10 +2,9 @@ import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
-        width: '100%',
         flex: 1,
         backgroundColor: '#1a1a1a',
-        padding: 20,
+        paddingTop: 40,
     },
     cartItem: {
         backgroundColor: '#333',
@@ -20,6 +19,16 @@ const styles = StyleSheet.create({
     removeText: {
         color: '#FF6347',
         fontSize: 14,
+        marginTop: 5,
+    },
+    actionText: {
+        color: '#1E90FF',
+        fontSize: 18,
+        marginHorizontal: 10,
+    },
+    cartActions: {
+        flexDirection: 'row',
+        alignItems: 'center',
         marginTop: 5,
     },
     cartList: {
