@@ -1,16 +1,18 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TextInput, Image, FlatList, Pressable, Modal, SafeAreaView, Platform } from 'react-native';
-import styles from './style';
+import styles from './style.js';
 import Entypo from 'react-native-vector-icons/Entypo';
-import BottomBar from '../../components/bottomBar';
+import BottomBar from '../../components/bottomBar/index.jsx';
 import DetalhesItem from '../../components/Detalhes/index.jsx';
 import Teste from "../../assets/teste.jpeg";
+import { findAllProdutos } from "../../../api/produto.js";
 
 function Pesquisa() {
   const preco = 2.20;
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const inputRef = useRef(null);
+  const [produtos, setProdutos] = useState([]);
 
   const itemTemplate = ({ item }) => (
     <Pressable 
@@ -20,14 +22,26 @@ function Pesquisa() {
         setModalVisible(true);
       }}
     >
-      <Image source={item.image} style={styles.itemImage} resizeMode='contain'/>
+      <Image source={{ uri: item.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }}  style={styles.itemImage}/>
       <View>
-        <Text style={styles.itemTitle}>{item.title}</Text>
-        <Text style={styles.itemPrice}>R$ {item.price.toFixed(2)}</Text>
+        <Text style={styles.itemTitle} numberOfLines={2} ellipsizeMode='tail'>{item.nome}</Text>
+        <Text style={styles.itemPrice}>R$ {item.preco.toFixed(2)}</Text>
       </View>
     </Pressable>
   );
+  useEffect(() => {
+    const fetchProdutos = async () => {
+        try {
+            const data = await findAllProdutos();
+            console.log("Dados dos Produtos:", data);
+            setProdutos(data);
+        } catch (error) {
+            console.error("Erro ao buscar produtos:", error);
+        }
+    };
 
+    fetchProdutos();
+}, []);
   const data = [
     { id: '1', title: 'Hamburguer teste 1', price: 10.99, image: Teste, ingredientes: 'Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste ' },
     { id: '2', title: 'Hamburguer teste 2', price: 12.99, image: Teste, ingredientes: 'Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste Teste '  },
@@ -60,9 +74,10 @@ function Pesquisa() {
         </Pressable>
       </View>
       <FlatList
-        data={data}
+        data={produtos}
         renderItem={itemTemplate}
         keyExtractor={item => item.id}
+        style={styles.lista}
       />
       </View>
       <BottomBar />

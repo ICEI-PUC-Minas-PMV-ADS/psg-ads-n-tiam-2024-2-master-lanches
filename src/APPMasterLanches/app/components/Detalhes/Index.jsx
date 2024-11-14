@@ -10,14 +10,17 @@ export default function DetalhesItem({ item, onClose }) {
         <StatusBar barStyle="default" />
         <Pressable style={styles.box} onPress={(e) => e.stopPropagation()}>
           <View style={styles.header}>
-            <Image source={item.image} style={styles.itemImage} resizeMode='contain' />
+            <Image source={{ uri: item.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }} style={styles.itemImage} resizeMode='contain' />
             <View>
-              <Text style={styles.itemTitle}>{item.title}</Text>
-              <Text style={styles.itemPrice}>{item.price}</Text>
+              <Text style={styles.itemTitle}>{item.nome}</Text>
+              <Text style={styles.itemPrice}>{item.preco.toFixed(2)}</Text>
             </View>
           </View>
           <View style={styles.descriptionBox}>
-            <Text>{item.ingredientes}</Text>
+            <Text>Ingredientes:</Text>
+            {item.ingredientes.map((ingrediente, index) => (
+              <Text key={index}>{ingrediente.nome}</Text>
+            ))}
           </View>
           <View style={styles.buttonBar}>
             <CustomButton 

@@ -4,7 +4,7 @@ import Login from "./app/pages/login";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CartProvider } from './app/contexts/CartContext';
 import HomeScreen from "./app/pages/telaPrincipal";
-import Pesquisa from "./app/pages/Pesquisa/index";
+import Pesquisa from "./app/pages/Pesquisa";
 import Cart from "./app/pages/shoppingCart";
 
 const Stack = createNativeStackNavigator();

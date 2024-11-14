@@ -77,6 +77,9 @@ const styles = StyleSheet.create({
     flex: 1, 
     position: 'absolute', 
   },
+  lista:{
+    marginBottom: '15%'
+  }
 });
 
 export default styles;
