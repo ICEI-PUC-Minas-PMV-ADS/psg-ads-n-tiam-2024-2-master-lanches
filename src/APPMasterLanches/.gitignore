@@ -33,3 +33,6 @@ yarn-error.*
 
 # typescript
 *.tsbuildinfo
+
+# Arquivo de configuração Firebase
+src/APIMasterLanchescs/firebase-config.json

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "./style"; // Corrigido para importar o styles corretamente
-import InputComponent from "../../components/input/form/input";
+import styles from "./style";
+import InputComponent from "../../components/input/form";
 import Logo from "../../assets/logo.png";
 import { login } from "../../../api/cliente";
 

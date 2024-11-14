@@ -361,3 +361,6 @@ MigrationBackup/
 
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
+
+# Arquivo de configuração Firebase
+src/APIMasterLanchescs/firebase-config.json
