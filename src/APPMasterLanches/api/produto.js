@@ -9,3 +9,13 @@ export const findProdutoById = async ({ id }) => {
         throw error;
     }
 };
+
+export const findAllProdutos = async () => {
+    try {
+        const response = await api.get('/v1/produtos');
+        return response.data;
+    } catch (error) {
+        console.error('Erro ao buscar produtos', error.response ? error.response.data : error.message);
+        throw error;
+    }
+} 
