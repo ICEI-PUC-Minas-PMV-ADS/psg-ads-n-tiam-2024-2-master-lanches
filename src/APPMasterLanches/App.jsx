@@ -1,7 +1,7 @@
 import { NavigationContainer } from "@react-navigation/native";
 import Login from "./app/pages/login";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { CartProvider } from "./app/pages/shoppingCart/CartContext";
+import { CartProvider } from "./app/contexts/CartContext";
 import HomeScreen from "./app/pages/telaPrincipal";
 import SearchScreen from "./app/pages/search";
 import Cart from "./app/pages/shoppingCart";
