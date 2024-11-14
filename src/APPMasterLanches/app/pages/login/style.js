@@ -3,20 +3,18 @@ import { Dimensions, StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
 	container: {
 		flex: 1,
-		alignItems: 'center',
-		paddingHorizontal: 10,
-		backgroundColor: '#000000',
+    	alignItems: 'center',
+    	justifyContent: 'center',
+    	backgroundColor: '#000000',
 	},
 	boxTop: {
-		width: '100%',
-		height: '40%',
-		alignItems: 'center',
-		marginTop: 60,
+		flex: 1,
+    	justifyContent: 'center',
 	},
-	imageLogo: {
-		width: '100%',
-		height: '100%',
-	},
+	// imageLogo: {
+	// 	width: 250,
+	// 	height: 300
+	// },
 	title: {
 		alignItems: 'center',
 		flexDirection: 'row',
@@ -35,30 +33,42 @@ const styles = StyleSheet.create({
 		fontSize: 16,
 	},
 	boxBottom: {
-		width: '100%',
-		alignItems: 'center',
-		gap: 20,
-	},
-	input: {
+		flex: 1,
+    	alignItems: 'center',
+   	 	justifyContent: 'center',
 		width: '90%',
-		padding: 14,
-		borderRadius: 20,
-		backgroundColor: '#FFFFFF',
-		fontSize: 20,
-		color: '#000000',
-		textAlign: 'center',
+    	paddingBottom: 50
 	},
+	// input: {
+	// 	width: '90%',
+   	// 	padding: 10,
+    // 	borderRadius: 15,
+    // 	backgroundColor: '#FFF',
+    // 	fontSize: 19,
+    // 	color: '#000000',
+    // 	textAlign: 'center',
+	// },
 	button: {
 		backgroundColor: '#fbdb5b',
+		textAlign: 'center',
 		width: '90%',
-		padding: 16,
-		borderRadius: 20,
+		height: 45,
+		marginTop: 15,
+		borderRadius: 15,
+		justifyContent: 'center',
+		alignItems: 'center'
 	},
 	buttonText: {
-		color: '#000000',
-		fontSize: 20,
-		textAlign: 'center',
+		color: 'black',
+    	fontWeight: 'bold',
 	},
+	btnCadastro: {
+		marginTop: 15,
+	 },
+   
+	 textBtnCadastro: {
+	   color: '#FFF'
+	 } 
 });
 
 export default styles;

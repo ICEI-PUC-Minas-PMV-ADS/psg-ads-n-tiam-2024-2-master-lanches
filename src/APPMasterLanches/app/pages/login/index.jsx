@@ -1,6 +1,6 @@
-import React, { useState } from "react";
-import { Image, Text, TextInput, TouchableOpacity, View } from "react-native";
-import styles from "./style"; // Corrigido para importar o styles corretamente
+import React, { useState, useEffect } from 'react';
+import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, Animated, Keyboard } from "react-native";
+import styles from "./style";
 import InputComponent from "../../components/input/form/input";
 import Logo from "../../assets/logo.png";
 import { login } from "../../../api/cliente";
@@ -26,17 +26,75 @@ export default function Login({ navigation }) {
     }
   };
 
+  // Animação da IMAGEM
+
+  const [offset] = useState(new Animated.ValueXY({x: 0, y: 95}));
+  const [imageLogo] = useState(new Animated.ValueXY({x: 250, y: 300}));
+
+  useEffect(() => {
+    KeyboardDidShowListener = Keyboard.addListener('keyboardDidShow', keyboardShow);
+    KeyboardDidHideListener = Keyboard.addListener('keyboardDidHide', keyboardHide);
+  
+    Animated.spring(offset.y, {
+      toValue: 0,
+      speed: 4,
+      bounciness: 20,
+      duration: 100,
+      useNativeDriver: false
+    }).start();
+  }, []);
+  
+  function keyboardShow() {
+    Animated.parallel([
+      Animated.timing(imageLogo.x, {
+        toValue: 220,
+        duration: 300,
+        useNativeDriver: false 
+      }),
+      Animated.timing(imageLogo.y, {
+        toValue: 200,
+        duration: 300,
+        useNativeDriver: false
+      })
+    ]).start();
+  }
+  
+  function keyboardHide() {
+    Animated.parallel([
+      Animated.timing(imageLogo.x, {
+        toValue: 250,
+        duration: 200,
+        useNativeDriver: false 
+      }),
+      Animated.timing(imageLogo.y, {
+        toValue: 300,
+        duration: 200,
+        useNativeDriver: false
+      })
+    ]).start();
+  }
+  
+
   return (
-    <View style={styles.container}>
-      <View style={styles.boxTop}>
-        <Image style={styles.imageLogo} source={Logo} resizeMode="contain" />
-        <View style={styles.title}>
-          <Text style={styles.titleTextLeft}>LOGIN</Text>
-          <Text style={styles.titleTextRight}>Create new account</Text>
-        </View>
+    <KeyboardAvoidingView style={styles.container}>
+       <View style={styles.boxTop}>
+        <Animated.Image 
+        style={{
+          width: imageLogo.x,
+          height: imageLogo.y
+        }} 
+        source={Logo} 
+        resizeMode='contain'
+        />
       </View>
-      <View style={styles.boxBottom}>
-        <InputComponent
+      <Animated.View style={[styles.boxBottom,
+        {
+          transform: [
+            {translateY: offset.y } 
+          ]
+        }
+      ]}>        
+      <InputComponent
           placeholder="Digite o email"
           keyboardType="email-address"
           value={email}
@@ -56,7 +114,12 @@ export default function Login({ navigation }) {
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
-      </View>
-    </View>
-  );
-}
+
+        <TouchableOpacity style={styles.btnCadastro}>
+          <Text style={styles.textBtnCadastro}>Criar Conta</Text>
+        </TouchableOpacity>
+
+      </Animated.View>
+    </KeyboardAvoidingView>
+   );
+};

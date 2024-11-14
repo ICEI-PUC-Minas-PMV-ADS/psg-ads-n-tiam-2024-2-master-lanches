@@ -18,7 +18,7 @@ namespace APIMasterLanchescs.Controllers
         {
             try
             {
-                var estoque = await _estoqueService.findEstoqueProdutoByIdProduto(idProduto);
+                var estoque = await _estoqueService.FindEstoqueProdutoById(idProduto);
                 return Ok(estoque);
             }
             catch (Exception ex)

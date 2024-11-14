@@ -2,25 +2,22 @@ import { StyleSheet } from "react-native";
 
 export const style = StyleSheet.create({
     inputContainer: {
-      width: "90%",
-      flexDirection: "row",
-      alignItems: "center",
-      borderColor: "#ccc",
-      borderWidth: 1,
-      borderRadius: 20,
-      backgroundColor: "#FFFFFF",
-      paddingHorizontal: 10,
-    },
+      display: 'flex',
+      justifyContent: 'center',
+      alignItems: 'center'
+    }, 
     input: {
-      flex: 1,
-      fontSize: 16,
-      color: "#000000",
-      paddingVertical: 12,
-      paddingHorizontal: 10,
+      minWidth: '90%',
+      marginBottom: 15,
+      padding: 10,
+      borderRadius: 15,
+      backgroundColor: '#FFF',
+      fontSize: 19,
+      color: '#000000',
       textAlign: 'center',
     },
     iconButton: {
-      padding: 0,
+      textAlign: 'center'
     },
   });
   
