@@ -13,7 +13,7 @@ export default function App() {
         <CartProvider>
             <NavigationContainer>
                 <Stack.Navigator 
-                    initialRouteName="Home" 
+                    initialRouteName="Login" 
                     screenOptions={{ animation: 'fade', headerShown: false }} 
                 >
                     <Stack.Screen name="Login" component={Login} />
