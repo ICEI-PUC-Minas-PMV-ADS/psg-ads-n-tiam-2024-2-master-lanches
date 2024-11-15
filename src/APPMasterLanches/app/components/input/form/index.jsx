@@ -50,7 +50,7 @@ export default function InputComponent({
         />
             {isPassword && (
                 <TouchableOpacity onPress={togglePasswordVisibility} style={style.iconButton}>
-                    <Icon name={secureEntry ? "visibility-off" : "visibility"} size={20} color="#777" />
+                <Icon name={secureEntry ? "visibility-off" : "visibility"} size={20} color="#777" />
                 </TouchableOpacity>
         )}
         </View>

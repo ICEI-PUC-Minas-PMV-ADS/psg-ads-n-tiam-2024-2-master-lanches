@@ -6,6 +6,7 @@ import { CartProvider } from './app/contexts/CartContext';
 import HomeScreen from "./app/pages/telaPrincipal";
 import Pesquisa from "./app/pages/Pesquisa";
 import Cart from "./app/pages/shoppingCart";
+import Cadastro from './app/pages/cadastro';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -13,10 +14,11 @@ export default function App() {
         <CartProvider>
             <NavigationContainer>
                 <Stack.Navigator 
-                    initialRouteName="Login" 
+                    initialRouteName="Cadastro" 
                     screenOptions={{ animation: 'fade', headerShown: false }} 
                 >
                     <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Cadastro" component={Cadastro} />
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="Search" component={Pesquisa} />
                     <Stack.Screen name="Cart" component={Cart} />
