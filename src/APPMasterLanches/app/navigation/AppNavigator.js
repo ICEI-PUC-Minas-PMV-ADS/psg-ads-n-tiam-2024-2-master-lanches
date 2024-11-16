@@ -1,9 +1,8 @@
-
 import React from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../pages/login";
 import HomeScreen from "../pages/telaPrincipal";
-import Pesquisa from "../pages/Pesquisa";
+import Pesquisa from "../pages/pesquisa"
 import Cart from "../pages/shoppingCart";
 
 const Stack = createNativeStackNavigator();
@@ -13,10 +12,11 @@ export default function AppNavigator() {
         <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-                animation: 'fade', // ou 'slide_from_right', 'slide_from_left', etc.
-                headerShown: false, // se você não quiser mostrar o cabeçalho
+                animation: 'fade',  // Ou qualquer outra animação desejada
+                headerShown: false,
                 animationEnabled: true,
                 gestureEnabled: true,
+                cardStyle: { backgroundColor: 'transparent' },  // Fundo transparente para evitar piscar
             }}
         >
             <Stack.Screen name="Login" component={Login} />

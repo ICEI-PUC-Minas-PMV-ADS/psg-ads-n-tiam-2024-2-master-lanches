@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, ScrollView, FlatList } from "react-native";
+import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
 import styles from "./style";
 import { useProducts } from "../../../contexts/ProductContext";
 import { useCart } from "../../../contexts/CartContext";
@@ -9,8 +9,6 @@ export default function MediumCard() {
     const { produtos, refreshProdutos } = useProducts();
     const { addToCart } = useCart();
     const [loading, setLoading] = useState(true);
-    refreshProdutos
-    console.log(produtos)
     // Função para adicionar ao carrinho
     const handleAddToCart = (produto) => {
         console.log("Produto adicionado ao carrinho:", produto.nome);

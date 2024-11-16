@@ -1,18 +1,19 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { Text, View, TextInput, Image, FlatList, Pressable, Modal, SafeAreaView, Platform } from 'react-native';
+import { Text, View, TextInput, Image, FlatList, Pressable, Modal, SafeAreaView } from 'react-native';
 import styles from './style.js';
 import Entypo from 'react-native-vector-icons/Entypo';
-import BottomBar from '../../components/bottomBar/index.jsx';
-import DetalhesItem from '../../components/Detalhes/index.jsx';
-import { searchProdutos } from "../../../api/produto.js";
+import BottomBar from '../../components/bottomBar/index';
+import DetalhesItem from '../../components/modal/Detalhes';
+import { useProducts } from '../../contexts/ProductContext';
 import { debounce } from 'lodash';
+import Fuse from 'fuse.js';
 
 function Pesquisa() {
-  const preco = 2.20;
+  const { produtos: produtosContext } = useProducts(); // Carregamos os produtos do contexto
   const [modalVisible, setModalVisible] = useState(false);
   const [selectedItem, setSelectedItem] = useState(null);
   const inputRef = useRef(null);
-  const [produtos, setProdutos] = useState([]);
+  const [produtos, setProdutos] = useState([]); // Produtos filtrados
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -26,23 +27,30 @@ function Pesquisa() {
     >
       <Image source={{ uri: item.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }} style={styles.itemImage} />
       <View>
-        <Text style={styles.itemTitle} numberOfLines={2} ellipsizeMode='tail'>{item.nome}</Text>
+        <Text style={styles.itemTitle} numberOfLines={2} ellipsizeMode="tail">
+          {item.nome}
+        </Text>
         <Text style={styles.itemPrice}>R$ {item.preco.toFixed(2)}</Text>
       </View>
     </Pressable>
   );
 
+  const Pesquisado = (query) => {
+    if (!produtosContext || produtosContext.length === 0) return; // Verifica se há produtos disponíveis
 
-  async function Pesquisado(query) {
     setLoading(true);
     try {
-      const produtos = await searchProdutos(query);
-      setProdutos(produtos);
-      
+      const fuse = new Fuse(produtosContext, {
+        keys: ['nome', 'ingredientes'],
+        threshold: 0.3,
+      });
+      const result = fuse.search(query);
+      setProdutos(result.map(({ item }) => item));
     } finally {
       setLoading(false);
     }
-  }
+  };
+
   useEffect(() => {
     const debouncedSearch = debounce(() => {
       Pesquisado(query);
@@ -50,7 +58,16 @@ function Pesquisa() {
 
     debouncedSearch();
     return () => debouncedSearch.cancel(); // Limpa o debounce ao desmontar
-  }, [query]);
+  }, [query, produtosContext]); // Adicionamos produtosContext como dependência para garantir que está atualizado
+
+  if (!produtosContext || produtosContext.length === 0) {
+    return (
+      <SafeAreaView style={styles.page}>
+        <Text style={styles.loadingText}>Carregando produtos...</Text>
+      </SafeAreaView>
+    );
+  }
+
   return (
     <SafeAreaView style={styles.page}>
       <View style={styles.container}>
@@ -68,21 +85,23 @@ function Pesquisa() {
             <Entypo name="magnifying-glass" size={20} color="gray" style={{ marginLeft: 10 }} />
             <TextInput
               ref={inputRef}
-              placeholder='Digite para pesquisar'
+              placeholder="Digite para pesquisar"
               placeholderTextColor="#fff"
               style={styles.inputPesquisa}
-              keyboardType='email-address'
-              onChangeText={text => setQuery(text)}
-              onSubmitEditing={() => Pesquisado(query)}
+              onChangeText={(text) => setQuery(text)}
             />
           </Pressable>
         </View>
-        <FlatList
-          data={produtos}
-          renderItem={itemTemplate}
-          keyExtractor={item => item.id}
-          style={styles.lista}
-        />
+        {loading ? (
+          <Text style={styles.loadingText}>Carregando...</Text>
+        ) : (
+          <FlatList
+            data={produtos}
+            renderItem={itemTemplate}
+            keyExtractor={(item) => item.id.toString()}
+            style={styles.lista}
+          />
+        )}
       </View>
       <BottomBar />
     </SafeAreaView>

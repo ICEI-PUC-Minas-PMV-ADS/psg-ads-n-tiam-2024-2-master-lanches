@@ -2,18 +2,27 @@ import React, { useEffect, useState } from "react";
 import { View, Text, Image, ActivityIndicator } from "react-native";
 import styles from "./style";
 import { findProdutoById } from "../../../../api/produto";
+import { useProducts } from "../../../contexts/ProductContext";
 
 export default function LargeCard({ produtoId }) {
+    const { produtos } = useProducts(); // Obtém os produtos do contexto
     const [produto, setProduto] = useState(null);
     const [status, setStatus] = useState({ loading: true, error: null });
 
     useEffect(() => {
         const fetchProduto = async () => {
             setStatus({ loading: true, error: null });
+
             try {
-                const data = await findProdutoById({ id: produtoId });
-                console.log("Dados do Produto:", data);
-                setProduto(data);
+                // Busca no contexto primeiro
+                const produtoLocal = produtos.find((p) => p.id === produtoId);
+                if (produtoLocal) {
+                    setProduto(produtoLocal);
+                } else {
+                    // Se não estiver no contexto, busca na API
+                    const data = await findProdutoById({ id: produtoId });
+                    setProduto(data);
+                }
             } catch (error) {
                 console.error("Erro ao buscar produto:", error);
                 setStatus({ loading: false, error: "Falha ao carregar produto. Tente novamente." });
@@ -21,8 +30,9 @@ export default function LargeCard({ produtoId }) {
                 setStatus((prev) => ({ ...prev, loading: false }));
             }
         };
+
         fetchProduto();
-    }, [produtoId]);
+    }, [produtoId, produtos]);
 
     if (status.loading) return <LoadingComponent />;
     if (status.error) return <ErrorComponent message={status.error} />;
