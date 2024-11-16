@@ -37,7 +37,7 @@ const HomeScreen = () => {
                     </View>
                 </Section>
                 <Section title="EXPLORAR">
-                    <MediumCard produtoId={1} onAddToCart={handleAddToCart} />
+                    <MediumCard /* produtoId={1} */ onAddToCart={handleAddToCart} />
                 </Section>
             </ScrollView>
             <BottomBar />

@@ -1,10 +1,14 @@
-import { View, Text, Image } from "react-native";
+import React from "react";
+import { View, Image } from "react-native";
 import styles from "./style";
+import DefaultImage from '../../../assets/Default_noLoad.jpg';
 
-export default function SmallCard({ url }) {
+export default function SmallCard({ url, onPress }) {
+    const imageSource = url ? { uri: url } : DefaultImage;
+
     return (
         <View style={styles.container}>
-            <Image source={{ uri: url || 'https://exemplo.com/imagem-default.jpg' }} style={styles.imagem} />
+            <Image source={imageSource} style={styles.imagem} />
         </View>
     );
 }

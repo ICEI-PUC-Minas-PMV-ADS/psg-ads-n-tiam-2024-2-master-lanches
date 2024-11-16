@@ -1,27 +1,26 @@
-import React, { useState, useEffect } from 'react';
-import { Text, Pressable } from 'react-native';
-import styles from './style';
+import React, { useState, useEffect } from "react";
+import { Text, Pressable, ActivityIndicator } from "react-native";
+import styles from "./style";
 
 const CustomButton = ({ 
   onPress, 
   texto, 
   style, 
   textStyle, 
-  backgroundColor, 
-  textColor, 
-  borderRadius, 
-  padding, 
-  fontSize,
-  hoverColor = 'yellow'
+  backgroundColor = "#4CAF50", 
+  textColor = "#fff", 
+  borderRadius = 5, 
+  padding = 10, 
+  fontSize = 16, 
+  hoverColor = "#8BC34A",
+  isLoading = false,
 }) => {
-  const [textoInterno, setTextoInterno] = useState('clique aqui');
+  const [textoInterno, setTextoInterno] = useState("Clique aqui");
   const [isHovered, setIsHovered] = useState(false);
   const [isPressed, setIsPressed] = useState(false);
 
   useEffect(() => {
-    if (texto) {
-      setTextoInterno(texto);
-    }
+    if (texto) setTextoInterno(texto);
   }, [texto]);
 
   return (
@@ -31,29 +30,26 @@ const CustomButton = ({
       onHoverOut={() => setIsHovered(false)}
       onPressIn={() => setIsPressed(true)}
       onPressOut={() => setIsPressed(false)}
-      style={({ pressed }) => [
+      style={[
         styles.button, 
         style, 
         { 
-          backgroundColor: isHovered ? hoverColor : backgroundColor, 
-          backgroundColor: pressed ? hoverColor : backgroundColor,
+          backgroundColor: isPressed || isHovered ? hoverColor : backgroundColor,
           borderRadius, 
           padding,
-          transform: pressed ? [{ scale: 0.95 }] : [{ scale: 1 }],
-          minWidth: 90, // Define uma largura mínima
-          minHeight: 40, // Define uma altura mínima
+          transform: isPressed ? [{ scale: 0.95 }] : [{ scale: 1 }],
+          minWidth: 90, 
+          minHeight: 40, 
         }
       ]}
     >
-      <Text 
-        style={[
-          styles.buttonText, 
-          textStyle, 
-          { color: textColor, fontSize }
-        ]}
-      >
-        {textoInterno}
-      </Text>
+      {isLoading ? (
+        <ActivityIndicator color={textColor} />
+      ) : (
+        <Text style={[styles.buttonText, textStyle, { color: textColor, fontSize }]}>
+          {textoInterno}
+        </Text>
+      )}
     </Pressable>
   );
 };

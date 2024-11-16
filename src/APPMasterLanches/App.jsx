@@ -1,27 +1,25 @@
 import React from 'react';
 import { NavigationContainer } from "@react-navigation/native";
-import Login from "./app/pages/login";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { CartProvider } from './app/contexts/CartContext';
-import HomeScreen from "./app/pages/telaPrincipal";
-import Pesquisa from "./app/pages/Pesquisa";
-import Cart from "./app/pages/shoppingCart";
+import { ProductProvider } from './app/contexts/ProductContext';
+import AppNavigator from './app/navigation/AppNavigator';
 
-const Stack = createNativeStackNavigator();
+const AppProviders = ({ children }) => {
+    return(
+    <ProductProvider>
+        <CartProvider>
+            {children}
+        </CartProvider>
+    </ProductProvider>
+)};
+
 export default function App() {
     return (
-        <CartProvider>
+        <AppProviders>
             <NavigationContainer>
-                <Stack.Navigator 
-                    initialRouteName="Home" 
-                    screenOptions={{ animation: 'fade', headerShown: false }} 
-                >
-                    <Stack.Screen name="Login" component={Login} />
-                    <Stack.Screen name="Home" component={HomeScreen} />
-                    <Stack.Screen name="Search" component={Pesquisa} />
-                    <Stack.Screen name="Cart" component={Cart} />
-                </Stack.Navigator>
+                <AppNavigator />
             </NavigationContainer>
-        </CartProvider>
+        </AppProviders>
     );
 }
