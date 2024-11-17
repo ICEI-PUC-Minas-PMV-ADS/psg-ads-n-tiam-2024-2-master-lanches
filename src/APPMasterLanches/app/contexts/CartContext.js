@@ -44,9 +44,10 @@ export function CartProvider({ children }) {
         await AsyncStorage.removeItem(CART_EXPIRATION_KEY);
     };
 
-    const addToCart = useCallback((item) => {
+    const addToCart = useCallback((item, adicionais = []) => {
+        item.id = itemKey = `${item.id}-${adicionais.map(a => a.id).join('-')}`;
         setCart((prevCart) => {
-            const itemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id);
+            const itemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id && JSON.stringify(cartItem.adicionais) === JSON.stringify(item.adicionais));
             if (itemIndex !== -1) {
                 const updatedCart = [...prevCart];
                 updatedCart[itemIndex].quantidade += 1;
@@ -55,27 +56,29 @@ export function CartProvider({ children }) {
                 return [...prevCart, { ...item, quantidade: 1 }];
             }
         });
-    }, []);
+    }, []);    
 
-    const incrementItemQuantity = useCallback((id) => {
+    const incrementItemQuantity = useCallback((id, adicionais) => {
         setCart((prevCart) =>
             prevCart.map((item) =>
-                item.id === id ? { ...item, quantidade: item.quantidade + 1 } : item
+                item.id === id && JSON.stringify(item.adicionais) === JSON.stringify(adicionais)
+                    ? { ...item, quantidade: item.quantidade + 1 }
+                    : item
             )
         );
     }, []);
-
-    const decrementItemQuantity = useCallback((id) => {
+    
+    const decrementItemQuantity = useCallback((id, adicionais) => {
         setCart((prevCart) =>
             prevCart
                 .map((item) =>
-                    item.id === id && item.quantidade > 1
+                    item.id === id && JSON.stringify(item.adicionais) === JSON.stringify(adicionais)
                         ? { ...item, quantidade: item.quantidade - 1 }
                         : item
                 )
                 .filter((item) => item.quantidade > 0)
         );
-    }, []);
+    }, []);    
 
     const removeFromCart = useCallback((id) => {
         setCart((prevCart) => prevCart.filter((item) => item.id !== id));

@@ -98,13 +98,16 @@ export default function DetalhesItem({ item, onClose }) {
                             style={styles.buttonBackground}
                             textStyle={styles.buttonText}
                             texto={isBebida ? 'Definir Quantidade' : 'Adicionar'}
-                            backgroundColor='#FF6347'
-                            textColor='#fff'
+                            backgroundColor="#FF6347"
+                            textColor="#fff"
                             borderRadius={5}
                             padding={10}
                             fontSize={16}
-                            hoverColor='#ab3838'
-                            onPress={() => addToCart(item) && onClose}
+                            hoverColor="#ab3838"
+                            onPress={() => {
+                                addToCart({ ...item, adicionais, preco });
+                                onClose();
+                            }}
                         />
                     </View>
                 </Pressable>

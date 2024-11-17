@@ -7,17 +7,20 @@ import styles from './style';
 const CartItem = memo(({ item, onIncrement, onDecrement, onRemove }) => (
     <View style={styles.cartItem}>
         <Text style={styles.cartItemText}>{item.nome}</Text>
+        {item.adicionais?.length > 0 && (
+            <Text style={styles.adicionaisText}>Adicionais: {item.adicionais.map(a => a.nome).join(', ')}</Text>
+        )}
         <Text style={styles.cartItemText}>Preço unitário: R$ {item.preco.toFixed(2)}</Text>
         <Text style={styles.cartItemText}>Quantidade: {item.quantidade}</Text>
         <Text style={styles.cartItemText}>Subtotal: R$ {(item.quantidade * item.preco).toFixed(2)}</Text>
         <View style={styles.cartActions}>
-            <View style={{flexDirection:'row'}}>
-            <TouchableOpacity onPress={() => onDecrement(item.id)} style={styles.actionButton}>
-                <Text style={styles.actionText}>-</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={() => onIncrement(item.id)} style={styles.actionButton}>
-                <Text style={styles.actionText}>+</Text>
-            </TouchableOpacity>
+            <View style={{ flexDirection: 'row' }}>
+                <TouchableOpacity onPress={() => onDecrement(item.id)} style={styles.actionButton}>
+                    <Text style={styles.actionText}>-</Text>
+                </TouchableOpacity>
+                <TouchableOpacity onPress={() => onIncrement(item.id)} style={styles.actionButton}>
+                    <Text style={styles.actionText}>+</Text>
+                </TouchableOpacity>
             </View>
             <TouchableOpacity onPress={() => onRemove(item.id)} style={styles.removeButton}>
                 <Text style={styles.removeText}>Remover</Text>

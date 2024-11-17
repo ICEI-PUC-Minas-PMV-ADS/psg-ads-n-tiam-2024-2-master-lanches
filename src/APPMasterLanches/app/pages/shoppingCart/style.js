@@ -3,16 +3,18 @@ import { StyleSheet } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#1a1a1a',
+        backgroundColor: '#121212',
         paddingTop: 40,
         paddingHorizontal: 16,
         paddingBottom: 80,
     },
     cartItem: {
-        backgroundColor: '#333',
+        backgroundColor: '#1e1e1e',
         padding: 15,
         marginBottom: 10,
         borderRadius: 10,
+        borderWidth: 1,
+        borderColor: '#FFD700',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
         shadowOpacity: 0.25,
@@ -25,13 +27,12 @@ const styles = StyleSheet.create({
         lineHeight: 22,
     },
     removeText: {
-        color: '#000000',
+        color: '#fff',
         fontSize: 14,
-        marginTop: 5,
         fontWeight: '600',
     },
     actionText: {
-        color: '#1E90FF',
+        color: '#FFD700',
         fontSize: 18,
         fontWeight: 'bold',
         marginHorizontal: 10,
@@ -46,26 +47,26 @@ const styles = StyleSheet.create({
         paddingBottom: 120,
     },
     emptyCart: {
-        color: '#fff',
+        color: '#888',
         fontSize: 18,
         textAlign: 'center',
         marginTop: 20,
     },
     cartFooter: {
         padding: 16,
-        backgroundColor: '#fff',
+        backgroundColor: '#1e1e1e',
         borderTopWidth: 1,
-        borderTopColor: '#ddd',
+        borderTopColor: '#FFD700',
         alignItems: 'center',
     },
     totalText: {
         fontSize: 20,
         fontWeight: 'bold',
         marginBottom: 15,
-        color: '#333',
+        color: '#FFD700',
     },
     checkoutButton: {
-        backgroundColor: '#4CAF50',
+        backgroundColor: '#FFD700',
         paddingVertical: 12,
         paddingHorizontal: 24,
         borderRadius: 8,
@@ -79,27 +80,42 @@ const styles = StyleSheet.create({
         elevation: 5,
     },
     checkoutText: {
-        color: '#fff',
+        color: '#121212',
         fontWeight: 'bold',
         fontSize: 16,
         textAlign: 'center',
     },
     actionButton: {
         marginHorizontal: 8,
-        backgroundColor: '#ddd',
+        backgroundColor: '#FFD700',
         padding: 8,
         borderRadius: 4,
         alignItems: 'center',
         justifyContent: 'center',
+    },
+    actionText: {
+        color: '#000', // Preto para contraste
+        fontSize: 18,
+        fontWeight: 'bold',
+    },
+    adicionaisText: {
+        color: '#ccc',
+        fontSize: 14,
+        marginVertical: 4,
     },
     removeButton: {
         marginLeft: 16,
-        backgroundColor: '#FF4D4D',
+        backgroundColor: '#FF4500', // Laranja escuro
         padding: 8,
         borderRadius: 4,
         alignItems: 'center',
         justifyContent: 'center',
     },
+    removeText: {
+        color: '#fff',
+        fontSize: 14,
+        fontWeight: 'bold',
+    },    
 });
 
 export default styles;

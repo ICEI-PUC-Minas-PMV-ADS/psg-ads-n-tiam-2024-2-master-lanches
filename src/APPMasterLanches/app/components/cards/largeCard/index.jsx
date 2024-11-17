@@ -1,38 +1,27 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, ActivityIndicator } from "react-native";
-import styles from "./style";
-import { findProdutoById } from "../../../../api/produto";
-import { useProducts } from "../../../contexts/ProductContext";
+import React, { useEffect, useState } from 'react';
+import { View, Text, Image, ActivityIndicator } from 'react-native';
+import styles from './style';
+import { useProducts } from '../../../contexts/ProductContext';
 
-export default function LargeCard({ produtoId }) {
-    const { produtos } = useProducts(); // Obtém os produtos do contexto
-    const [produto, setProduto] = useState(null);
+function LargeCard({ produtoId }) {
+    const { getProdutoById } = useProducts();
+    const [produto, setProduto] = useState({});
     const [status, setStatus] = useState({ loading: true, error: null });
-
+    console.log('Produto carregado em LargeCard:', produto);
     useEffect(() => {
         const fetchProduto = async () => {
             setStatus({ loading: true, error: null });
-
             try {
-                // Busca no contexto primeiro
-                const produtoLocal = produtos.find((p) => p.id === produtoId);
-                if (produtoLocal) {
-                    setProduto(produtoLocal);
-                } else {
-                    // Se não estiver no contexto, busca na API
-                    const data = await findProdutoById({ id: produtoId });
-                    setProduto(data);
-                }
-            } catch (error) {
-                console.error("Erro ao buscar produto:", error);
-                setStatus({ loading: false, error: "Falha ao carregar produto. Tente novamente." });
+                const produto = await getProdutoById(produtoId);
+                setProduto(produto);
+            } catch {
+                setStatus({ loading: false, error: 'Erro ao carregar produto' });
             } finally {
-                setStatus((prev) => ({ ...prev, loading: false }));
+                setStatus({ loading: false });
             }
         };
-
         fetchProduto();
-    }, [produtoId, produtos]);
+    }, [produtoId]);
 
     if (status.loading) return <LoadingComponent />;
     if (status.error) return <ErrorComponent message={status.error} />;
@@ -40,12 +29,9 @@ export default function LargeCard({ produtoId }) {
 
     return (
         <View style={styles.card}>
-            <Image source={{ uri: produto.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }} style={styles.imagem} />
+            <Image source={{ uri: produto.imagemUrl || DefaultImage }} style={styles.imagem} />
             <Text style={styles.nome}>{produto.nome}</Text>
-            <Text style={styles.preco}>Preço: R$ {produto.preco ? produto.preco.toFixed(2) : "N/A"}</Text>
-            <Text style={styles.status}>{produto.statusDisponibilidade ? "Disponível" : "Indisponível"}</Text>
-            <Text style={styles.tituloIngredientes}>Ingredientes:</Text>
-            {renderIngredientes(produto.ingredientes)}
+            <Text style={styles.preco}>Preço: R$ {produto.preco.toFixed(2)}</Text>
         </View>
     );
 }
@@ -63,13 +49,7 @@ function ErrorComponent({ message }) {
     return <Text style={styles.errorText}>{message}</Text>;
 }
 
-function renderIngredientes(ingredientes) {
-    if (!ingredientes?.length) {
-        return <Text style={styles.semIngredientes}>Sem ingredientes adicionais</Text>;
-    }
-    return ingredientes.map((ingrediente) => (
-        <View key={ingrediente.idIngrediente} style={styles.ingrediente}>
-            <Text>{ingrediente.nome} - R$ {ingrediente.precoUnitario.toFixed(2)}</Text>
-        </View>
-    ));
-}
+
+export default React.memo(LargeCard, (prevProps, nextProps) => {
+    return prevProps.produtoId === nextProps.produtoId;
+});

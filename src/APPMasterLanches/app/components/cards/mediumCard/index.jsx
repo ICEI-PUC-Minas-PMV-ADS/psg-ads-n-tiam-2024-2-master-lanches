@@ -1,27 +1,23 @@
-import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
-import styles from "./style";
-import { useProducts } from "../../../contexts/ProductContext";
-import { useCart } from "../../../contexts/CartContext";
+import React, { useState } from 'react';
+import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import styles from './style';
+import { useProducts } from '../../../contexts/ProductContext';
+import { useCart } from '../../../contexts/CartContext';
 import DefaultImage from '../../../assets/Default_noLoad.jpg';
 
-export default function MediumCard() {
+function MediumCard() {
     const { produtos, refreshProdutos } = useProducts();
     const { addToCart } = useCart();
-    const [loading, setLoading] = useState(true);
-    // Função para adicionar ao carrinho
-    const handleAddToCart = (produto) => {
-        console.log("Produto adicionado ao carrinho:", produto.nome);
-        addToCart(produto);
-    };
-    useEffect(() => {
-        if (produtos.length > 0) {
-            setLoading(false)
-        }
-    }, [produtos]);
-    // Renderiza cada item do produto
+    const [loading, setLoading] = useState(false);
+
+    const handleRefresh = async () => {
+        setLoading(true);
+        await refreshProdutos();
+        setLoading(false);
+    };    
+
     const renderItem = ({ item: produto }) => (
-        <View key={produto.id} style={[styles.card, styles.cardSpacing]}>
+        <View style={[styles.card, styles.cardSpacing]}>
             <Image 
                 source={{ uri: produto.imagemUrl || DefaultImage }} 
                 style={styles.imagem} 
@@ -34,7 +30,7 @@ export default function MediumCard() {
                 </Text>
                 <TouchableOpacity 
                     style={styles.addButton} 
-                    onPress={() => handleAddToCart(produto)}
+                    onPress={() => addToCart(produto)}
                 >
                     <Text style={styles.addButtonText}>Adicionar</Text>
                 </TouchableOpacity>
@@ -50,12 +46,14 @@ export default function MediumCard() {
                 <FlatList
                     data={produtos}
                     renderItem={renderItem}
-                    keyExtractor={(produto) => produto.id.toString()}
+                    keyExtractor={(produto, index) => `${produto.id}-${index}`}
                     contentContainerStyle={styles.cardContainer}
-                    onRefresh={refreshProdutos} // Para permitir pull-to-refresh
+                    onRefresh={handleRefresh}
                     refreshing={false}
                 />
             )}
         </View>
     );
 }
+
+export default React.memo(MediumCard);

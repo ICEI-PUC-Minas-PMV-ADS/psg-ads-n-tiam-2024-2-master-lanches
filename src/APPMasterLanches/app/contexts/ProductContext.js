@@ -1,6 +1,6 @@
 import React, { createContext, useState, useEffect } from 'react';
 import AsyncStorage from '@react-native-async-storage/async-storage';
-import { findAllProdutos } from '../../api/produto';
+import { findAllProdutos, findProdutoById } from '../../api/produto';
 
 const ProductContext = createContext();
 
@@ -29,7 +29,7 @@ export const ProductProvider = ({ children }) => {
             console.log("Cache expirado ou não encontrado. Atualizando produtos...");
             refreshProdutos();
         } catch (error) {
-            console.error("Erro ao carregar produtos do cache:", error);
+            console.error('Erro ao carregar produtos do cache:', error);
         }
     };
 
@@ -46,12 +46,34 @@ export const ProductProvider = ({ children }) => {
                 console.error("Dados inesperados da API:", freshProdutos);
             }
         } catch (error) {
-            console.error("Erro ao buscar produtos:", error);
+            console.error('Erro ao buscar produtos:', error);
         }
     };
 
+    const getProdutoById = async (id) => {
+        // Verifique se o produto já está na lista
+        console.log('getProdutoById chamado para ID:', id);
+        const produtoLocal = produtos.find((produto) => produto.id === id);
+        if (produtoLocal) return produtoLocal;
+    
+        try {
+            const produtoRemoto = await findProdutoById({ id });
+            if (produtoRemoto) {
+                setProdutos((prev) => {
+                    // Garanta que o produto não está duplicado
+                    const isDuplicate = prev.some((produto) => produto.id === produtoRemoto.id);
+                    return isDuplicate ? prev : [...prev, produtoRemoto];
+                });
+                return produtoRemoto;
+            }
+        } catch (error) {
+            console.error('Erro ao buscar produto por ID:', error);
+        }
+        return null;
+    };    
+
     return (
-        <ProductContext.Provider value={{ produtos, refreshProdutos }}>
+        <ProductContext.Provider value={{ produtos, refreshProdutos, getProdutoById }}>
             {children}
         </ProductContext.Provider>
     );
