@@ -1,7 +1,7 @@
 import React from 'react';
 import { Text, View, Image, TouchableWithoutFeedback, Pressable, StatusBar, Platform } from 'react-native';
 import styles from './style';
-import CustomButton from '../CustomButton/index';
+import CustomButton from '../customButton/index';
 
 export default function DetalhesItem({ item, onClose }) {
   return (

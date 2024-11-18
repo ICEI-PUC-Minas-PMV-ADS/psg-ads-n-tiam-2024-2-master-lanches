@@ -2,8 +2,8 @@ import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TextInput, Image, FlatList, Pressable, Modal, SafeAreaView, Platform } from 'react-native';
 import styles from './style.js';
 import Entypo from 'react-native-vector-icons/Entypo';
-import BottomBar from '../../components/bottomBar/index.jsx';
-import DetalhesItem from '../../components/Detalhes/index.jsx';
+import BottomBar from '../../components/bottomBar';
+import DetalhesItem from '../../components/detalhes/Index.jsx';
 import Teste from "../../assets/teste.jpeg";
 import { findAllProdutos } from "../../../api/produto.js";
 

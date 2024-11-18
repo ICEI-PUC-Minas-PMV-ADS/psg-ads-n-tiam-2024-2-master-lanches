@@ -19,6 +19,7 @@ export default function App() {
                     screenOptions={{ animation: 'fade', headerShown: false }} 
                 >
                     <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Cadastro" component={Cadastro} />
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="Search" component={Pesquisa} />
                     <Stack.Screen name="Cart" component={Cart} />
