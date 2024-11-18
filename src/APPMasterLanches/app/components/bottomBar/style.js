@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
@@ -17,7 +17,6 @@ const styles = StyleSheet.create({
     },
     button: {
         padding: 10,
-        zIndex: 10,
     },
     buttonHome: {
         width: 60,
@@ -28,7 +27,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         position: 'absolute',
         left: '50%',
-        transform: [{translateX: -20}],
+        transform: [{ translateX: -20 }],
         top: -30,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
@@ -38,11 +37,10 @@ const styles = StyleSheet.create({
     },
     navbar: {
         width: '85%',
-        display: 'flex',
         flexDirection: 'row',
+        justifyContent: 'space-between',
         alignItems: 'center',
-        justifyContent: 'space-between'
-    }
+    },
 });
 
 export default styles;

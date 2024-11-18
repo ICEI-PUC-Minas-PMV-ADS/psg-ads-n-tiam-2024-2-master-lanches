@@ -13,17 +13,17 @@ namespace APIMasterLanchescs.Controllers
             _estoqueService = estoqueService;
         }
 
-        [HttpGet("produtos/{idProduto}")]
-        public async Task<IActionResult> findEstoqueProdutoByIdProduto(string idProduto)
+        [HttpGet("produtos/{id}")]
+        public async Task<IActionResult> findEstoqueProdutoById(string id)
         {
             try
             {
-                var estoque = await _estoqueService.FindEstoqueProdutoById(idProduto);
+                var estoque = await _estoqueService.FindEstoqueProdutoById(id);
                 return Ok(estoque);
             }
             catch (Exception ex)
             {
-                return StatusCode(500, $"Erro ao buscar estoque do protudo: {idProduto} - {ex.Message}");
+                return StatusCode(500, $"Erro ao buscar estoque do protudo: {id} - {ex.Message}");
             }
         }
     }

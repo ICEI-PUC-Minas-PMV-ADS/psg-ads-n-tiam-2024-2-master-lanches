@@ -1,56 +1,56 @@
 import React, { useEffect, useState } from "react";
-import { View, Text, Image, TouchableOpacity } from "react-native";
+import { View, Text, Image, TouchableOpacity, ScrollView } from "react-native";
 import styles from "./style";
-import { findProdutoById } from "../../../../api/produto";
+import { findAllProdutos } from "../../../../api/produto";
+import { useCart } from '../../../contexts/CartContext'; // Importe o useCart
 
-export default function MediumCard({ produtoId }) {
-    const [produto, setProduto] = useState(null);
+export default function MediumCard() {
+    const [produtos, setProdutos] = useState([]);
+    const { addToCart } = useCart(); // Use a função addToCart do CartContext
 
     useEffect(() => {
-        const fetchProduto = async () => {
+        const fetchProdutos = async () => {
             try {
-                const data = await findProdutoById({ id: produtoId });
-                console.log("Dados do Produto:", data);
-                setProduto(data);
+                const data = await findAllProdutos();
+                console.log("Dados dos Produtos:", data);
+                setProdutos(data);
             } catch (error) {
-                console.error("Erro ao buscar produto:", error);
+                console.error("Erro ao buscar produtos:", error);
             }
         };
 
-        fetchProduto();
-    }, [produtoId]);
+        fetchProdutos();
+    }, []);
 
-    if (!produto) {
-        return <Text>Carregando...</Text>;
+    if (produtos.length === 0) {
+        return <Text style={styles.loadingText}>Carregando...</Text>;
     }
 
-    const handleAddToCart = () => {
+    const handleAddToCart = (produto) => {
         console.log("Produto adicionado ao carrinho:", produto.nome);
-
+        addToCart(produto); // Agora a função addToCart do contexto é chamada
     };
 
     return (
-        <View style={styles.card}>
-            <Image 
-                source={{ uri: produto.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }} 
-                style={styles.imagem} 
-            />
-            <View style={styles.infoContainer}>
-                <Text style={styles.nome}>{produto.nome}</Text>
-                <Text style={styles.preco}>Preço: R$ {produto.preco.toFixed(2)}</Text>
-                <Text style={styles.status}>
-                    {produto.statusDisponibilidade ? "Disponível" : "Indisponível"}
-                </Text>
-                <Text style={styles.tituloIngredientes}>Ingredientes:</Text>
-                {produto.ingredientes?.map((ingrediente) => (
-                    <View key={ingrediente.idIngrediente} style={styles.ingrediente}>
-                        <Text>{ingrediente.nome} - R$ {ingrediente.precoUnitario.toFixed(2)}</Text>
+        <ScrollView contentContainerStyle={styles.cardContainer}>
+            {produtos.map((produto) => (
+                <View key={produto.id} style={[styles.card, styles.cardSpacing]}>
+                    <Image 
+                        source={{ uri: produto.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }} 
+                        style={styles.imagem} 
+                    />
+                    <View style={styles.infoContainer}>
+                        <Text style={styles.nome}>{produto.nome}</Text>
+                        <Text style={styles.preco}>R$ {produto.preco.toFixed(2)}</Text>
+                        <Text style={styles.status}>
+                            {produto.statusDisponibilidade ? "Disponível" : "Indisponível"}
+                        </Text>
+                        <TouchableOpacity style={styles.addButton} onPress={() => handleAddToCart(produto)}>
+                            <Text style={styles.addButtonText}>Adicionar</Text>
+                        </TouchableOpacity>
                     </View>
-                ))}
-                <TouchableOpacity style={styles.addButton} onPress={handleAddToCart}>
-                    <Text style={styles.addButtonText}>+</Text>
-                </TouchableOpacity>
-            </View>
-        </View>
+                </View>
+            ))}
+        </ScrollView>
     );
 }

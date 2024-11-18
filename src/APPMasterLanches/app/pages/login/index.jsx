@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
-import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, Animated, Keyboard } from "react-native";
+import React, { useState, useEffect, } from 'react';
+import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, Animated, Keyboard,} from "react-native";
 import styles from "./style";
-import InputComponent from "../../components/input/form/input";
+import InputComponent from "../../components/input/form/index";
 import Logo from "../../assets/logo.png";
 import { login } from "../../../api/cliente";
 

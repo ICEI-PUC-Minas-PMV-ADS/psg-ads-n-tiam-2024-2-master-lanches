@@ -20,4 +20,3 @@ export const style = StyleSheet.create({
       textAlign: 'center'
     },
 });
-  
