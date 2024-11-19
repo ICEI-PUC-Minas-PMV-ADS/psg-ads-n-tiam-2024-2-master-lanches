@@ -50,6 +50,7 @@ function MediumCard() {
                     contentContainerStyle={styles.cardContainer}
                     onRefresh={handleRefresh}
                     refreshing={false}
+                    style={{marginBottom: '15%'}}
                 />
             )}
         </View>

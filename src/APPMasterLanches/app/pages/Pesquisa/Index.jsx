@@ -26,7 +26,7 @@ function Pesquisa() {
       }}
     >
       <Image source={{ uri: item.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }} style={styles.itemImage} />
-      <View>
+      <View style={{width: '66%' ,}}>
         <Text style={styles.itemTitle} numberOfLines={2} ellipsizeMode="tail">
           {item.nome}
         </Text>

@@ -1,36 +1,35 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, View, Image, TouchableWithoutFeedback, Pressable, StatusBar } from 'react-native';
 import styles from './style';
 import ModalAdicionais from '../Adicionais';
 import CustomButton from '../../CustomButton/index';
 import { useCart } from '../../../contexts/CartContext';
-import { useState } from 'react';
 
 export default function DetalhesItem({ item, onClose }) {
     const { addToCart } = useCart();
     const [isModalVisible, setModalVisible] = useState(false);
+    const [adicionais, setAdicionais] = useState([]);
     const isBebida = item.categoriaId === "1";
-    const ingredientes = item.ingredientes
-    const [adicionais, setAdicionais] = useState([])
-    const [preco, setPreco] = useState(item.preco)
 
-    const handleOpenAdicionaisModal = () => {
-        setModalVisible(true);
+    // Calcula o preço total (produto base + adicionais)
+    const totalPreco = item.preco + adicionais.reduce((acc, adicional) => acc + adicional.preco, 0);
+
+    const handleOpenAdicionaisModal = () => setModalVisible(true);
+
+    const handleCloseAdicionaisModal = () => setModalVisible(false);
+
+    const handleAddAdicionais = (selectedAdicionais) => {
+        setAdicionais(selectedAdicionais); // Atualiza os adicionais
     };
 
-    const handleCloseAdicionaisModal = () => {
-        setModalVisible(false);
-    };
-
-    const handleAddAdicionais = (adicionais) => {
-        // Adicionar os adicionais ao item
-        setAdicionais(adicionais);
-        handlePrecoAdicionais(adicionais);
-    };
-
-    const handlePrecoAdicionais = (adicionais) => {
-        let precoAdicionais = adicionais.reduce((total, adicional) => total + adicional.preco, 0);
-        setPreco(item.preco + precoAdicionais);
+    const handleAddToCart = () => {
+        const cartItem = {
+            ...item,
+            adicionais,
+            preco: totalPreco,
+        };
+        addToCart(cartItem, adicionais); // Envia adicionais para o contexto
+        onClose();
     };
 
     return (
@@ -48,26 +47,27 @@ export default function DetalhesItem({ item, onClose }) {
                         <Image
                             source={{ uri: item.imagemUrl || DefaultImage }}
                             style={styles.itemImage}
-                            resizeMode='contain'
+                            resizeMode="contain"
                         />
                         <View>
                             <Text style={styles.itemTitle}>{item.nome}</Text>
-                            <Text style={styles.itemPrice}>{`R$ ${preco.toFixed(2)}`}</Text>
+                            <Text style={styles.itemPrice}>{`R$ ${totalPreco.toFixed(2)}`}</Text>
                         </View>
                     </View>
 
-                    {/* Exibe quadro de ingredientes ou outra informação relevante para bebidas */}
+                    {/* Exibição de ingredientes ou descrição */}
                     {isBebida ? (
                         <View style={styles.descriptionBox}>
                             <Text>Volume: {item.volume} ml</Text>
-                            {/* Adicione qualquer outra informação relevante para bebidas aqui */}
                         </View>
                     ) : (
                         <View style={styles.descriptionBox}>
                             <Text style={styles.title}>Ingredientes:</Text>
-                            {ingredientes.length ? (
-                                ingredientes.map((ingrediente, index) => (
-                                    <Text key={index} style={styles.ingredienteText}>{ingrediente.nome}</Text>
+                            {item.ingredientes?.length > 0 ? (
+                                item.ingredientes.map((ingrediente, index) => (
+                                    <Text key={index} style={styles.ingredienteText}>
+                                        {ingrediente.nome}
+                                    </Text>
                                 ))
                             ) : (
                                 <Text style={styles.ingredienteText}>Sem ingredientes adicionais</Text>
@@ -77,13 +77,16 @@ export default function DetalhesItem({ item, onClose }) {
                                 <>
                                     <Text style={styles.title}>Adicionais:</Text>
                                     {adicionais.map((adicional, index) => (
-                                        <Text key={index} style={styles.ingredienteText}>{adicional.nome}</Text>
+                                        <Text key={index} style={styles.ingredienteText}>
+                                            {adicional.nome} - R$ {adicional.preco.toFixed(2)}
+                                        </Text>
                                     ))}
                                 </>
                             )}
                         </View>
                     )}
 
+                    {/* Botões de ação */}
                     <View style={styles.buttonBar}>
                         {!isBebida && (
                             <CustomButton
@@ -91,23 +94,18 @@ export default function DetalhesItem({ item, onClose }) {
                                 textStyle={styles.buttonText}
                                 texto="Adicionais"
                                 backgroundColor="#FF6347"
+                                hoverColor="#ab3838"
                                 onPress={handleOpenAdicionaisModal}
                             />
                         )}
                         <CustomButton
                             style={styles.buttonBackground}
                             textStyle={styles.buttonText}
-                            texto={isBebida ? 'Definir Quantidade' : 'Adicionar'}
+                            texto={isBebida ? "Definir Quantidade" : "Adicionar"}
                             backgroundColor="#FF6347"
                             textColor="#fff"
-                            borderRadius={5}
-                            padding={10}
-                            fontSize={16}
                             hoverColor="#ab3838"
-                            onPress={() => {
-                                addToCart({ ...item, adicionais, preco });
-                                onClose();
-                            }}
+                            onPress={handleAddToCart}
                         />
                     </View>
                 </Pressable>

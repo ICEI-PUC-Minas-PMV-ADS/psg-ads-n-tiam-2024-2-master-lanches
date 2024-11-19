@@ -45,43 +45,52 @@ export function CartProvider({ children }) {
     };
 
     const addToCart = useCallback((item, adicionais = []) => {
-        item.id = itemKey = `${item.id}-${adicionais.map(a => a.id).join('-')}`;
+        const uniqueId = `${item.id}-${adicionais.map(a => a.id).sort().join('-')}`;
+    
         setCart((prevCart) => {
-            const itemIndex = prevCart.findIndex((cartItem) => cartItem.id === item.id && JSON.stringify(cartItem.adicionais) === JSON.stringify(item.adicionais));
-            if (itemIndex !== -1) {
+            const existingItemIndex = prevCart.findIndex(
+                (cartItem) => cartItem.uniqueId === uniqueId
+            );
+    
+            if (existingItemIndex !== -1) {
+                // Incrementa a quantidade se o item já existir
                 const updatedCart = [...prevCart];
-                updatedCart[itemIndex].quantidade += 1;
+                updatedCart[existingItemIndex].quantidade += 1;
                 return updatedCart;
-            } else {
-                return [...prevCart, { ...item, quantidade: 1 }];
             }
+    
+            return [
+                ...prevCart,
+                { ...item, uniqueId, adicionais, quantidade: 1 },
+            ];
         });
-    }, []);    
+    }, []);      
 
-    const incrementItemQuantity = useCallback((id, adicionais) => {
+    const incrementItemQuantity = useCallback((uniqueId) => {
         setCart((prevCart) =>
             prevCart.map((item) =>
-                item.id === id && JSON.stringify(item.adicionais) === JSON.stringify(adicionais)
+                item.uniqueId === uniqueId
                     ? { ...item, quantidade: item.quantidade + 1 }
                     : item
             )
         );
     }, []);
     
-    const decrementItemQuantity = useCallback((id, adicionais) => {
+    const decrementItemQuantity = useCallback((uniqueId) => {
         setCart((prevCart) =>
             prevCart
                 .map((item) =>
-                    item.id === id && JSON.stringify(item.adicionais) === JSON.stringify(adicionais)
+                    item.uniqueId === uniqueId
                         ? { ...item, quantidade: item.quantidade - 1 }
                         : item
                 )
                 .filter((item) => item.quantidade > 0)
         );
-    }, []);    
+    }, []);
+    
 
     const removeFromCart = useCallback((id) => {
-        setCart((prevCart) => prevCart.filter((item) => item.id !== id));
+        setCart((prevCart) => prevCart.filter((item) => item.uniqueId !== id));
     }, []);
 
     return (

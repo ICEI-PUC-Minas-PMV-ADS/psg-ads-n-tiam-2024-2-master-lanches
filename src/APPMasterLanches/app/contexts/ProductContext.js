@@ -51,16 +51,15 @@ export const ProductProvider = ({ children }) => {
     };
 
     const getProdutoById = async (id) => {
-        // Verifique se o produto já está na lista
         console.log('getProdutoById chamado para ID:', id);
+    
         const produtoLocal = produtos.find((produto) => produto.id === id);
         if (produtoLocal) return produtoLocal;
     
         try {
             const produtoRemoto = await findProdutoById({ id });
-            if (produtoRemoto) {
+            if (produtoRemoto && !produtoRemoto.adicionais) {
                 setProdutos((prev) => {
-                    // Garanta que o produto não está duplicado
                     const isDuplicate = prev.some((produto) => produto.id === produtoRemoto.id);
                     return isDuplicate ? prev : [...prev, produtoRemoto];
                 });
@@ -70,7 +69,7 @@ export const ProductProvider = ({ children }) => {
             console.error('Erro ao buscar produto por ID:', error);
         }
         return null;
-    };    
+    };      
 
     return (
         <ProductContext.Provider value={{ produtos, refreshProdutos, getProdutoById }}>

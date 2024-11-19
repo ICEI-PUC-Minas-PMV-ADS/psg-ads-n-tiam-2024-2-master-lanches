@@ -6,35 +6,36 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     zIndex: 11,
-    backgroundColor: "rgba(0, 0, 0, 0.5)", // Fundo semi-transparente
+    backgroundColor: "rgba(0, 0, 0, 0.7)",
   },
   box: {
-    backgroundColor: '#fff', // Fundo branco para a caixa principal
+    backgroundColor: '#1e1e1e',
     width: '80%',
     height: '76%',
     position: 'absolute',
     alignSelf: 'center',
     borderRadius: 10,
-    overflow: 'hidden',
+    borderWidth: 1,
+    borderColor: '#FFD700',
     shadowColor: '#000',
     shadowOpacity: 0.25,
     shadowRadius: 3.84,
     elevation: 5,
     shadowOffset: { width: 0, height: 2 },
   },
-  itemTitle: { 
-    fontSize: 19, 
+  itemTitle: {
+    fontSize: 19,
     fontWeight: 'bold',
-    color: '#333', // Cor do texto
+    color: '#FFD700',
   },
   itemPrice: {
     fontSize: 14,
-    color: '#666', // Cor do texto
+    color: '#FFD700',
   },
   itemImage: {
-    height: '100%', 
+    height: '100%',
     width: '28.5%',
-    borderRadius: 10, // Adiciona bordas arredondadas à imagem
+    borderRadius: 10,
   },
   header: {
     flexDirection: 'row',
@@ -43,15 +44,14 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     padding: 10,
     borderBottomWidth: 1,
-    borderBottomColor: '#ddd', // Linha de separação
+    borderBottomColor: '#FFD700',
   },
   descriptionBox: {
     alignSelf: 'center',
-    backgroundColor: '#f9f9f9', // Fundo claro para a descrição
+    backgroundColor: '#f9f9f9',
     width: '95%',
-    height: '60%', // Ajuste a altura para evitar cortes
-    borderColor: '#ddd',
-    borderStyle: 'solid',
+    height: '60%',
+    borderColor: '#FFD700',
     borderWidth: 1,
     borderRadius: 10,
     padding: 10,
@@ -66,14 +66,14 @@ const styles = StyleSheet.create({
     marginTop: 10,
   },
   buttonBackground: {
-    backgroundColor: '#FF6347', // Cor do botão (tom de vermelho tomate)
+    backgroundColor: '#FFD700',
     padding: 10,
     borderRadius: 5,
-    flex: 1, // Permite que o botão ocupe o espaço disponível
-    marginHorizontal: 5, // Espaçamento entre os botões
+    flex: 1,
+    marginHorizontal: 5,
   },
   buttonText: {
-    color: '#fff', // Cor do texto do botão
+    color: '#121212',
     fontWeight: 'bold',
     textAlign: 'center',
   },
