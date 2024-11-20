@@ -5,11 +5,12 @@ import HomeScreen from "../pages/telaPrincipal";
 import Pesquisa from "../pages/pesquisa"
 import Cart from "../pages/shoppingCart";
 import AdministrationFunctions from '../pages/funçõesAdministração';
+import { accessUser } from '../contexts/UserContext';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
-    const [ADM, setADM] = useState(true);
+    const {ADM}  = accessUser()
 
     // Mapeamento de telas baseando-se no estado ADM
     const CHANGEABLE_NAVIGATION = [
@@ -23,11 +24,11 @@ export default function AppNavigator() {
         <Stack.Navigator
             initialRouteName="Home"
             screenOptions={{
-                animation: 'fade',  // Ou qualquer outra animação desejada
+                animation: 'fade',
                 headerShown: false,
                 animationEnabled: true,
                 gestureEnabled: true,
-                cardStyle: { backgroundColor: 'transparent' },  // Fundo transparente para evitar piscar
+                cardStyle: { backgroundColor: 'transparent' }, 
             }}
         >
             {/* Telas comuns */}
