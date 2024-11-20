@@ -19,6 +19,9 @@ export default function BottomBar() {
                 <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cart')}>
                     <Icon name="shopping-cart" size={24} color="#000" />
                 </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Profile')}>
+                    <Icon name="user" size={24} color="#000" />
+                </TouchableOpacity>
             </View>
         </View>
     );
