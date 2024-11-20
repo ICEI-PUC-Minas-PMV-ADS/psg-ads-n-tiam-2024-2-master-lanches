@@ -57,34 +57,35 @@ export default function DetalhesItem({ item, onClose }) {
 
                     {/* Exibição de ingredientes ou descrição */}
                     {isBebida ? (
-                        <View style={styles.descriptionBox}>
-                            <Text>Volume: {item.volume} ml</Text>
-                        </View>
-                    ) : (
-                        <View style={styles.descriptionBox}>
-                            <Text style={styles.title}>Ingredientes:</Text>
-                            {item.ingredientes?.length > 0 ? (
-                                item.ingredientes.map((ingrediente, index) => (
-                                    <Text key={index} style={styles.ingredienteText}>
-                                        {ingrediente.nome}
-                                    </Text>
-                                ))
-                            ) : (
-                                <Text style={styles.ingredienteText}>Sem ingredientes adicionais</Text>
-                            )}
+    <View style={styles.descriptionBox}>
+        <Text>Volume: {item.volume} ml</Text>
+    </View>
+) : (
+    <View style={styles.descriptionBox}>
+        {item.ingredientes?.length > 0 && (
+            <>
+                <Text style={styles.title}>Ingredientes:</Text>
+                {item.ingredientes.map((ingrediente, index) => (
+                    <Text key={index} style={styles.ingredienteText}>
+                        {ingrediente.nome}
+                    </Text>
+                ))}
+            </>
+        )}
 
-                            {adicionais.length > 0 && (
-                                <>
-                                    <Text style={styles.title}>Adicionais:</Text>
-                                    {adicionais.map((adicional, index) => (
-                                        <Text key={index} style={styles.ingredienteText}>
-                                            {adicional.nome} - R$ {adicional.preco.toFixed(2)}
-                                        </Text>
-                                    ))}
-                                </>
-                            )}
-                        </View>
-                    )}
+        {adicionais.length > 0 && (
+            <>
+                <Text style={styles.title}>Adicionais:</Text>
+                {adicionais.map((adicional, index) => (
+                    <Text key={index} style={styles.ingredienteText}>
+                        {adicional.nome} - R$ {adicional.preco.toFixed(2)}
+                    </Text>
+                ))}
+            </>
+        )}
+    </View>
+)}
+
 
                     {/* Botões de ação */}
                     <View style={styles.buttonBar}>

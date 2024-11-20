@@ -1,12 +1,12 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Text, View, TextInput, Image, FlatList, Pressable, Modal, SafeAreaView } from 'react-native';
-import styles from './style.js';
 import Entypo from 'react-native-vector-icons/Entypo';
 import BottomBar from '../../components/bottomBar/index';
 import DetalhesItem from '../../components/modal/Detalhes';
 import { useProducts } from '../../contexts/ProductContext';
 import { debounce } from 'lodash';
 import Fuse from 'fuse.js';
+import styles from './style';
 
 function Pesquisa() {
   const { produtos: produtosContext } = useProducts(); // Carregamos os produtos do contexto
@@ -16,7 +16,7 @@ function Pesquisa() {
   const [produtos, setProdutos] = useState([]); // Produtos filtrados
   const [query, setQuery] = useState('');
   const [loading, setLoading] = useState(false);
-
+  const allProdutos = Object.values(produtosContext).flat()
   const itemTemplate = ({ item }) => (
     <Pressable
       style={styles.itemBox}
@@ -26,7 +26,7 @@ function Pesquisa() {
       }}
     >
       <Image source={{ uri: item.imagemUrl || 'https://exemplo.com/imagem-default.jpg' }} style={styles.itemImage} />
-      <View style={{width: '66%' ,}}>
+      <View style={{ width: '66%', }}>
         <Text style={styles.itemTitle} numberOfLines={2} ellipsizeMode="tail">
           {item.nome}
         </Text>
@@ -34,18 +34,20 @@ function Pesquisa() {
       </View>
     </Pressable>
   );
+  const searchProdutos = async (query, produtos = []) => {
+    if (!query) return produtos.slice(0, 3); // Retorna apenas os três primeiros se não houver busca
+    const fuse = new Fuse(produtos, {
+      keys: ["nome", "ingredientes"],
+      threshold: 0.3,
+    });
+    return fuse.search(query).map(({ item }) => item);
+  };
 
-  const Pesquisado = (query) => {
-    if (!produtosContext || produtosContext.length === 0) return; // Verifica se há produtos disponíveis
-
+  const Pesquisado = async (query) => {
     setLoading(true);
     try {
-      const fuse = new Fuse(produtosContext, {
-        keys: ['nome', 'ingredientes'],
-        threshold: 0.3,
-      });
-      const result = fuse.search(query);
-      setProdutos(result.map(({ item }) => item));
+      const result = await searchProdutos(query, allProdutos);
+      setProdutos(result);
     } finally {
       setLoading(false);
     }
@@ -53,14 +55,16 @@ function Pesquisa() {
 
   useEffect(() => {
     const debouncedSearch = debounce(() => {
-      Pesquisado(query);
-    }, 500); // Aguarda 500ms antes de executar a pesquisa
+      const allProdutos = Object.values(produtosContext).flat(); // Junta todas as categorias
+      Pesquisado(query, allProdutos);
+    }, 500);
 
     debouncedSearch();
-    return () => debouncedSearch.cancel(); // Limpa o debounce ao desmontar
-  }, [query, produtosContext]); // Adicionamos produtosContext como dependência para garantir que está atualizado
+    return () => debouncedSearch.cancel();
+  }, [query, produtosContext]);
 
-  if (!produtosContext || produtosContext.length === 0) {
+
+  if (!allProdutos || allProdutos.length === 0) {
     return (
       <SafeAreaView style={styles.page}>
         <Text style={styles.loadingText}>Carregando produtos...</Text>

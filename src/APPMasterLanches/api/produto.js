@@ -1,38 +1,30 @@
-import api from './apiML';
-import Fuse from 'fuse.js';
+import api from "./apiML";
 
 export const findProdutoById = async ({id}) => {
-    try { 
-        const { data } = await api.get(`/produtos/` + id);
+    try {
+        const { data } = await api.get(`/produtos/${id}`);
         return data;
     } catch (error) {
-        console.error('Erro ao buscar produto', error.response?.data || error.message);
-        throw error;
+        console.error("Erro ao buscar produto:", error.response?.data || error.message);
+        throw new Error(error.response?.data?.mensagem || "Erro ao buscar produto.");
     }
 };
 
 export const findAllProdutos = async () => {
     try {
-        const { data } = await api.get('/produtos');
+        const { data } = await api.get("/produtos");
         return data;
     } catch (error) {
-        console.error('Erro ao buscar produtos', error.response?.data || error.message);
-        throw error;
+        console.error("Erro ao buscar produtos:", error.response?.data || error.message);
+        throw new Error("Erro ao buscar produtos.");
     }
 };
-
-
-export const searchProdutos = async (query) => {
+export const findAllCategorias = async () => {
     try {
-        const produtos = await findAllProdutos();
-        const fuse = new Fuse(produtos, {
-            keys: ['nome', 'ingredientes'],
-            threshold: 0.3,
-        });
-        const result = fuse.search(query);
-        return result.map(({ item }) => item);
+        const { data } = await api.get("/categorias-produtos");
+        return data;
     } catch (error) {
-        console.error('Erro ao buscar produtos', error.response?.data || error.message);
-        throw error;
+        console.error("Erro ao buscar produtos:", error.response?.data || error.message);
+        throw new Error("Erro ao buscar produtos.");
     }
 };

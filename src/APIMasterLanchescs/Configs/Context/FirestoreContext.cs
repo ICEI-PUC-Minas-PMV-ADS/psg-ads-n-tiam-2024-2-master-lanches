@@ -8,21 +8,38 @@ namespace APIMasterLanchescs.Configs.DbContext
 
         public FirestoreContext(IConfiguration configuration)
         {
-            var firebaseConfigPath = configuration["Firebase:ConfigPath"];
+            string firebaseConfigPath = configuration["Firebase:ConfigPath"];
+            string projectId = configuration["Firebase:ProjectId"];
 
-            if (string.IsNullOrEmpty(firebaseConfigPath))
+            if (string.IsNullOrWhiteSpace(firebaseConfigPath))
             {
-                throw new ArgumentNullException(nameof(firebaseConfigPath), "O caminho para o arquivo de configuração do Firebase não pode ser nulo.");
+                throw new ArgumentException("O caminho para o arquivo de configuração do Firebase é obrigatório.", nameof(firebaseConfigPath));
             }
+
+            if (string.IsNullOrWhiteSpace(projectId))
+            {
+                throw new ArgumentException("O ID do projeto Firebase é obrigatório.", nameof(projectId));
+            }
+
             Environment.SetEnvironmentVariable("GOOGLE_APPLICATION_CREDENTIALS", firebaseConfigPath);
-            _firestoreDb = FirestoreDb.Create(configuration["Firebase:ProjectId"]);
+            _firestoreDb = FirestoreDb.Create(projectId);
         }
 
+        /// <summary>
+        /// Propriedade para acessar o banco Firestore.
+        /// </summary>
         public FirestoreDb FirestoreDb => _firestoreDb;
-        
-        public FirestoreDb GetFirestoreDb()
+
+        /// <summary>
+        /// Retorna uma referência para uma coleção.
+        /// </summary>
+        public CollectionReference GetCollection(string collectionName)
         {
-            return _firestoreDb;
+            if (string.IsNullOrWhiteSpace(collectionName))
+            {
+                throw new ArgumentException("O nome da coleção não pode ser nulo ou vazio.", nameof(collectionName));
+            }
+            return _firestoreDb.Collection(collectionName);
         }
     }
 }

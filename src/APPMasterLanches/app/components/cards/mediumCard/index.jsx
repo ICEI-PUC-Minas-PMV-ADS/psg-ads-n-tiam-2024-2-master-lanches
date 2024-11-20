@@ -6,10 +6,10 @@ import { useCart } from '../../../contexts/CartContext';
 import DefaultImage from '../../../assets/Default_noLoad.jpg';
 
 function MediumCard() {
-    const { produtos, refreshProdutos } = useProducts();
+    const { produtos: produtosContext, refreshProdutos } = useProducts();
     const { addToCart } = useCart();
     const [loading, setLoading] = useState(false);
-
+    const allProdutos = Object.values(produtosContext).flat()
     const handleRefresh = async () => {
         setLoading(true);
         await refreshProdutos();
@@ -19,7 +19,7 @@ function MediumCard() {
     const renderItem = ({ item: produto }) => (
         <View style={[styles.card, styles.cardSpacing]}>
             <Image 
-                source={{ uri: produto.imagemUrl || DefaultImage }} 
+                source={{ uri: produto.imagemUrl || null }} 
                 style={styles.imagem} 
             />
             <View style={styles.infoContainer}>
@@ -44,7 +44,7 @@ function MediumCard() {
                 <Text style={styles.loadingText}>Carregando produtos...</Text>
             ) : (
                 <FlatList
-                    data={produtos}
+                    data={allProdutos}
                     renderItem={renderItem}
                     keyExtractor={(produto, index) => `${produto.id}-${index}`}
                     contentContainerStyle={styles.cardContainer}

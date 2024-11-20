@@ -1,14 +1,13 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#1a1a1a', 
+        backgroundColor: '#000000', 
         alignItems: 'center',
     },
-    scrollContainer: {
-        marginTop: 17,
-        flexGrow: 1,
+    flatListContainer: {
+        marginTop: Platform.OS === 'ios' || Platform.OS === 'android' ? 40 : 0,
         justifyContent: 'flex-start',
         alignItems: 'center',
         paddingBottom: 80,

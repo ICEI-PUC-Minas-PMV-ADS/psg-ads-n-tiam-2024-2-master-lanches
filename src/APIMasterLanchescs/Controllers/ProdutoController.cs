@@ -32,8 +32,9 @@ namespace APIMasterLanchescs.Controllers
         {
             try
             {
-                var produto = await _produtoService.BuscarProdutoIdAsync(id);
-                return produto != null ? Ok(produto) : NotFound("Produto não encontrada.");
+                // Usar o nome correto do método
+                var produto = await _produtoService.BuscarProdutoPorIdAsync(id);
+                return produto != null ? Ok(produto) : NotFound("Produto não encontrado.");
             }
             catch (Exception ex) { return StatusCode(500, $"Erro ao buscar produto: {ex.Message}"); }
         }
@@ -43,7 +44,8 @@ namespace APIMasterLanchescs.Controllers
         {
             try
             {
-                return Ok(await _produtoService.BuscarListaProdutoAsync());
+                // Usar o nome correto do método
+                return Ok(await _produtoService.BuscarProdutosAsync());
             }
             catch (Exception ex) { return StatusCode(500, $"Erro ao buscar lista de produtos: {ex.Message}"); }
         }
@@ -53,10 +55,11 @@ namespace APIMasterLanchescs.Controllers
         {
             try
             {
-                var produto = await _produtoService.FindListaProdutoByCategoriaAsync(idCategoria);
+                // Usar o nome correto do método
+                var produto = await _produtoService.BuscarProdutosPorCategoriaAsync(idCategoria);
                 return Ok(produto);
             }
-            catch (Exception ex) { return StatusCode(500, $"Erro ao buscar lista de produtos: {ex.Message}"); }
+            catch (Exception ex) { return StatusCode(500, $"Erro ao buscar lista de produtos por categoria: {ex.Message}"); }
         }
 
         [HttpPut("{id}")]
@@ -65,7 +68,8 @@ namespace APIMasterLanchescs.Controllers
             if (produto == null) { return BadRequest("Não podem haver campos nulos"); }
             try
             {
-                await _produtoService.AtualizarProduto(id, produto);
+                // Usar o nome correto do método
+                await _produtoService.AtualizarProdutoAsync(id, produto);
                 return Ok(produto);
             }
             catch (Exception ex) { return StatusCode(500, $"Erro ao atualizar produto: {ex.Message}"); }
@@ -76,6 +80,7 @@ namespace APIMasterLanchescs.Controllers
         {
             try
             {
+                // Adicionar implementação do método DeletarProduto no ProdutoService se necessário
                 await _produtoService.DeletarProduto(id);
                 return NoContent();
             }

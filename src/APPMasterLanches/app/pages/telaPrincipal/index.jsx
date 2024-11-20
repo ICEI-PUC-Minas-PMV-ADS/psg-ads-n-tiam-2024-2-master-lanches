@@ -16,7 +16,7 @@ const HomeScreen = () => {
 
     
     const renderLargeCardSection = () => (
-        <LargeCard produtoId={2} onAddToCart={handleAddToCart} />
+        <LargeCard produtoId={"2"} onAddToCart={handleAddToCart} />
     );
     
     const renderSmallCardSection = () => (

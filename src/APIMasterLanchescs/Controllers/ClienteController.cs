@@ -43,7 +43,7 @@ namespace APIMasterLanchescs.Controllers
 
             try
             {
-                var firebaseAuthLink = await _clienteService.Login(clienteLogin);
+                var firebaseAuthLink = await _clienteService.LoginAsync(clienteLogin);
                 return Ok(new { Token = firebaseAuthLink.FirebaseToken, Email = clienteLogin.Email });
             }
             catch (Exception ex)

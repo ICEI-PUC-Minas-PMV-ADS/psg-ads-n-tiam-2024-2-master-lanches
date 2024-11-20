@@ -5,19 +5,18 @@ namespace APIMasterLanchescs.Models
     [FirestoreData]
     public class Estoque
     {
-        [FirestoreProperty("idEstoque")]
-        public string IdEstoque { get; set; }
+        [FirestoreProperty("id")]
+        public string IdProduto { get; set; }
 
-        [FirestoreProperty("produtoId")]
-        public string ProdutoId { get; set; }
+        [FirestoreProperty("nome")]
+        public string NomeProduto { get; set; }
 
-        [FirestoreProperty("quantidadeDisponivel")]
+        [FirestoreProperty("quantidade")]
         public int QuantidadeDisponivel { get; set; }
 
-        [FirestoreProperty("unidadeMedida")]
-        public string UnidadeMedida { get; set; }
-
-        [FirestoreProperty("dataUltimaAtualizacao")]
-        public DateTime DataUltimaAtualizacao { get; set; }
+        // Campos dinâmicos para extensibilidade
+        [FirestoreProperty]
+        public Dictionary<string, object> CamposExtras { get; set; }
     }
+
 }

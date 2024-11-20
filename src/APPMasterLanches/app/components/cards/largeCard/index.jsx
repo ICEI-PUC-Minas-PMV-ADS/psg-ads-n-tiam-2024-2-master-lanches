@@ -7,13 +7,13 @@ function LargeCard({ produtoId }) {
     const { getProdutoById } = useProducts();
     const [produto, setProduto] = useState({});
     const [status, setStatus] = useState({ loading: true, error: null });
-    console.log('Produto carregado em LargeCard:', produto);
     useEffect(() => {
         const fetchProduto = async () => {
             setStatus({ loading: true, error: null });
             try {
                 const produto = await getProdutoById(produtoId);
                 setProduto(produto);
+                console.log('Produto carregado em LargeCard:', produto);
             } catch {
                 setStatus({ loading: false, error: 'Erro ao carregar produto' });
             } finally {

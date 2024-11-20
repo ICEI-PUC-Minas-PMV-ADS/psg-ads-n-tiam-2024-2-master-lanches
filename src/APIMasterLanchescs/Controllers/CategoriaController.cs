@@ -15,18 +15,6 @@ namespace APIMasterLanchescs.Controllers
             _categoriaService = categoriaService;
         }
 
-        [HttpPost]
-        public async Task<IActionResult> SaveCategoria([FromBody] CategoriaProduto categoriaProduto)
-        {
-            if (categoriaProduto == null) { return BadRequest("Não podem haver campos nulos"); }
-            try
-            {
-                await _categoriaService.SaveCategoriaAsync(categoriaProduto);
-                return Ok(categoriaProduto);
-            }
-            catch (Exception ex) { return StatusCode(500, $"Erro ao salvar categoria: {ex.Message}"); }
-        }
-
         [HttpGet]
         public async Task<IActionResult> FindListCategoria()
         {
@@ -37,9 +25,23 @@ namespace APIMasterLanchescs.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500, $"Erro ao buscar categorias: {ex.Message}");
             }
         }
-        
+
+        [HttpPost]
+        public async Task<IActionResult> SaveCategoria([FromBody] CategoriaProduto categoriaProduto)
+        {
+            if (categoriaProduto == null) return BadRequest("Categoria inválida.");
+            try
+            {
+                await _categoriaService.SaveCategoriaAsync(categoriaProduto);
+                return Ok(categoriaProduto);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro ao salvar categoria: {ex.Message}");
+            }
+        }
     }
 }

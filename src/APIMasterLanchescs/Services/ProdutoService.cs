@@ -14,52 +14,85 @@ namespace APIMasterLanchescs.Services
 
         public async Task SalvarProdutoAsync(Produto produto)
         {
-            try { await _firestoreContext.GetFirestoreDb().Collection("produto").Document(produto.Id).SetAsync(produto); }
-            catch (Exception ex) { throw new Exception("Erro ao salvar produto: " + ex.Message); }
+            try
+            {
+                await _firestoreContext.FirestoreDb.Collection("produto")
+                    .Document(produto.Id)
+                    .SetAsync(produto);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao salvar produto: {ex.Message}");
+            }
         }
 
-        public async Task<Produto> BuscarProdutoIdAsync(string id)
+        public async Task<Produto> BuscarProdutoPorIdAsync(string id)
         {
-            var documentSnapshot = await _firestoreContext.GetFirestoreDb().Collection("produto").Document(id.ToString()).GetSnapshotAsync();
-            return documentSnapshot.Exists ? documentSnapshot.ConvertTo<Produto>() : throw new Exception("Produto não encontrado.");
+            var documentSnapshot = await _firestoreContext.FirestoreDb.Collection("produto")
+                .Document(id)
+                .GetSnapshotAsync();
+
+            return documentSnapshot.Exists
+                ? documentSnapshot.ConvertTo<Produto>()
+                : throw new KeyNotFoundException("Produto não encontrado.");
         }
 
-        public async Task<List<Produto>> BuscarListaProdutoAsync()
+        public async Task<List<Produto>> BuscarProdutosAsync()
         {
             var produtos = new List<Produto>();
-            var snapshot = await _firestoreContext.GetFirestoreDb().Collection("produto").GetSnapshotAsync();
-            foreach (var document in snapshot.Documents){ produtos.Add(document.ConvertTo<Produto>()); }
+            var snapshot = await _firestoreContext.FirestoreDb.Collection("produto").GetSnapshotAsync();
+            foreach (var document in snapshot.Documents)
+            {
+                produtos.Add(document.ConvertTo<Produto>());
+            }
             return produtos;
         }
 
-        public async Task DeletarProduto(string id)
+        public async Task AtualizarProdutoAsync(string id, Produto produto)
         {
-            var documentRef = _firestoreContext.GetFirestoreDb().Collection("produto").Document(id.ToString());
+            var documentRef = _firestoreContext.FirestoreDb.Collection("produto").Document(id);
             var documentSnapshot = await documentRef.GetSnapshotAsync();
-            if (documentSnapshot.Exists) { await documentRef.DeleteAsync(); }
-            else { throw new Exception("Produto não encontrado."); }
+            if (documentSnapshot.Exists)
+            {
+                await documentRef.SetAsync(produto);
+            }
+            else
+            {
+                throw new KeyNotFoundException("Produto não encontrado.");
+            }
         }
 
-        public async Task AtualizarProduto(string id, Produto produto)
-        {
-            var documentRef = _firestoreContext.GetFirestoreDb().Collection("produto").Document(id);
-            var documentSnapshot = await documentRef.GetSnapshotAsync();
-            if (documentSnapshot.Exists) { await documentRef.SetAsync(produto); }
-            else { throw new Exception("Produto não encontrado."); }
-        }
-
-        public async Task<List<Produto>> FindListaProdutoByCategoriaAsync(string idCategoria)
+        public async Task<List<Produto>> BuscarProdutosPorCategoriaAsync(string idCategoria)
         {
             var produtos = new List<Produto>();
-            var documentRef = _firestoreContext.GetFirestoreDb().Collection("produto");
-            var query = documentRef.WhereEqualTo("categoriaId", idCategoria);
+            var query = _firestoreContext.FirestoreDb.Collection("produto")
+                .WhereEqualTo("categoriaId", idCategoria);
             var snapshot = await query.GetSnapshotAsync();
             foreach (var document in snapshot.Documents)
             {
-                var produto = document.ConvertTo<Produto>();
-                produtos.Add(produto);
+                produtos.Add(document.ConvertTo<Produto>());
             }
             return produtos;
+        }
+        public async Task DeletarProduto(string id)
+        {
+            try
+            {
+                var documentRef = _firestoreContext.FirestoreDb.Collection("produto").Document(id);
+                var documentSnapshot = await documentRef.GetSnapshotAsync();
+                if (documentSnapshot.Exists)
+                {
+                    await documentRef.DeleteAsync();
+                }
+                else
+                {
+                    throw new KeyNotFoundException("Produto não encontrado.");
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro ao deletar produto: {ex.Message}");
+            }
         }
     }
 }
