@@ -55,7 +55,7 @@ const ShoppingCart = () => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1, backgroundColor: 'black' }}>
             <View style={styles.container}>
                 <FlatList
                     data={cart}

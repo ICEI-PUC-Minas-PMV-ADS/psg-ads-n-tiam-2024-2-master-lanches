@@ -3,6 +3,7 @@ import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
+import { accessUser } from '../../contexts/UserContext';
 
 const ICONS = [
     { name: "home", screen: "Home" },
@@ -15,8 +16,8 @@ const CHANGEABLE_ICONS = [
 ];
 
 const BottomBar = () => {
+    const {ADM}  = accessUser()
     const navigation = useNavigation();
-    const [ADM, setADM] = useState(true);
 
     const baseIconMap = (icon, index) => (
         <TouchableOpacity

@@ -9,7 +9,7 @@ export default function DetalhesItem({ item, onClose }) {
     const { addToCart } = useCart();
     const [isModalVisible, setModalVisible] = useState(false);
     const [adicionais, setAdicionais] = useState([]);
-    const isBebida = item.categoriaId === "1";
+    const isHamburguer = item.nomeCategoria === "Hambúrguer" || "Vegetariano";
 
     // Calcula o preço total (produto base + adicionais)
     const totalPreco = item.preco + adicionais.reduce((acc, adicional) => acc + adicional.preco, 0);
@@ -56,7 +56,7 @@ export default function DetalhesItem({ item, onClose }) {
                     </View>
 
                     {/* Exibição de ingredientes ou descrição */}
-                    {isBebida ? (
+                    {!isHamburguer ? (
     <View style={styles.descriptionBox}>
         <Text>Volume: {item.volume} ml</Text>
     </View>
@@ -89,7 +89,7 @@ export default function DetalhesItem({ item, onClose }) {
 
                     {/* Botões de ação */}
                     <View style={styles.buttonBar}>
-                        {!isBebida && (
+                        {isHamburguer && (
                             <CustomButton
                                 style={styles.buttonBackground}
                                 textStyle={styles.buttonText}
@@ -102,7 +102,7 @@ export default function DetalhesItem({ item, onClose }) {
                         <CustomButton
                             style={styles.buttonBackground}
                             textStyle={styles.buttonText}
-                            texto={isBebida ? "Definir Quantidade" : "Adicionar"}
+                            texto={!isHamburguer ? "Definir Quantidade" : "Adicionar"}
                             backgroundColor="#FF6347"
                             textColor="#fff"
                             hoverColor="#ab3838"

@@ -12,13 +12,15 @@ import Collapsible from "react-native-collapsible";
 import Icon from "react-native-vector-icons/MaterialIcons"; // Instale react-native-vector-icons
 import styles from "./style";
 import { findAllEstoque, updateEstoque, initializeEstoque } from "../../../../api/estoque";
+import { accessUser } from "../../../contexts/UserContext";
 
 const StockManagement = () => {
     const [estoque, setEstoque] = useState([]);
     const [loading, setLoading] = useState(true);
     const [collapsed, setCollapsed] = useState(true);
     const rotation = new Animated.Value(collapsed ? 0 : 1); // Estado para animação da rotação
-    const userRole = "admin";
+    const {ADM}  = accessUser()
+    const userRole = ADM? "admin" : "user" ;
 
     useEffect(() => {
         const fetchEstoque = async () => {

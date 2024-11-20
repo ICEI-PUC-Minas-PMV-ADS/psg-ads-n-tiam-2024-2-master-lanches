@@ -3,14 +3,17 @@ import { NavigationContainer } from "@react-navigation/native";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { CartProvider } from './app/contexts/CartContext';
 import { ProductProvider } from './app/contexts/ProductContext';
+import { UserProvider } from './app/contexts/UserContext';
 import AppNavigator from './app/navigation/AppNavigator';
 
 const AppProviders = ({ children }) => {
     return (
         <ProductProvider>
-            <CartProvider>
-                {children}
-            </CartProvider>
+            <UserProvider>
+                <CartProvider>
+                    {children}
+                </CartProvider>
+            </UserProvider>
         </ProductProvider>
     )
 };
