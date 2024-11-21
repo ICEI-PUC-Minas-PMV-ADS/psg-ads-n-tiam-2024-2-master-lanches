@@ -6,7 +6,7 @@ namespace APIMasterLanchescs.Services
 {
     public class ClienteService
     {
-        private const string API_KEY = "SUA_CHAVE_FIREBASE";
+        private const string API_KEY = "AIzaSyCSH4jUUskcCQcpACrrGs2m7Y2pxGGhSYk";
         private readonly FirestoreContext _firestoreContext;
 
         public ClienteService(FirestoreContext firestoreContext)

@@ -22,7 +22,7 @@ export default function AppNavigator() {
 
     return (
         <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Login"
             screenOptions={{
                 animation: 'fade',
                 headerShown: false,
