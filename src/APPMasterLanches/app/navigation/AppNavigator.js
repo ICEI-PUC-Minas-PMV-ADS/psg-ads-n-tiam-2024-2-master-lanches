@@ -10,6 +10,7 @@ import Cadastro from '../pages/cadastro';
 import CadastroEndereco from '../pages/cadastroEndereco';
 import CategoriaBebidas from '../pages/categorias/bebidas';
 import CategoriaTeste from '../pages/categorias/Base';
+import Profile from '../pages/profile';
 
 const Stack = createNativeStackNavigator();
 
@@ -26,7 +27,7 @@ export default function AppNavigator() {
 
     return (
         <Stack.Navigator
-            initialRouteName="teste"
+            initialRouteName="Perfil"
             screenOptions={{
                 animation: 'fade',
                 headerShown: false,
@@ -41,6 +42,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Search" component={Pesquisa} />
             <Stack.Screen name="Cadastro" component={Cadastro} />
             <Stack.Screen name="CadastroEndereco" component={CadastroEndereco} />
+            <Stack.Screen name="Perfil" component={Profile} />
             <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
             <Stack.Screen name="teste" component={CategoriaTeste} />
             {/* Tela dinâmica */}
