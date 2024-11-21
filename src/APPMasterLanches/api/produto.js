@@ -10,6 +10,16 @@ export const findProdutoById = async ({id}) => {
     }
 };
 
+export const findProdutoByCategoria = async ({id}) => {
+    try { 
+        const { data } = await api.get(`/produtos/categorias/` + id);
+        return data;
+    } catch (error) {
+        console.error('Erro ao buscar produto', error.response?.data || error.message);
+        throw error;
+    }
+};
+
 export const findAllProdutos = async () => {
     try {
         const { data } = await api.get('/produtos');

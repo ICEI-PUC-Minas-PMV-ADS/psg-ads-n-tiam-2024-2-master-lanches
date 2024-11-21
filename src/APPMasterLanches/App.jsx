@@ -8,6 +8,7 @@ import Pesquisa from "./app/pages/Pesquisa";
 import Cart from "./app/pages/shoppingCart";
 import Cadastro from './app/pages/cadastro';
 import CadastroEndereco from './app/pages/cadastroEndereco';
+import CategoriaBebidas from './app/pages/categorias/bebidas';
 
 const Stack = createNativeStackNavigator();
 export default function App() {
@@ -15,7 +16,7 @@ export default function App() {
         <CartProvider>
             <NavigationContainer>
                 <Stack.Navigator 
-                    initialRouteName="Cadastro" 
+                    initialRouteName="CadastroEndereco" 
                     screenOptions={{ animation: 'fade', headerShown: false }} 
                 >
                     <Stack.Screen name="Login" component={Login} />
@@ -24,6 +25,7 @@ export default function App() {
                     <Stack.Screen name="Home" component={HomeScreen} />
                     <Stack.Screen name="Search" component={Pesquisa} />
                     <Stack.Screen name="Cart" component={Cart} />
+                    <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
                 </Stack.Navigator>
             </NavigationContainer>
         </CartProvider>
