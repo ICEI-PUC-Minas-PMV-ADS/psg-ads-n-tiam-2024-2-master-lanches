@@ -6,11 +6,14 @@ import Pesquisa from "../pages/pesquisa"
 import Cart from "../pages/shoppingCart";
 import AdministrationFunctions from '../pages/funçõesAdministração';
 import { accessUser } from '../contexts/UserContext';
+import Cadastro from './app/pages/cadastro';
+import CadastroEndereco from './app/pages/cadastroEndereco';
+import CategoriaBebidas from './app/pages/categorias/bebidas';
 
 const Stack = createNativeStackNavigator();
 
 export default function AppNavigator() {
-    const {ADM}  = accessUser()
+    const { ADM } = accessUser()
 
     // Mapeamento de telas baseando-se no estado ADM
     const CHANGEABLE_NAVIGATION = [
@@ -28,16 +31,19 @@ export default function AppNavigator() {
                 headerShown: false,
                 animationEnabled: true,
                 gestureEnabled: true,
-                cardStyle: { backgroundColor: 'transparent' }, 
+                cardStyle: { backgroundColor: 'transparent' },
             }}
         >
             {/* Telas comuns */}
             <Stack.Screen name="Login" component={Login} />
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Search" component={Pesquisa} />
-
+            <Stack.Screen name="Login" component={Login} />
+            <Stack.Screen name="Cadastro" component={Cadastro} />
+            <Stack.Screen name="CadastroEndereco" component={CadastroEndereco} />
+            <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
             {/* Tela dinâmica */}
-            <Stack.Screen name={dynamicScreen.name} component={dynamicScreen.component} initialParams={{ userRole: ADM ? "admin" : "user"}} />
+            <Stack.Screen name={dynamicScreen.name} component={dynamicScreen.component} initialParams={{ userRole: ADM ? "admin" : "user" }} />
         </Stack.Navigator>
     );
 }
