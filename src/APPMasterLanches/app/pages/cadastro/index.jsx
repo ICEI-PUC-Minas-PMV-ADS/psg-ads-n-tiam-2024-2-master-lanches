@@ -26,7 +26,6 @@ export default function Cadastro({ navigation }) {
         }
       };
 
-
  return (
     <KeyboardAvoidingView style={styles.container}>
           <View style={styles.boxTop}>
@@ -42,7 +41,7 @@ export default function Cadastro({ navigation }) {
             //   onChangeText={setEmail}
               maskType="name"
             />
-            <InputDefault
+            <InputComponent
               placeholder="Digite seu CPF"
               keyboardType="numeric"
               maskType="cpf"

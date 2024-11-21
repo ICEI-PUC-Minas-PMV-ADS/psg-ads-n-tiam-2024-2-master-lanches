@@ -14,13 +14,12 @@ const styles = StyleSheet.create({
   },
 
   TextCadastro: {
-	fontFamily: 'Roboto',
-    fontSize: 28,
-	
+	  fontFamily: 'Roboto',
+    fontSize: 19,
     color: '#FFC107',
     textAlign: 'center',
     fontWeight: 'bold',
-	width: 320,
+	  width: 320,
   },
 
   boxBottom: {

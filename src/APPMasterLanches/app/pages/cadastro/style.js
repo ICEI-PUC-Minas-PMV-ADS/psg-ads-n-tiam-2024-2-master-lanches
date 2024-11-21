@@ -14,13 +14,12 @@ const styles = StyleSheet.create({
   },
 
   TextCadastro: {
-	fontFamily: 'Roboto',
-    fontSize: 28,
-	
+	  fontFamily: 'Roboto',
+    fontSize: 21,
     color: '#FFC107',
     textAlign: 'center',
     fontWeight: 'bold',
-	width: 320,
+	  width: 320,
   },
 
   boxBottom: {
@@ -46,6 +45,10 @@ const styles = StyleSheet.create({
     color: "black",
     fontWeight: "bold",
   },
+
+  input: {
+
+  }
 });
 
 export default styles;
