@@ -31,10 +31,17 @@ const BottomBar = () => {
 
     return (
         <View style={styles.container}>
-            {ICONS.map((icon, index) => baseIconMap(icon, index))}
-            {baseIconMap(CHANGEABLE_ICONS[ADM ? 1 : 0], ICONS.length)}
+            <TouchableOpacity style={styles.buttonHome} onPress={() => navigation.navigate('Home')}>
+                <Icon name="home" size={24} color="#000" />
+            </TouchableOpacity>
+            <View style={styles.navbar}>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Search')}>
+                    <Icon name="search" size={24} color="#000" />
+                </TouchableOpacity>
+                <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('Cart')}>
+                    <Icon name="shopping-cart" size={24} color="#000" />
+                </TouchableOpacity>
+            </View>
         </View>
     );
-};
-
-export default BottomBar;
+}
