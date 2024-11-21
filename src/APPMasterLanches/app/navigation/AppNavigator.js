@@ -9,6 +9,7 @@ import { accessUser } from '../contexts/UserContext';
 import Cadastro from '../pages/cadastro';
 import CadastroEndereco from '../pages/cadastroEndereco';
 import CategoriaBebidas from '../pages/categorias/bebidas';
+import CategoriaTeste from '../pages/categorias/Base';
 
 const Stack = createNativeStackNavigator();
 
@@ -25,7 +26,7 @@ export default function AppNavigator() {
 
     return (
         <Stack.Navigator
-            initialRouteName="Login"
+            initialRouteName="teste"
             screenOptions={{
                 animation: 'fade',
                 headerShown: false,
@@ -41,6 +42,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Cadastro" component={Cadastro} />
             <Stack.Screen name="CadastroEndereco" component={CadastroEndereco} />
             <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
+            <Stack.Screen name="teste" component={CategoriaTeste} />
             {/* Tela dinâmica */}
             <Stack.Screen name={dynamicScreen.name} component={dynamicScreen.component} initialParams={{ userRole: ADM ? "admin" : "user" }} />
         </Stack.Navigator>
