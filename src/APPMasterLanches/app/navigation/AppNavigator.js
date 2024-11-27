@@ -11,6 +11,7 @@ import CadastroEndereco from '../pages/cadastroEndereco';
 import CategoriaBebidas from '../pages/categorias/bebidas';
 import CategoriaTeste from '../pages/categorias/Base';
 import Profile from '../pages/profile';
+import PedidosList from '../pages/gestao';
 
 const Stack = createNativeStackNavigator();
 
@@ -27,7 +28,7 @@ export default function AppNavigator() {
 
     return (
         <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Login"
             screenOptions={{
                 animation: 'fade',
                 headerShown: false,
@@ -45,6 +46,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Perfil" component={Profile} />
             <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
             <Stack.Screen name="teste" component={CategoriaTeste} />
+            <Stack.Screen name="pedidos" component={PedidosList} />
             {/* Tela dinâmica */}
             <Stack.Screen name={dynamicScreen.name} component={dynamicScreen.component} initialParams={{ userRole: ADM ? "admin" : "user" }} />
         </Stack.Navigator>

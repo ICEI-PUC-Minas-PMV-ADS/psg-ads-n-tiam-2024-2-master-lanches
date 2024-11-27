@@ -5,6 +5,7 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
+        zIndex: 12,
         backgroundColor: 'rgba(0, 0, 0, 0.7)', // Fundo semi-transparente
     },
     modalContainer: {

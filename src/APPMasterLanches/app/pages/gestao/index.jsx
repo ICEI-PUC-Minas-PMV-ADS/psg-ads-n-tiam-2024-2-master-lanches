@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, Text, FlatList } from 'react-native';
 import BottomBar from '../../components/bottomBar';
 import PedidoForm from "../../components/PedidoForm";
@@ -9,8 +9,6 @@ const PedidosList = () => {
     const [pedidos, setPedidos] = useState([]); // Estado para armazenar os pedidos
     const [loading, setLoading] = useState(true); // Estado para controlar o carregamento
     const [editingPedido, setEditingPedido] = useState(null); // Estado para editar um pedido
-  
-    const navigation = useNavigation(); // Hook de navegação
   
     // Função para buscar todos os pedidos
     useEffect(() => {
