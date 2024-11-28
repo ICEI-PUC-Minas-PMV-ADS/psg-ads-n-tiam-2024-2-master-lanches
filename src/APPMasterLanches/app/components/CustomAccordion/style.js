@@ -5,15 +5,21 @@ const styles = StyleSheet.create({
         backgroundColor: "#333",
         borderBottomWidth: 1,
         borderBottomColor: "#555",
+        flexDirection: "row",
+        justifyContent: "space-between",
+        alignItems: "center",
     },
     headerText: {
         color: "#fff",
         fontSize: 16,
+        fontWeight: "bold",
     },
     content: {
-
-        backgroundColor: "red",
+        backgroundColor: "black",
         height: '100%',
+    },
+    icon: {
+        marginLeft: 10,
     },
 });
 
