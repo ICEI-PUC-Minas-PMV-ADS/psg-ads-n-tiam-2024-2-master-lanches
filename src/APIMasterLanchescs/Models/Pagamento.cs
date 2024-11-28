@@ -5,7 +5,7 @@ namespace APIMasterLanchescs.Models
     [FirestoreData]
     public class Pagamento
     {
-        [FirestoreProperty("idEstoque")]
+        [FirestoreProperty("idPagamento")]
         public string IdPagamento { get; set; }
 
         [FirestoreProperty("pedidoId")]
@@ -22,5 +22,8 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("statusPagamento")]
         public string StatusPagamento { get; set; }
+
+        [FirestoreProperty("pixDetails")]
+        public PixPaymentResponse PixDetails { get; set; }
     }
 }

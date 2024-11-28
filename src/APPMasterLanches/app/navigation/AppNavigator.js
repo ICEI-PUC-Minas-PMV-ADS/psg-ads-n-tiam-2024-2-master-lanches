@@ -10,6 +10,7 @@ import Cadastro from '../pages/cadastro';
 import CategoriaBebidas from '../pages/categorias/bebidas';
 import CategoriaTeste from '../pages/categorias/Base';
 import Profile from '../pages/profile';
+import PedidosList from '../pages/gestao';
 
 const Stack = createNativeStackNavigator();
 
@@ -44,6 +45,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
             <Stack.Screen name="teste" component={CategoriaTeste} />
             <Stack.Screen name="Funções Administração" component={AdministrationFunctions} />
+            <Stack.Screen name="pedidos" component={PedidosList} />
             {/* Tela dinâmica */}
             <Stack.Screen name={dynamicScreen.name} component={dynamicScreen.component} initialParams={{ userRole: ADM ? "admin" : "user" }} />
         </Stack.Navigator>

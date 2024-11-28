@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Text, View, FlatList, TextInput, Alert } from "react-native";
 
 const PedidoForm = ({ pedido, setEditingPedido }) => {
   const [formData, setFormData] = useState({
@@ -40,46 +41,49 @@ const PedidoForm = ({ pedido, setEditingPedido }) => {
       console.error("Erro ao salvar pedido:", error.message);
     }
   };
-
+  
+  {/* <div>
+    <h2><Text>Oi</Text>{{pedido ? "Editar Pedido" : "Criar Novo Pedido"}}</h2>
+    <form onSubmit={handleSubmit}>
+      <div>
+        <label>Descrição:</label>
+        <input
+          type="text"
+          name="descricao"
+          value={formData.descricao}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Cliente:</label>
+        <input
+          type="text"
+          name="cliente"
+          value={formData.cliente}
+          onChange={handleChange}
+          required
+        />
+      </div>
+      <div>
+        <label>Status:</label>
+        <select
+          name="status"
+          value={formData.status}
+          onChange={handleChange}
+        >
+          <option value="Em andamento">Em andamento</option>
+          <option value="Finalizado">Finalizado</option>
+          <option value="Cancelado">Cancelado</option>
+        </select>
+      </div>
+      <button type="submit">{pedido ? "Atualizar Pedido" : "Criar Pedido"}</button>
+    </form>
+  </div> */}
   return (
-    <div>
-      <h2>{pedido ? "Editar Pedido" : "Criar Novo Pedido"}</h2>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>Descrição:</label>
-          <input
-            type="text"
-            name="descricao"
-            value={formData.descricao}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Cliente:</label>
-          <input
-            type="text"
-            name="cliente"
-            value={formData.cliente}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Status:</label>
-          <select
-            name="status"
-            value={formData.status}
-            onChange={handleChange}
-          >
-            <option value="Em andamento">Em andamento</option>
-            <option value="Finalizado">Finalizado</option>
-            <option value="Cancelado">Cancelado</option>
-          </select>
-        </div>
-        <button type="submit">{pedido ? "Atualizar Pedido" : "Criar Pedido"}</button>
-      </form>
-    </div>
+    <View>
+
+    </View>
   );
 };
 

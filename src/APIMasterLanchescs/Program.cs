@@ -67,6 +67,7 @@ public class Program
         builder.Services.AddScoped<ClienteService>();
         builder.Services.AddScoped<CategoriaService>();
         builder.Services.AddScoped<EstoqueService>();
+        builder.Services.AddScoped<PixPaymentService>();
 
         // Registrar o FirebaseApp como um serviço
         builder.Services.AddSingleton(firebaseApp);
