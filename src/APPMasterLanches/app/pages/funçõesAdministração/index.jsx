@@ -3,6 +3,7 @@ import { View, Text } from "react-native";
 import BottomBar from "../../components/bottomBar";
 import StockManagement from "../../components/components_ADM/estoque";
 import CustomAccordion from "../../components/CustomAccordion";
+import CadastroEndereco from "../../components/cadastroEndereco";
 import styles from "./style";
 
 const AdministrationFunctions = () => {
@@ -21,6 +22,7 @@ const AdministrationFunctions = () => {
             content: <Text style={styles.contentText}>Conteúdo de outra função aqui.</Text>,
             loaded: true,
         },
+        
     ]);
 
     const updateLoaded = (index, loaded) => {

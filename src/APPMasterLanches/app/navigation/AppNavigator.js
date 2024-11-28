@@ -2,12 +2,11 @@ import React, { useState } from 'react';
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "../pages/login";
 import HomeScreen from "../pages/telaPrincipal";
-import Pesquisa from "../pages/pesquisa"
+import Pesquisa from "../pages/Pesquisa"
 import Cart from "../pages/shoppingCart";
 import AdministrationFunctions from '../pages/funçõesAdministração';
 import { accessUser } from '../contexts/UserContext';
 import Cadastro from '../pages/cadastro';
-import CadastroEndereco from '../pages/cadastroEndereco';
 import CategoriaBebidas from '../pages/categorias/bebidas';
 import CategoriaTeste from '../pages/categorias/Base';
 import Profile from '../pages/profile';
@@ -27,7 +26,7 @@ export default function AppNavigator() {
 
     return (
         <Stack.Navigator
-            initialRouteName="Home"
+            initialRouteName="Cadastro"
             screenOptions={{
                 animation: 'fade',
                 headerShown: false,
@@ -41,10 +40,10 @@ export default function AppNavigator() {
             <Stack.Screen name="Home" component={HomeScreen} />
             <Stack.Screen name="Search" component={Pesquisa} />
             <Stack.Screen name="Cadastro" component={Cadastro} />
-            <Stack.Screen name="CadastroEndereco" component={CadastroEndereco} />
             <Stack.Screen name="Perfil" component={Profile} />
             <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
             <Stack.Screen name="teste" component={CategoriaTeste} />
+            <Stack.Screen name="Funções Administração" component={AdministrationFunctions} />
             {/* Tela dinâmica */}
             <Stack.Screen name={dynamicScreen.name} component={dynamicScreen.component} initialParams={{ userRole: ADM ? "admin" : "user" }} />
         </Stack.Navigator>
