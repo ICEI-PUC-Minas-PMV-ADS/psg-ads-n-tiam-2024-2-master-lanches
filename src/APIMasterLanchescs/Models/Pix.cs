@@ -16,7 +16,9 @@ namespace APIMasterLanchescs.Models
 
     public class PixPaymentResponse
     {
-        public string QRCode { get; set; } // Base64 do QR Code
+        public string QRCode { get; set; } // Caminho da imagem do QR Code
         public string PixCode { get; set; } // Código Pix
+        public string Status { get; set; } // Status do pagamento
+        public string StatusDetail { get; set; } // Detalhes do status do pagamento
     }
 }
