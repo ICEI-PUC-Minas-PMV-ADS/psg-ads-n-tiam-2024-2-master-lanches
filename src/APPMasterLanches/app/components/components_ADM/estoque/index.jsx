@@ -1,32 +1,20 @@
 import React, { useEffect, useState } from "react";
-import {
-    Text,
-    View,
-    FlatList,
-    TextInput,
-    Alert,
-    TouchableOpacity,
-    Animated,
-} from "react-native";
-import Collapsible from "react-native-collapsible";
-import Icon from "react-native-vector-icons/MaterialIcons"; // Instale react-native-vector-icons
+import { Text, View, FlatList, TextInput, Alert } from "react-native";
 import styles from "./style";
-import { findAllEstoque, updateEstoque, initializeEstoque } from "../../../../api/estoque";
+import { findAllEstoque, updateEstoque } from "../../../../api/estoque";
 import { accessUser } from "../../../contexts/UserContext";
 
-const StockManagement = () => {
+const StockManagement = ({ setLoaded }) => {
     const [estoque, setEstoque] = useState([]);
     const [loading, setLoading] = useState(true);
-    const [collapsed, setCollapsed] = useState(true);
-    const rotation = new Animated.Value(collapsed ? 0 : 1); // Estado para animação da rotação
-    const {ADM}  = accessUser()
-    const userRole = ADM? "admin" : "user" ;
+    const { ADM } = accessUser();
+    const userRole = ADM ? "admin" : "user";
 
     useEffect(() => {
         const fetchEstoque = async () => {
             try {
+                setLoaded(false); // Marca como não carregado
                 const data = await findAllEstoque();
-                console.log("Estoque:", data);
                 setEstoque(data);
             } catch (error) {
                 console.error("Erro ao carregar estoque:", error.message);
@@ -39,6 +27,12 @@ const StockManagement = () => {
         fetchEstoque();
     }, []);
 
+    useEffect(() => {
+        if (!loading) {
+            setLoaded(true); // Marca como carregado somente após a renderização
+        }
+    }, [loading]);
+
     const handleUpdate = async (idProduto, quantidade) => {
         if (userRole !== "admin") {
             Alert.alert("Permissão negada", "Apenas administradores podem alterar o estoque.");
@@ -46,14 +40,15 @@ const StockManagement = () => {
         }
 
         try {
-            const item = estoque.find((item) => item.idProduto === idProduto);
-            if (!item) throw new Error("Item não encontrado");
-
-            const updatedItem = { ...item, quantidadeDisponivel: quantidade };
+            const updatedItem = { quantidadeDisponivel: quantidade };
             await updateEstoque(idProduto, updatedItem);
 
             setEstoque((prev) =>
-                prev.map((item) => (item.idProduto === idProduto ? updatedItem : item))
+                prev.map((item) =>
+                    item.idProduto === idProduto
+                        ? { ...item, quantidadeDisponivel: quantidade }
+                        : item
+                )
             );
 
             Alert.alert("Sucesso", "Estoque atualizado com sucesso.");
@@ -63,85 +58,37 @@ const StockManagement = () => {
         }
     };
 
-    const handleInitializeEstoque = async () => {
-        if (userRole !== "admin") {
-            Alert.alert("Permissão negada", "Apenas administradores podem inicializar o estoque.");
-            return;
-        }
-
-        try {
-            await initializeEstoque(10); // Inicializa com 10 documentos
-            Alert.alert("Sucesso", "Estoque inicializado com sucesso.");
-        } catch (error) {
-            console.error("Erro ao inicializar estoque:", error.message);
-            Alert.alert("Erro", "Não foi possível inicializar o estoque.");
-        }
-    };
-
-    const toggleExpanded = () => {
-        const newValue = collapsed ? 1 : 0;
-        /* Animated.timing(rotation, {
-            toValue: newValue,
-            duration: 500,
-            easing: Animated.Easing.inOut(Animated.Easing.quad),
-            useNativeDriver: true,
-        }).start(); */
-        setCollapsed(!collapsed);
-    };
-
-    const rotationStyle = {
-        transform: [
-            {
-                rotate: rotation.interpolate({
-                    inputRange: [0, 1],
-                    outputRange: ["-90deg", "90deg"], // Rotação lateral
-                }),
-            },
-        ],
-    };
+    const renderItem = ({ item }) => (
+        <View style={styles.stockItem}>
+            <Text style={styles.itemTitle}>{item.nomeProduto}</Text>
+            <Text style={styles.itemText}>
+                Quantidade: {item.quantidadeDisponivel}
+            </Text>
+            {userRole === "admin" && (
+                <TextInput
+                    style={styles.input}
+                    placeholder="Nova quantidade"
+                    placeholderTextColor="#fff"
+                    keyboardType="numeric"
+                    onSubmitEditing={(e) =>
+                        handleUpdate(item.idProduto, Number(e.nativeEvent.text))
+                    }
+                />
+            )}
+        </View>
+    );
 
     return (
         <View style={styles.container}>
-            <View style={styles.functionContainer}>
-                <Text style={{ color: "white" }}>Gerenciamento de Estoque</Text>
-                <TouchableOpacity onPress={toggleExpanded} style={styles.toggleButton}>
-                    <Animated.View style={rotationStyle}>
-                        <Icon name="keyboard-arrow-right" size={24} color="#fff" />
-                    </Animated.View>
-                </TouchableOpacity>
-                <Collapsible collapsed={collapsed}>
-                    {loading ? (
-                        <Text>Carregando estoque...</Text>
-                    ) : (
-                        <FlatList
-                            data={estoque}
-                            keyExtractor={(item) => item.idProduto}
-                            renderItem={({ item }) => (
-                                <View style={styles.stockItem}>
-                                    <Text style={styles.itemTitle}>{item.nomeProduto}</Text>
-                                    <Text style={styles.itemText}>
-                                        Quantidade: {item.quantidadeDisponivel}
-                                    </Text>
-                                    {userRole === "admin" && (
-                                        <TextInput
-                                            style={styles.input}
-                                            placeholder="Nova quantidade"
-                                            placeholderTextColor="#fff"
-                                            keyboardType="numeric"
-                                            onSubmitEditing={(e) =>
-                                                handleUpdate(
-                                                    item.idProduto,
-                                                    Number(e.nativeEvent.text)
-                                                )
-                                            }
-                                        />
-                                    )}
-                                </View>
-                            )}
-                        />
-                    )}
-                </Collapsible>
-            </View>
+            {loading ? (
+                <Text style={{color: 'white'}}>Carregando estoque...</Text>
+            ) : (
+                <FlatList
+                    data={estoque}
+                    keyExtractor={(item) => item.idProduto}
+                    renderItem={renderItem}
+                />
+            )}
         </View>
     );
 };

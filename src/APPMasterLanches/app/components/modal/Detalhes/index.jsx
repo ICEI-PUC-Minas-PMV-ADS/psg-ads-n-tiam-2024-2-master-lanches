@@ -9,7 +9,7 @@ export default function DetalhesItem({ item, onClose }) {
     const { addToCart } = useCart();
     const [isModalVisible, setModalVisible] = useState(false);
     const [adicionais, setAdicionais] = useState([]);
-    const isHamburguer = item.nomeCategoria === "Hambúrguer" || "Vegetariano";
+    const isHamburguer = item.nomeCategoria === "Hambúrguer" || item.nomeCategoria === "Vegetariano" ? true : false;
 
     // Calcula o preço total (produto base + adicionais)
     const totalPreco = item.preco + adicionais.reduce((acc, adicional) => acc + adicional.preco, 0);

@@ -8,6 +8,7 @@ export default function InputComponent({
         placeholder,
         isPassword = false,
         maskType,
+        capitalize = false,
         ...props
     }) {
     const [value, setValue] = useState("");
@@ -46,6 +47,7 @@ export default function InputComponent({
             secureTextEntry={secureEntry}
             value={value}
             onChangeText={handleChange}
+            autoCapitalize={capitalize ? 'sentences': 'none'}
             {...props}
         />
             {isPassword && (
