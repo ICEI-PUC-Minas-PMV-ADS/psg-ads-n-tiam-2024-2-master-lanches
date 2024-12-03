@@ -27,7 +27,7 @@ export default function AppNavigator() {
 
     return (
         <Stack.Navigator
-            initialRouteName="Cadastro"
+            initialRouteName="Perfil"
             screenOptions={{
                 animation: 'fade',
                 headerShown: false,

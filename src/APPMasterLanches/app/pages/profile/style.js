@@ -7,18 +7,32 @@ const styles = StyleSheet.create({
         alignItems: 'center',
     },
     avatarContainer: {
-        marginTop: 150,
+        marginTop: 180,
         alignItems: 'center',
-        marginBottom: 20,
+        marginBottom: 100,
     },
     avatarCircle: {
         width: 100,
         height: 100,
-        borderRadius: 50,
+        borderRadius: 40,
         backgroundColor: '#fff',
         justifyContent: 'center',
         alignItems: 'center',
+        overflow: 'hidden', // Garante que a imagem respeite o formato circular
     },
+    avatarImage: {
+        width: '100%',
+        height: '100%',
+    },
+    nameInput: {
+        marginTop: 10,
+        fontSize: 22,
+        color: '#fff',
+        width: '80%',
+        padding: 10,
+        borderRadius: 8,
+        textAlign: 'center',
+    },    
     optionsContainer: {
         width: '80%',
     },
@@ -27,8 +41,20 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         paddingVertical: 15,
     },
-    optionText: {
+    helpDetails: {
+        marginTop: 10,
+        padding: 10,
+        backgroundColor: '#222',
+        borderRadius: 8,
+    },
+    helpText: {
         fontSize: 18,
+        color: '#fff',
+        marginBottom: 10,
+    },
+    
+    optionText: {
+        fontSize: 22,
         color: '#fff',
         marginLeft: 10,
     },
