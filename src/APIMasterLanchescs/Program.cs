@@ -64,7 +64,7 @@ public class Program
 
         builder.Services.AddSingleton<FirestoreContext>();
         builder.Services.AddScoped<ProdutoService>();
-        builder.Services.AddScoped<ClienteService>();
+        builder.Services.AddScoped<UsuarioService>();
         builder.Services.AddScoped<CategoriaService>();
         builder.Services.AddScoped<EstoqueService>();
         builder.Services.AddScoped<PixPaymentService>();
