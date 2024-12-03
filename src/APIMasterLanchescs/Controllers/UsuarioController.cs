@@ -46,7 +46,7 @@ namespace APIMasterLanchescs.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarCliente(string id)
         {
-            await _clienteService.DeletarClienteAsync(id);
+            await _clienteService.DeletarClienteAsync(int.Parse(id));
             return NoContent();
         }
     }

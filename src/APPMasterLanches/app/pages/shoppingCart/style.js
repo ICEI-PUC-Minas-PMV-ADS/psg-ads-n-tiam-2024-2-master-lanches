@@ -4,10 +4,10 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: '#000000',
-        paddingTop: 40,
+        //paddingTop: 40,
         paddingHorizontal: 16,
         paddingBottom: 80,
-        marginTop: Platform.OS === 'ios' || Platform.OS === 'android' ? 40 : 0,
+        // marginTop: Platform.OS === 'ios' || Platform.OS === 'android' ? 40 : 0,
     },
     cartItem: {
         backgroundColor: '#1e1e1e',
@@ -45,7 +45,7 @@ const styles = StyleSheet.create({
         justifyContent: 'space-between',
     },
     cartList: {
-        paddingBottom: 120,
+        //paddingBottom: 120,
     },
     emptyCart: {
         color: '#888',

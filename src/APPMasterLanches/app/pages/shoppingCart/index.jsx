@@ -4,6 +4,7 @@ import BottomBar from '../../components/bottomBar';
 import ModalPagamento from '../../components/modal/Pagamento';
 import { useCart } from '../../contexts/CartContext';
 import { accessUser } from '../../contexts/UserContext'; // Contexto de Usuário
+import Header from '../../components/header';
 import styles from './style';
 
 const CartItem = memo(({ item, onIncrement, onDecrement, onRemove }) => (
@@ -82,6 +83,7 @@ const ShoppingCart = () => {
 
     return (
         <View style={{ flex: 1, backgroundColor: 'black' }}>
+            <Header />
             <ModalPagamento
                 isVisible={isModalVisible}
                 data={pagamentoInfo}
