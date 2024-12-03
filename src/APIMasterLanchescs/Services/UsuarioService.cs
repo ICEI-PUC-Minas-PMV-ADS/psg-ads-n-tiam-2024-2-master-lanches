@@ -100,7 +100,7 @@ namespace APIMasterLanchescs.Services
 
         public async Task DeletarClienteAsync(int id)
         {
-            var documentRef = _firestoreContext.FirestoreDb.Collection("usuario").Document(id);
+            var documentRef = _firestoreContext.FirestoreDb.Collection("usuario").Document(id.ToString());
             var documentSnapshot = await documentRef.GetSnapshotAsync();
             if (documentSnapshot.Exists)
             {

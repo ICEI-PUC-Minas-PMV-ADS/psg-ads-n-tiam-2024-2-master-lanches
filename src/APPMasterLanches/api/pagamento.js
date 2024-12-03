@@ -1,14 +1,44 @@
 import api from "./apiML";
+import AsyncStorage from "@react-native-async-storage/async-storage";
+import * as FileSystem from "expo-file-system";
 
-// Criar pagamento
+// Criar pagamento e salvar QR Code localmente
 export const createPagamento = async (dadosPagamento) => {
     try {
         const { data } = await api.post("/pagamento/pix", dadosPagamento);
-        console.log(data)
-        return data;
+
+        console.log("Dados recebidos da API:", data); // Debug
+
+        if (data.qrCodeBytes) {
+            // Gera o caminho local para salvar o QR Code
+            const localPath = `${FileSystem.cacheDirectory}qrCode_${Date.now()}.png`;
+
+            // Salva o QR Code como PNG localmente
+            await FileSystem.writeAsStringAsync(localPath, data.qrCodeBytes, {
+                encoding: FileSystem.EncodingType.Base64,
+            });
+
+            // Salva o caminho no AsyncStorage para futura referência
+            const cacheData = {
+                PixCode: data.pixCode,
+                QRCode_Path: localPath,
+                expiresAt: Date.now() + 10 * 60 * 1000, // Validade de 10 minutos
+            };
+
+            await AsyncStorage.setItem(`pix_${data.pixCode}`, JSON.stringify(cacheData));
+
+            return {
+                PixCode: data.pixCode,
+                QRCode_Path: localPath,
+                Status: data.status,
+                Details: data.statusDetail,
+            };
+        }
+
+        throw new Error("QR Code inválido.");
     } catch (error) {
         console.error("Erro ao criar pagamento:", error.response?.data || error.message);
-        throw new Error(error.response?.data?.mensagem || "Erro ao criar pagamento.");
+        throw new Error(error.response?.data?.message || error.message);
     }
 };
 

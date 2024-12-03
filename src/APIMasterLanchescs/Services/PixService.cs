@@ -11,48 +11,50 @@ namespace APIMasterLanchescs.Services
     public class PixPaymentService
     {
         public PixPaymentResponse CreatePayment(PixPaymentRequest request)
+    {
+        // Configura Mercado Pago SDK
+        MercadoPagoConfig.AccessToken = "TEST-5213086491742764-112016-aeac350e484fffb3c8eeb2d94d8e2a0e-2107574441";
+        
+        var paymentRequest = new PaymentCreateRequest
         {
-            // Configura Mercado Pago SDK
-            MercadoPagoConfig.AccessToken = "TEST-5213086491742764-112016-aeac350e484fffb3c8eeb2d94d8e2a0e-2107574441";
-
-            var paymentRequest = new PaymentCreateRequest
+            TransactionAmount = request.Amount,
+            Description = request.Description ?? "Pagamento por Pix",
+            PaymentMethodId = "pix",
+            ExternalReference = request.ExternalReference,
+            Payer = new PaymentPayerRequest
             {
-                TransactionAmount = request.Amount,
-                Description = request.Description ?? "Pagamento por Pix",
-                PaymentMethodId = "pix",
-                ExternalReference = request.ExternalReference,
-                Payer = new PaymentPayerRequest
-                {
-                    Email = request.PayerEmail ?? "default_email@test.com"
-                }
+                Email = request.PayerEmail ?? "default_email@test.com"
+            }
+        };
+        var paymentClient = new PaymentClient();
+        Payment payment = paymentClient.Create(paymentRequest);
+
+        if (payment.Status == "pending")
+        {
+            string qrCodeBase64 = payment.PointOfInteraction.TransactionData.QrCodeBase64;
+            string pixCode = payment.PointOfInteraction.TransactionData.QrCode;
+
+            // Salva na API (inutil agora, possivel uso futuro para relatorio)
+            SaveQrCodeImage(qrCodeBase64);
+
+            // Converte o QR Code Base64 para uma imagem PNG
+            byte[] qrCodeBytes = Convert.FromBase64String(qrCodeBase64);
+
+            return new PixPaymentResponse
+            {
+                QRCodeBytes = qrCodeBytes,
+                PixCode = pixCode,
+                Status = payment.Status,
+                StatusDetail = payment.StatusDetail
             };
-
-            var paymentClient = new PaymentClient();
-            Payment payment = paymentClient.Create(paymentRequest);
-
-            if (payment.Status == "pending")
-            {
-                string qrCodeBase64 = payment.PointOfInteraction.TransactionData.QrCodeBase64;
-                string pixCode = payment.PointOfInteraction.TransactionData.QrCode;
-
-                // Converte QR Code Base64 para imagem, para registro (outros possiveis usos no futuro)
-                SaveQrCodeImage(qrCodeBase64);
-
-                return new PixPaymentResponse
-                {
-                    QRCode = qrCodeBase64,
-                    PixCode = pixCode,
-                    Status = payment.Status,
-                    StatusDetail = payment.StatusDetail
-                };
-            }
-            else
-            {
-                throw new Exception($"Erro ao criar o pagamento: {payment.StatusDetail}");
-            }
         }
+        else
+        {
+            throw new Exception($"Erro ao criar o pagamento: {payment.StatusDetail}");
+        }
+    }
 
-        private string SaveQrCodeImage(string qrCodeBase64)
+        private void SaveQrCodeImage(string qrCodeBase64)
         {
             byte[] imageBytes = Convert.FromBase64String(qrCodeBase64);
 
@@ -70,9 +72,6 @@ namespace APIMasterLanchescs.Services
                     bitmap.Save(fullPath, ImageFormat.Png);
                 }
             }
-
-            // Retorna o caminho relativo
-            return Path.Combine("qrcodes", fileName).Replace("\\", "/");
         }
     }
 }

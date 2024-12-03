@@ -1,7 +1,9 @@
-import React, { memo, useMemo } from 'react';
+import React, { memo, useMemo, useState } from 'react';
 import { Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
 import BottomBar from '../../components/bottomBar';
+import ModalPagamento from '../../components/modal/Pagamento';
 import { useCart } from '../../contexts/CartContext';
+import { accessUser } from '../../contexts/UserContext'; // Contexto de Usuário
 import styles from './style';
 
 const CartItem = memo(({ item, onIncrement, onDecrement, onRemove }) => (
@@ -35,27 +37,57 @@ const CartItem = memo(({ item, onIncrement, onDecrement, onRemove }) => (
 
 const ShoppingCart = () => {
     const { cart, incrementItemQuantity, decrementItemQuantity, removeFromCart, clearCart } = useCart();
+    const { savePagamento } = accessUser();
+    const [isModalVisible, setModalVisible] = useState(false);
+    const [pagamentoInfo, setPagamentoInfo] = useState({});
+
+    const userName = 'Josue';
+    const userMail = 'stttttttt@gmail.com';
 
     const totalPrice = useMemo(() => {
         return cart.reduce((total, item) => total + item.preco * item.quantidade, 0);
     }, [cart]);
 
-    const handleCheckout = () => {
-        Alert.alert(
-            'Finalizar Pedido',
-            `Deseja finalizar o pedido no valor de R$ ${totalPrice.toFixed(2)}?`,
-            [
-                { text: 'Cancelar', style: 'cancel' },
-                { text: 'Confirmar', onPress: () => {
-                    clearCart();
-                    Alert.alert('Pedido Finalizado!', 'Seu pedido foi enviado com sucesso.');
-                }},
-            ]
-        );
+    const itensFiltrados = (itens) => {
+        return itens.map((item) => ({
+            _0_Id: item.id,
+            _1_Nome: item.nome,
+            _2_Categoria: item.nomeCategoria,
+            _3_Adicionais: item.adicionais,
+            _4_Ingredientes: item.ingredientes,
+            _5_Preco: item.preco,
+            _6_Quantidade: item.quantidade,
+        }));
+    };
+
+    const handlePagamento = () => {
+        const Pedido = itensFiltrados(cart);
+        const Valor = totalPrice;
+        const Descricao = `Pagamento de R$ ${Valor.toFixed(2)} feito por ${userName}`;
+        const Email = userMail;
+    
+        const info = { Pedido, Valor, Descricao, Email };
+        setPagamentoInfo(info);
+        setModalVisible(true);
+    };
+
+    const handlePagamentoFinalizado = (pagamentoConcluido) => {
+        if (pagamentoConcluido) {
+            savePagamento(pagamentoConcluido); // Salva no UserContext
+            clearCart(); // Limpa o carrinho
+            Alert.alert('Pagamento Concluído', 'Seu pagamento foi processado com sucesso!');
+        }
+        setModalVisible(false); // Fecha a modal
     };
 
     return (
         <View style={{ flex: 1, backgroundColor: 'black' }}>
+            <ModalPagamento
+                isVisible={isModalVisible}
+                data={pagamentoInfo}
+                onClose={() => setModalVisible(false)}
+                onPagamentoFinalizado={handlePagamentoFinalizado}
+            />
             <View style={styles.container}>
                 <FlatList
                     data={cart}
@@ -74,7 +106,7 @@ const ShoppingCart = () => {
                 {cart.length > 0 && (
                     <View style={styles.cartFooter}>
                         <Text style={styles.totalText}>Total: R$ {totalPrice.toFixed(2)}</Text>
-                        <TouchableOpacity style={styles.checkoutButton} onPress={handleCheckout}>
+                        <TouchableOpacity style={styles.checkoutButton} onPress={handlePagamento}>
                             <Text style={styles.checkoutText}>Finalizar Pedido</Text>
                         </TouchableOpacity>
                     </View>
