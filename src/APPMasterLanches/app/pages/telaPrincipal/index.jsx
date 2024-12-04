@@ -2,6 +2,7 @@ import React from 'react';
 import { View, Text, FlatList } from 'react-native';
 import styles from './style';
 import BottomBar from '../../components/bottomBar';
+import Header from '../../components/header';
 import LargeCard from '../../components/cards/largeCard';
 import SmallCard from '../../components/cards/smallCard';
 import MediumCard from '../../components/cards/mediumCard';
@@ -49,6 +50,7 @@ const HomeScreen = () => {
     
     return (
         <View style={styles.container}>
+            <Header />
             <FlatList 
                 data={sections}
                 renderItem={renderSection}

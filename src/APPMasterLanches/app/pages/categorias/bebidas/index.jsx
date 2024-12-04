@@ -1,35 +1,97 @@
 import React from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
 import styles from './style'; // Importando os estilos globais
+import { useCart } from '../../../contexts/CartContext';
 
-const drinks = [
-  { id: '1', name: 'Coca-Cola', price: 'R$ 5,00', image: 'https://link_da_imagem1.com' },
-  { id: '2', name: 'Sprite', price: 'R$ 5,00', image: 'https://link_da_imagem2.com' },
-  { id: '3', name: 'Suco de Laranja', price: 'R$ 7,00', image: 'https://link_da_imagem3.com' },
-  { id: '4', name: 'Água Mineral', price: 'R$ 3,00', image: 'https://link_da_imagem4.com' },
+const bebidas = [
+  {
+    id: "1",
+    nome: "Coca Cola Lata 310 ml",
+    preco: "R$ 5,00",
+    imagem: "https://www.bing.com/images/blob?bcid=svj.vawJz88HXQ",
+  },
+  {
+    id: "2",
+    nome: "Mate Couro 1L",
+    preco: "R$ 8,90",
+    imagem: "https://farmaciaindiana.vtexassets.com/arquivos/ids/205866-800-800?v=636746983612100000&width=800&height=800&aspect=true",
+  },
+  {
+    id: "3",
+    nome: "Mate Couro 1L ZERO",
+    preco: "R$ 8,90",
+    imagem: "https://apoioentrega.vteximg.com.br/arquivos/ids/851931-1000-1000/1170_0.png?v=638595340214830000",
+  },
+  {
+    id: "4",
+    nome: "Guaraná Antártica 1,5L",
+    preco: "R$ 12,90",
+    imagem: "https://apoioentrega.vteximg.com.br/arquivos/ids/836999-500-500/105177_0.png?v=638573470155030000",
+  },
+  {
+    id: "5",
+    nome: "Guaraná Antártica 2L",
+    preco: "R$ 15,90",
+    imagem: "https://m.media-amazon.com/images/I/51GYR4rO8+L._AC_SX569_.jpg",
+  },
+  {
+    id: "6",
+    nome: "Soda Limonada 2L",
+    preco: "R$ 12,90",
+    imagem: "https://encrypted-tbn2.gstatic.com/shopping?q=tbn:ANd9GcRoWEZr3M7HcNmxBJasgVj8Sl6hoyJLcd6bQKeYgiGiwLmLksOs58-sr5Zi7zqVToazZVz7O1EP1vWp5_nM9CU-5k1Qp26rsQvx_ADPjuVxElZyc_BWWzHQgvfXYIf9-u9MUQqnTCs&usqp=CAc",
+  },
+  {
+    id: "7",
+    nome: "Sukita Laranja 2L",
+    preco: "R$ 12,90",
+    imagem: "https://carrefourbr.vtexassets.com/arquivos/ids/169439211/16d9a89afe8043b6a3592510807cbff7.jpg?v=638598902188500000",
+  },
+  {
+    id: "8",
+    nome: "Pepsi 2L",
+    preco: "R$ 15,90",
+    imagem: "https://carrefourbr.vtexassets.com/arquivos/ids/118251451/750b5e5af66c4aef9e73db5b047baf22.jpg?v=638217325062900000",
+  },
+  {
+    id: "9",
+    nome: "Suco 1L UVA",
+    preco: "R$ 9,90",
+    imagem: "https://carrefourbr.vtexassets.com/arquivos/ids/161315774/9a75ea4fabd849ffac129e7035a498c8.jpg?v=638543997489730000",
+  },
+  {
+    id: "10",
+    nome: "Suco 1L MARACUJÁ",
+    preco: "R$ 9,90",
+    imagem: "https://carrefourbr.vtexassets.com/arquivos/ids/132011517/141e3b2647b84e31a8cdee4adf188a83.jpg?v=638321487585130000",
+  },
 ];
 
 export default function CategoriaBebidas() {
+
+  const { addToCart } = useCart();
   const renderItem = ({ item }) => (
     <View style={styles.cardContainer}>
-      <Image source={{ uri: item.image }} style={styles.image} />
-      <Text style={styles.text}>{item.name}</Text>
-      <Text style={styles.price}>{item.price}</Text>
-      <TouchableOpacity style={styles.button}>
+      <Image source={{ uri: item.imagem }} style={styles.image} />
+      <Text style={styles.text}>{item.nome}</Text>
+      <Text style={styles.price}>{item.preco}</Text>
+      <TouchableOpacity
+        style={styles.button}
+        onPress={() => addToCart(item)}>
         <Text style={styles.buttonText}>Adicionar</Text>
       </TouchableOpacity>
     </View>
   );
 
+
   return (
     <View style={styles.container}>
-      <Text style={styles.sectionTitle}>Nossas Bebidas</Text>
       <FlatList
-        data={drinks}
+        data={bebidas}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
-        contentContainerStyle={styles.scrollContainer}
-      />
+        numColumns={2}
+        contentContainerStyle={styles.list}
+        ListHeaderComponent={<Text style={styles.header}>Nossas Bebidas</Text>} />
     </View>
   );
 }
