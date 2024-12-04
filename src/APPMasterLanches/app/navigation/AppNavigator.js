@@ -27,7 +27,15 @@ export default function AppNavigator() {
 
     return (
         <Stack.Navigator
+<<<<<<< Updated upstream
             initialRouteName="Cadastro"
+=======
+<<<<<<< HEAD
+            initialRouteName="Bebidas"
+=======
+            initialRouteName="Cadastro"
+>>>>>>> 5aa478853d8be51769237fb12ff8fbe07e009ab0
+>>>>>>> Stashed changes
             screenOptions={{
                 animation: 'fade',
                 headerShown: false,
@@ -42,7 +50,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Search" component={Pesquisa} />
             <Stack.Screen name="Cadastro" component={Cadastro} />
             <Stack.Screen name="Perfil" component={Profile} />
-            <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
+            <Stack.Screen name="Bebidas" component={Categoria} />
             <Stack.Screen name="teste" component={CategoriaTeste} />
             <Stack.Screen name="Funções Administração" component={AdministrationFunctions} />
             <Stack.Screen name="pedidos" component={PedidosList} />
