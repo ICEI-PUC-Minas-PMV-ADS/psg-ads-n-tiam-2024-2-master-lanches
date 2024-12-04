@@ -62,7 +62,7 @@
 			color: 'black',
 			fontWeight: 'bold',
 		},
-		btnCadastro: {
+		btnCriarConta: {
 			marginTop: 15,
 		},
 	

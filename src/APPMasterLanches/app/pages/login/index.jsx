@@ -115,7 +115,7 @@ export default function Login({ navigation }) {
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity style={styles.btnCadastro}>
+        <TouchableOpacity style={styles.btnCriarConta}>
           <Text style={styles.textBtnCadastro}>Criar Conta</Text>
         </TouchableOpacity>
 

@@ -48,6 +48,12 @@ const styles = StyleSheet.create({
     color: 'black',
     fontWeight: 'bold',
   },
+//   InputPassword: {
+//     flex: 1, // Faz o input ocupar o máximo de espaço disponível
+//     fontSize: 18, // Tamanho do texto
+//     color: '#000', // Cor do texto
+//     paddingVertical: 8, // Espaçamento interno vertical
+//   }
 });
 
 export default styles;

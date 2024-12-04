@@ -3,6 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, A
 import styles from "./style";
 import CustomAccordion from '../../components/CustomAccordion';
 import CadastroEndereco from '../../components/cadastroEndereco';
+import CadastroDadosPessoais from '../../components/cadastroDadosPessoais';
 import { cadastro } from "../../../api/cliente";
 
 export default function Cadastro({ navigation }) {
@@ -15,6 +16,11 @@ export default function Cadastro({ navigation }) {
         content: <CadastroEndereco />,
         loaded: true,
       },
+      {
+        title: "Dados Pessoais",
+        content: <CadastroDadosPessoais />,
+        loaded: true,
+      }
     ];
 
     const handleLogin = async () => {
