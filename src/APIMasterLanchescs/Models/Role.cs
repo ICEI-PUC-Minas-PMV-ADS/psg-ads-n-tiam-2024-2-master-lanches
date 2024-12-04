@@ -1,6 +1,6 @@
 using Google.Cloud.Firestore;
 
-namespace APIMasterLanchescs.Models 
+namespace APIMasterLanchescs.Models
 {
     [FirestoreData]
     public class Role
@@ -9,6 +9,16 @@ namespace APIMasterLanchescs.Models
         public string Name { get; set; }
 
         [FirestoreProperty]
-        public List<string> AccessibleScreens { get; set; } = new List<string>();
+        public List<ScreenAccess> AccessibleScreens { get; set; } = new List<ScreenAccess>();
+    }
+
+    [FirestoreData]
+    public class ScreenAccess
+    {
+        [FirestoreProperty]
+        public string name { get; set; }
+
+        [FirestoreProperty]
+        public int level { get; set; }
     }
 }

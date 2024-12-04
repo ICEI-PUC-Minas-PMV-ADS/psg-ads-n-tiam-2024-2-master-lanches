@@ -6,7 +6,7 @@ namespace APIMasterLanchescs.Models
     public class Endereco
     {
         [FirestoreProperty("idEndereco")]
-        public string IdEndereco { get; set; }
+        public int IdEndereco { get; set; }
 
         [FirestoreProperty("clienteId")]
         public string ClienteId { get; set; }

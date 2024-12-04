@@ -36,6 +36,20 @@ namespace APIMasterLanchescs.Controllers
             return Ok(user);
         }
 
+        [HttpGet("{id}/info")]
+        public async Task<IActionResult> ObterInformacoesGerais(int id)
+        {
+            var informacoes = await _clienteService.ObterInformacoesGeraisUsuarioAsync(id);
+            return Ok(informacoes);
+        }
+
+        [HttpPatch("{id}")]
+        public async Task<IActionResult> AtualizarCampoUsuario(int id, [FromQuery] string campo, [FromBody] object valor)
+        {
+            await _clienteService.AtualizarCampoUsuarioAsync(id, campo, valor);
+            return NoContent();
+        }
+
         [HttpGet]
         public async Task<IActionResult> BuscarClientes()
         {
@@ -46,8 +60,19 @@ namespace APIMasterLanchescs.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeletarCliente(string id)
         {
-            await _clienteService.DeletarClienteAsync(int.Parse(id));
-            return NoContent();
+            try
+            {
+                await _clienteService.DeletarClienteAsync(id);
+                return NoContent();
+            }
+            catch (UserFriendlyException ex)
+            {
+                return BadRequest(new { mensagem = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, new { mensagem = "Erro interno ao tentar deletar o cliente." });
+            }
         }
     }
 }

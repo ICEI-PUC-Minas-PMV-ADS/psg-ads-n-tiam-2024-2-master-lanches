@@ -1,13 +1,11 @@
 ﻿using APIMasterLanchescs.Configs.DbContext;
 using APIMasterLanchescs.Models;
-using Firebase.Auth;
+using FirebaseAdmin.Auth;
 
 namespace APIMasterLanchescs.Services
 {
     public class UsuarioService
     {
-        private const string API_KEY = "AIzaSyCSH4jUUskcCQcpACrrGs2m7Y2pxGGhSYk";
-
         private readonly FirestoreContext _firestoreContext;
 
         public UsuarioService(FirestoreContext firestoreContext)
@@ -19,33 +17,55 @@ namespace APIMasterLanchescs.Services
         {
             try
             {
-                var ultimoIdDoc = await _firestoreContext.FirestoreDb.Collection("config").Document("ultimoId").GetSnapshotAsync();
-                int ultimoId = 0;
-
-                if (ultimoIdDoc.Exists && ultimoIdDoc.TryGetValue<int>("valor", out var valor))
+                // Verificar se o e-mail já existe no Firebase Authentication
+                try
                 {
-                    ultimoId = valor;
+                    await FirebaseAuth.DefaultInstance.GetUserByEmailAsync(cliente.Email);
+                    throw new Exception("Já existe um usuário com este e-mail.");
+                }
+                catch (FirebaseAuthException ex) when (ex.AuthErrorCode == AuthErrorCode.UserNotFound)
+                {
+                    // Prosseguir apenas se o e-mail não existir
                 }
 
-                int novoId = ultimoId + 1;
+                // Verificar se o e-mail já existe no Firestore
+                var query = _firestoreContext.FirestoreDb.Collection("usuario").WhereEqualTo("Email", cliente.Email);
+                var querySnapshot = await query.GetSnapshotAsync();
+                if (querySnapshot.Documents.Count > 0)
+                {
+                    throw new Exception("Já existe um usuário com este e-mail no sistema.");
+                }
 
+                // Buscar o último ID registrado
+                var ultimoIdDoc = await _firestoreContext.FirestoreDb.Collection("config").Document("ultimoId").GetSnapshotAsync();
+                int ultimoId = ultimoIdDoc.Exists ? ultimoIdDoc.GetValue<int>("valor") : 0;
+
+                int novoId = ultimoId + 1;
                 cliente.idUsuario = novoId;
 
+                // Verificar a imagem de perfil
+                if (cliente.ImagemPerfil == null || cliente.ImagemPerfil.Length == 0)
+                {
+                    cliente.ImagemPerfil = await File.ReadAllBytesAsync("assets/Default_user_image.jpg");
+                }
+
+                // Criar usuário no Firebase Authentication
+                await FirebaseAuth.DefaultInstance.CreateUserAsync(new UserRecordArgs
+                {
+                    Email = cliente.Email,
+                    Password = cliente.Password,
+                    DisplayName = cliente.Nome
+                });
+
+                // Salvar o cliente no Firestore
                 await _firestoreContext.FirestoreDb.Collection("usuario").Document(novoId.ToString()).SetAsync(cliente);
 
+                // Atualizar o último ID em "config"
                 await _firestoreContext.FirestoreDb.Collection("config").Document("ultimoId").SetAsync(new { valor = novoId });
-
-                var authProvider = new FirebaseAuthProvider(new FirebaseConfig(API_KEY));
-
-                var firebaseAuthLink = await authProvider.CreateUserWithEmailAndPasswordAsync(cliente.Email, cliente.Password, cliente.Nome);
-            }
-            catch (FirebaseAuthException ex)
-            {
-                throw new Exception($"Erro ao registrar o usuário no Firebase Authentication: {ex.Message}");
             }
             catch (Exception ex)
             {
-                throw new Exception($"Erro ao registrar o usuário no Firestore: {ex.Message}");
+                throw new Exception($"Erro ao registrar o cliente: {ex.Message}", ex);
             }
         }
 
@@ -54,20 +74,31 @@ namespace APIMasterLanchescs.Services
         {
             try
             {
-                var firebaseAuthLink = await new FirebaseAuthProvider(new FirebaseConfig(API_KEY)).SignInWithEmailAndPasswordAsync(clienteLogin.Email, clienteLogin.Senha);
+                // Autenticar no Firebase Authentication
+                var authProvider = FirebaseAuth.DefaultInstance;
+                var firebaseAuthLink = await FirebaseAuth.DefaultInstance.CreateCustomTokenAsync(clienteLogin.Email);
 
-                if (string.IsNullOrEmpty(firebaseAuthLink.FirebaseToken)) { throw new Exception("Erro ao gerar token de autenticação"); }
+                if (string.IsNullOrEmpty(firebaseAuthLink))
+                {
+                    throw new Exception("Erro ao gerar token de autenticação.");
+                }
 
-                var snapshot = await _firestoreContext.FirestoreDb.Collection("usuario").WhereEqualTo("email", clienteLogin.Email).Limit(1).GetSnapshotAsync();
+                // Verificar existência no Firestore
+                var snapshot = await _firestoreContext.FirestoreDb.Collection("usuario")
+                    .WhereEqualTo("Email", clienteLogin.Email).Limit(1).GetSnapshotAsync();
 
                 var user = snapshot.Documents.FirstOrDefault()?.ConvertTo<Usuario>();
 
-                if (user == null) { throw new Exception("Usuário não encontrado"); }
-                    
+                if (user == null)
+                {
+                    throw new Exception("Usuário inconsistente. Entre em contato com o suporte.");
+                }
+
                 return new LoginResponse
                 {
-                    Token = firebaseAuthLink.FirebaseToken,
-                    Role = new Role() { Name = user.Role.Name, AccessibleScreens = user.Role.AccessibleScreens }
+                    Token = firebaseAuthLink,
+                    Role = user.Role,
+                    UserID = user.idUsuario
                 };
             }
             catch (FirebaseAuthException authEx)
@@ -97,18 +128,72 @@ namespace APIMasterLanchescs.Services
             }
             return clientes;
         }
+        public async Task<Dictionary<string, object>> ObterInformacoesGeraisUsuarioAsync(int id)
+        {
+            var documentSnapshot = await _firestoreContext.FirestoreDb.Collection("usuario").Document(id.ToString()).GetSnapshotAsync();
 
-        public async Task DeletarClienteAsync(int id)
+            if (!documentSnapshot.Exists)
+            {
+                throw new KeyNotFoundException("Usuário não encontrado.");
+            }
+
+            var usuario = documentSnapshot.ConvertTo<Usuario>();
+
+            return new Dictionary<string, object>
+                    {
+                        { "Nome", usuario.Nome },
+                        { "Email", usuario.Email },
+                        { "Telefone", usuario.Telefone },
+                        { "DataCadastro", usuario.DataCadastro },
+                        { "ImagemPerfil", Convert.ToBase64String(usuario.ImagemPerfil ?? new byte[0]) },
+                        { "Role", usuario.Role.Name },
+                        { "AccessibleScreens", usuario.Role.AccessibleScreens }
+                    };
+        }
+
+        public async Task AtualizarCampoUsuarioAsync(int id, string campo, object novoValor)
         {
             var documentRef = _firestoreContext.FirestoreDb.Collection("usuario").Document(id.ToString());
             var documentSnapshot = await documentRef.GetSnapshotAsync();
-            if (documentSnapshot.Exists)
+
+            if (!documentSnapshot.Exists)
             {
-                await documentRef.DeleteAsync();
+                throw new KeyNotFoundException("Usuário não encontrado.");
             }
-            else
+
+            if (campo == "imagemPerfil" && novoValor is string base64String)
             {
-                throw new KeyNotFoundException("Cliente não encontrado.");
+                novoValor = Convert.FromBase64String(base64String);
+            }
+
+            await documentRef.UpdateAsync(campo, novoValor);
+        }
+
+        public async Task DeletarClienteAsync(string uid)
+        {
+            try
+            {
+                // Remover o usuário do Firestore
+                var documentRef = _firestoreContext.FirestoreDb.Collection("usuario").Document(uid);
+                var documentSnapshot = await documentRef.GetSnapshotAsync();
+
+                if (!documentSnapshot.Exists)
+                {
+                    throw new KeyNotFoundException("Usuário não encontrado no Firestore.");
+                }
+
+                await documentRef.DeleteAsync();
+
+                // Remover o usuário do Firebase Authentication
+                await FirebaseAuth.DefaultInstance.DeleteUserAsync(uid);
+            }
+            catch (FirebaseAuthException ex)
+            {
+                throw new Exception($"Erro ao remover do Firebase Authentication: {ex.Message}", ex);
+            }
+            catch (Exception ex)
+            {
+                throw new Exception($"Erro geral ao deletar o cliente: {ex.Message}", ex);
             }
         }
     }

@@ -28,5 +28,8 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("role")]
         public Role Role { get; set; }
+
+        [FirestoreProperty("imagemPerfil")]
+        public byte[]? ImagemPerfil { get; set; }
     }
 }
