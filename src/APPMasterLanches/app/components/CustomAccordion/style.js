@@ -12,7 +12,7 @@ const styles = StyleSheet.create({
     },
     content: {
 
-        backgroundColor: "red",
+        backgroundColor: "#000000",
         height: '100%',
     },
 });
