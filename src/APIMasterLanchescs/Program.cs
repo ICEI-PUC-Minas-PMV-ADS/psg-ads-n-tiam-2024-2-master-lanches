@@ -68,6 +68,7 @@ public class Program
         builder.Services.AddScoped<CategoriaService>();
         builder.Services.AddScoped<EstoqueService>();
         builder.Services.AddScoped<PixPaymentService>();
+        builder.Services.AddHostedService<SincronizacaoBackgroundService>();
 
         // Registrar o FirebaseApp como um serviço
         builder.Services.AddSingleton(firebaseApp);
@@ -108,7 +109,7 @@ public class Program
             app.UseSwaggerUI();
         }
 
-        app.UseHttpsRedirection();
+        //app.UseHttpsRedirection();
 
         app.UseRouting();
 
@@ -140,5 +141,23 @@ public class Program
         // Tratamento global de exceções
         app.UseExceptionHandler("/error");
         app.Run();
+    }
+}
+public class SincronizacaoBackgroundService : BackgroundService
+{
+    private readonly FirestoreContext _firestoreContext;
+
+    public SincronizacaoBackgroundService(FirestoreContext firestoreContext)
+    {
+        _firestoreContext = firestoreContext;
+    }
+
+    protected override async Task ExecuteAsync(CancellationToken stoppingToken)
+    {
+        TimeSpan intervalo = TimeSpan.FromHours(1);
+        while (!stoppingToken.IsCancellationRequested)
+        {
+            await _firestoreContext.SincronizacaoAutomatica(intervalo, stoppingToken);
+        }
     }
 }

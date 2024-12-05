@@ -4,6 +4,7 @@ import Entypo from 'react-native-vector-icons/Entypo';
 import BottomBar from '../../components/bottomBar/index';
 import DetalhesItem from '../../components/modal/Detalhes';
 import { useProducts } from '../../contexts/ProductContext';
+import Header from '../../components/header';
 import { debounce } from 'lodash';
 import Fuse from 'fuse.js';
 import styles from './style';
@@ -74,6 +75,7 @@ function Pesquisa() {
 
   return (
     <SafeAreaView style={styles.page}>
+      <Header />
       <View style={styles.container}>
         <Modal
           transparent={true}

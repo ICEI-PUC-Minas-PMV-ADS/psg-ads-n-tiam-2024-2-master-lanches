@@ -3,7 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, A
 import styles from "./style";
 import InputComponent from "../input/form";
 import InputDefault from '../input/inputpadrao';
-import { cadastro } from "../../../api/cliente";
+import { cadastro } from "../../../api/usuario";
 
 export default function CadastroEndereco(){
 

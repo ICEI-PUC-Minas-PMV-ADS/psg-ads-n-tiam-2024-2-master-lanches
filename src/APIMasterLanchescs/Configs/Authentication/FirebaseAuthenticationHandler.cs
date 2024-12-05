@@ -38,13 +38,18 @@ namespace APIMasterLanchescs.Configs.Authentication
             try
             {
                 var firebaseToken = await FirebaseAuth.GetAuth(_firebaseApp).VerifyIdTokenAsync(token);
-
+                Console.WriteLine(firebaseToken);
                 var claims = firebaseToken.Claims.Select(c => new Claim(c.Key, c.Value.ToString() ?? string.Empty)).ToList();
                 var identity = new ClaimsIdentity(claims, nameof(FirebaseAuthenticationHandler));
                 var principal = new ClaimsPrincipal(identity);
                 var ticket = new AuthenticationTicket(principal, JwtBearerDefaults.AuthenticationScheme);
 
                 return AuthenticateResult.Success(ticket);
+            }
+            catch (FirebaseAuthException ex) when (ex.Message.Contains("expired"))
+            {
+                Logger.LogError("Token Firebase expirado. Peça um novo ao cliente.");
+                return AuthenticateResult.Fail("Token expirado. Obtenha um novo ID Token.");
             }
             catch (Exception ex)
             {

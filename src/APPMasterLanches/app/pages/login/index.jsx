@@ -3,12 +3,13 @@ import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, A
 import styles from "./style";
 import InputComponent from "../../components/input/form/index";
 import Logo from "../../assets/logo.png";
-import { login } from "../../../api/cliente";
+import { accessUser } from '../../contexts/UserContext';
 
 export default function Login({ navigation }) {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
   const [error, setError] = useState("");
+  const { loginUsuario } = accessUser()
 
   const handleLogin = async () => {
     setError("");
@@ -17,8 +18,8 @@ export default function Login({ navigation }) {
       return;
     }
     try {
-      const data = await login(email, senha);
-      console.log("Login bem-sucedido:", data);
+      await loginUsuario(email, senha);
+      console.log("Login bem-sucedido");
       navigation.navigate("Home");
     } catch (err) {
       console.error("Erro no login:", err); // Melhorar a depuração

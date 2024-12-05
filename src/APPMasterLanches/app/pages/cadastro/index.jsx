@@ -3,7 +3,7 @@ import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, A
 import styles from "./style";
 import CustomAccordion from '../../components/CustomAccordion';
 import CadastroEndereco from '../../components/cadastroEndereco';
-import { cadastro } from "../../../api/cliente";
+import { cadastro } from "../../../api/usuario";
 
 export default function Cadastro({ navigation }) {
     const [email, setEmail] = useState("");
