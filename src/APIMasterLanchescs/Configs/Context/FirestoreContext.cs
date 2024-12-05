@@ -41,5 +41,51 @@ namespace APIMasterLanchescs.Configs.DbContext
             }
             return _firestoreDb.Collection(collectionName);
         }
+
+        /// <summary>
+        /// Lista todos os produtos do Firestore.
+        /// </summary>
+        public async Task<List<Dictionary<string, object>>> ListAllProdutos()
+        {
+            var collection = GetCollection("produtos");
+            var snapshot = await collection.GetSnapshotAsync();
+
+            return snapshot.Documents
+                .Select(doc => doc.ToDictionary())
+                .ToList();
+        }
+
+        /// <summary>
+        /// Sincronização automática dos produtos com estoque.
+        /// </summary>
+        public async Task SincronizacaoAutomatica(TimeSpan intervalo, CancellationToken stoppingToken)
+        {
+            while (true)
+            {
+                try
+                {
+                    // Sincroniza estoque com produtos
+                    var produtos = await ListAllProdutos();
+                    await SincronizarEstoqueComProdutos(produtos);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"Erro na sincronização automática: {ex.Message}");
+                }
+
+                await Task.Delay(intervalo, stoppingToken);
+            }
+        }
+
+        /// <summary>
+        /// Sincroniza estoque com produtos fornecidos.
+        /// </summary>
+        private Task SincronizarEstoqueComProdutos(List<Dictionary<string, object>> produtos)
+        {
+            // Implementação específica para sincronização com estoque.
+            // Exemplo: Atualização de contagens de estoque.
+            Console.WriteLine($"Sincronizando {produtos.Count} produtos com estoque...");
+            return Task.CompletedTask;
+        }
     }
 }

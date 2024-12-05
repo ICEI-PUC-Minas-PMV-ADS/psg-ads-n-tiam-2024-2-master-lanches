@@ -31,5 +31,7 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("imagemPerfil")]
         public byte[]? ImagemPerfil { get; set; }
+        [FirestoreProperty("endereco")]
+        public Endereco Endereco { get; set; }
     }
 }

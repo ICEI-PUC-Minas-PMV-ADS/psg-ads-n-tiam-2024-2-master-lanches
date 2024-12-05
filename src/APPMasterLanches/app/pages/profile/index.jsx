@@ -4,11 +4,13 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as ImagePicker from 'expo-image-picker';
 import styles from './style';
 import BottomBar from "../../components/bottomBar";
+import { accessUser } from '../../contexts/UserContext';
 
 export default function Profile() {
     const [avatar, setAvatar] = useState(null); // Estado para armazenar o caminho da imagem
     const [userName, setUserName] = useState(''); // Estado para armazenar o nome do usuário
     const [showHelp, setShowHelp] = useState(false); // Estado para exibir/ocultar detalhes de ajuda
+    const { usuario } = accessUser()
 
     const pickImage = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -36,7 +38,7 @@ export default function Profile() {
             <View style={styles.avatarContainer}>
                 <TouchableOpacity style={styles.avatarCircle} onPress={pickImage}>
                     {avatar ? (
-                        <Image source={{ uri: avatar }} style={styles.avatarImage} />
+                        <Image source={usuario.ImagemPerfil} style={styles.avatarImage} />
                     ) : (
                         <Icon name="person" size={60} color="#D8A13B" />
                     )}

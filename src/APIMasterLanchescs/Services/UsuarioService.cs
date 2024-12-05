@@ -75,18 +75,18 @@ namespace APIMasterLanchescs.Services
             try
             {
                 // Autenticar no Firebase Authentication
+                Console.WriteLine(clienteLogin);
                 var authProvider = FirebaseAuth.DefaultInstance;
+                Console.WriteLine(authProvider);
                 var firebaseAuthLink = await FirebaseAuth.DefaultInstance.CreateCustomTokenAsync(clienteLogin.Email);
-
+                Console.WriteLine(firebaseAuthLink);
                 if (string.IsNullOrEmpty(firebaseAuthLink))
                 {
                     throw new Exception("Erro ao gerar token de autenticação.");
                 }
 
                 // Verificar existência no Firestore
-                var snapshot = await _firestoreContext.FirestoreDb.Collection("usuario")
-                    .WhereEqualTo("Email", clienteLogin.Email).Limit(1).GetSnapshotAsync();
-
+                var snapshot = await _firestoreContext.FirestoreDb.Collection("usuario").WhereEqualTo("email", clienteLogin.Email).Limit(1).GetSnapshotAsync();
                 var user = snapshot.Documents.FirstOrDefault()?.ConvertTo<Usuario>();
 
                 if (user == null)
@@ -147,7 +147,8 @@ namespace APIMasterLanchescs.Services
                         { "DataCadastro", usuario.DataCadastro },
                         { "ImagemPerfil", Convert.ToBase64String(usuario.ImagemPerfil ?? new byte[0]) },
                         { "Role", usuario.Role.Name },
-                        { "AccessibleScreens", usuario.Role.AccessibleScreens }
+                        { "AccessibleScreens", usuario.Role.AccessibleScreens },
+                        { "Endereço", usuario.Endereco}
                     };
         }
 

@@ -1,5 +1,5 @@
-import React from 'react';
-import { View, Text, FlatList, Image, TouchableOpacity } from 'react-native';
+import React, { useState } from 'react';
+import { View, Text, FlatList, Image, TouchableOpacity, Modal } from 'react-native';
 import styles from './style'; // Importando os estilos globais
 import { useCart } from '../../../contexts/CartContext';
 

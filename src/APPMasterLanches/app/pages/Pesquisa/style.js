@@ -5,10 +5,10 @@ const { height } = Dimensions.get('window');
 const styles = StyleSheet.create({
   page: {
     flex: 1,
+    backgroundColor: '#000000',
   },
   container: {
     flex: 1,
-    backgroundColor: '#000000',
     padding: 16,
     height: '100%',
     width: '100%',
@@ -17,7 +17,7 @@ const styles = StyleSheet.create({
     width: '100%',
     alignItems: 'center',
     marginBottom: 20,
-    marginTop: Platform.OS === 'ios' || Platform.OS === 'android' ? 40 : 0,
+    //marginTop: Platform.OS === 'ios' || Platform.OS === 'android' ? 40 : 0,
   },
   barraPesquisa: {
     flexDirection: 'row',

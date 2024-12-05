@@ -11,9 +11,15 @@ const api = axios.create({
 api.interceptors.request.use(
     async (config) => {
         const token = await AsyncStorage.getItem("token");
+        const role = await AsyncStorage.getItem("user.role");
+
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
         }
+        if (role) {
+            config.headers.Role = role;
+        }
+
         return config;
     },
     (error) => Promise.reject(error)
