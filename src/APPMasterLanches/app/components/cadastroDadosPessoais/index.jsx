@@ -3,38 +3,28 @@ import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, A
 import styles from "./style";
 import InputComponent from "../input/form";
 import InputDefault from '../input/inputpadrao';
-import { cadastro } from "../../../api/usuario";
+import { cadastro } from "../../../api/cliente";
 
-export default function CadastroEndereco(){
+export default function CadastroDadosPessoais(){
 
 
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.boxBottom}>
                 <InputComponent
+                    placeholder="Nome Completo"
+                    keyboardType="default"
+                    isPassword = "true"
+                />
+                <InputComponent
+                    placeholder="CPF"
+                    keyboardType="numeric"
+                    maskType="cpf"
+                />
+                <InputComponent
                     placeholder="CEP"
                     keyboardType="numeric"
                     maskType="cep"
-                />
-                <InputDefault
-                    placeholder="Rua"
-                    keyboardType="default"
-                />
-                <InputDefault
-                    placeholder="Bairro"
-                    keyboardType="default"
-                />
-                <InputDefault
-                    placeholder="Cidade"
-                    keyboardType="default"
-                />
-                <InputDefault
-                    placeholder="Numero"
-                    keyboardType="numeric"
-                />
-                <InputDefault
-                    placeholder="Complemento"
-                    keyboardType="default"
                 />
             </View>
             <View style={styles.button}>

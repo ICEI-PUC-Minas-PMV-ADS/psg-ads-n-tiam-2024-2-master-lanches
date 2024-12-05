@@ -3,21 +3,29 @@ import { StyleSheet } from "react-native";
 export const style = StyleSheet.create({
     inputContainer: {
       display: 'flex',
+      marginBottom: 15,
       justifyContent: 'center',
-      alignItems: 'center'
+      alignItems: 'center',
+      flexDirection: 'row',
+      backgroundColor: '#FFF',
+      borderRadius: 15,
+      width: '100%',
+      height: 40
     }, 
     input: {
-      minWidth: '90%',
-      marginBottom: 15,
+      width: '90%',
       padding: 10,
+      height: 40, 
       borderRadius: 15,
       backgroundColor: '#FFF',
       fontSize: 19,
       color: '#000000',
       textAlign: 'left',
+      paddingHorizontal: 10,
     },
     iconButton: {
-      textAlign: 'center'
+      textAlign: 'center',
+      padding: 8
     },
 });
   

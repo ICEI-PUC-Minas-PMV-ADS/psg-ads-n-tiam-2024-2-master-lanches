@@ -43,7 +43,7 @@ export default function AppNavigator() {
             <Stack.Screen name="Search" component={Pesquisa} />
             <Stack.Screen name="Cadastro" component={Cadastro} />
             <Stack.Screen name="Perfil" component={Profile} />
-            <Stack.Screen name="Bebidas" component={CategoriaBebidas} />
+            <Stack.Screen name="Bebidas" component={Categoria} />
             <Stack.Screen name="teste" component={CategoriaTeste} />
             <Stack.Screen name="Funções Administração" component={AdministrationFunctions} />
             <Stack.Screen name="pedidos" component={PedidosList} />
