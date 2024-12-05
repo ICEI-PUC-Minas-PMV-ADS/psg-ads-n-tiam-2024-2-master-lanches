@@ -46,7 +46,8 @@ return (
             value={value}
             onChangeText={handleChange}
             {...props}
-        />  
+            underlineColorAndroid="transparent"
+        />
     </View>
     );
 }

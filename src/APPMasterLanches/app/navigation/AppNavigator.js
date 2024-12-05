@@ -11,6 +11,7 @@ import CategoriaBebidas from '../pages/categorias/bebidas';
 import CategoriaTeste from '../pages/categorias/Base';
 import Profile from '../pages/profile';
 import PedidosList from '../pages/gestao';
+import CadastroEmail from '../components/cadastroEmail';
 
 const Stack = createNativeStackNavigator();
 

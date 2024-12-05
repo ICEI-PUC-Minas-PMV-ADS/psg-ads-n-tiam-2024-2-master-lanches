@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
         fontWeight: "bold",
     },
     content: {
-        backgroundColor: "black",
+        backgroundColor: "white",
         height: '100%',
     },
     icon: {

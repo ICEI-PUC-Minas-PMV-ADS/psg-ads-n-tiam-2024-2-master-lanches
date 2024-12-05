@@ -37,11 +37,6 @@ export default function CadastroEndereco(){
                     keyboardType="default"
                 />
             </View>
-            <View style={styles.button}>
-                <TouchableOpacity style={styles.btnCadastro}>
-                    <Text style={styles.textbtnCadastro}>Finalizar Cadastro</Text>
-                </TouchableOpacity>
-            </View>
         </KeyboardAvoidingView>
     );
 };

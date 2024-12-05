@@ -28,15 +28,33 @@ export default function InputComponent({
                 return text.replace(/\D/g, "").replace(/(\d{3})(\d{3})(\d{3})(\d{2})/, "$1.$2.$3-$4");
             case "currency":
                 return "R$ " + parseFloat(text.replace(/\D/g, "")).toFixed(2);
+            case "email":
+                validateEmail(text) 
+                if(isValid === true){
+                    return email;
+                } 
+                // else {
+                    
+                // }
             default:
                 return text;
             }
+    };
+    const [email, setEmail] = useState('');
+    const [isValid, setIsValid] = useState(true);
+
+    const validateEmail = (text) => {
+        // Regex simples para validação de email
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        setEmail(text);
+        setIsValid(emailRegex.test(text)); // Define se é válido ou não
     };
 
     const handleChange = (text) => {
         const maskedText = applyMask(text);
         setValue(maskedText);
     };
+
 
     return (
         <View style={style.inputContainer}>
@@ -48,6 +66,7 @@ export default function InputComponent({
             value={value}
             onChangeText={handleChange}
             autoCapitalize={capitalize ? 'sentences': 'none'}
+            underlineColorAndroid="transparent"
             {...props}
         />
             {isPassword && (

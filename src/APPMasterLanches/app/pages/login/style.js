@@ -36,18 +36,10 @@
 			flex: 1,
 			alignItems: 'center',
 			justifyContent: 'center',
-			width: '90%',
+			width: '80%',
 			paddingBottom: 50
 		},
-		// input: {
-		// 	width: '90%',
-		// 	padding: 10,
-		// 	borderRadius: 15,
-		// 	backgroundColor: '#FFF',
-		// 	fontSize: 19,
-		// 	color: '#000000',
-		// 	textAlign: 'center',
-		// },
+
 		button: {
 			backgroundColor: '#fbdb5b',
 			textAlign: 'center',

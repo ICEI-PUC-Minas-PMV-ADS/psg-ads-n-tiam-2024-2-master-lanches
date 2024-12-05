@@ -14,7 +14,6 @@ export default function CadastroDadosPessoais(){
                 <InputComponent
                     placeholder="Nome Completo"
                     keyboardType="default"
-                    isPassword = "true"
                 />
                 <InputComponent
                     placeholder="CPF"
@@ -22,15 +21,10 @@ export default function CadastroDadosPessoais(){
                     maskType="cpf"
                 />
                 <InputComponent
-                    placeholder="CEP"
+                    placeholder="Telefone"
                     keyboardType="numeric"
-                    maskType="cep"
+                    maskType="phone-cell"
                 />
-            </View>
-            <View style={styles.button}>
-                <TouchableOpacity style={styles.btnCadastro}>
-                    <Text style={styles.textbtnCadastro}>Finalizar Cadastro</Text>
-                </TouchableOpacity>
             </View>
         </KeyboardAvoidingView>
     );

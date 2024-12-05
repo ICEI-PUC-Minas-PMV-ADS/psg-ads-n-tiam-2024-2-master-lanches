@@ -4,6 +4,7 @@ import styles from "./style";
 import CustomAccordion from '../../components/CustomAccordion';
 import CadastroEndereco from '../../components/cadastroEndereco';
 import CadastroDadosPessoais from '../../components/cadastroDadosPessoais';
+import CadastroEmail from '../../components/cadastroEmail';
 import { cadastro } from "../../../api/cliente";
 
 export default function Cadastro({ navigation }) {
@@ -19,6 +20,11 @@ export default function Cadastro({ navigation }) {
       {
         title: "Dados Pessoais",
         content: <CadastroDadosPessoais />,
+        loaded: true,
+      },
+      {
+        title: 'E-mail',
+        content: <CadastroEmail />,
         loaded: true,
       }
     ];
@@ -42,6 +48,11 @@ export default function Cadastro({ navigation }) {
  return (
     <KeyboardAvoidingView style={styles.container}>
           <CustomAccordion sections={sections}/>
+          <View style={styles.button}>
+                <TouchableOpacity style={styles.btnCadastro}>
+                    <Text style={styles.textbtnCadastro}>Finalizar Cadastro</Text>
+                </TouchableOpacity>
+            </View>
     </KeyboardAvoidingView>
  )    
 }

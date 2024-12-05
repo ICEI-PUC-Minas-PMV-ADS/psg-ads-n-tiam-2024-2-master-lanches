@@ -46,9 +46,16 @@ const styles = StyleSheet.create({
     fontWeight: "bold",
   },
 
-  input: {
-
-  }
+  button: {
+    backgroundColor: '#fbdb5b',
+    textAlign: 'center',
+    width: '65%',
+    height: 45,
+    marginTop: 15,
+    borderRadius: 15,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
 });
 
 export default styles;
