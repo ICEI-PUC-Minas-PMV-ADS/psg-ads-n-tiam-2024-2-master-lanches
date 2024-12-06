@@ -47,7 +47,7 @@ const pedidosRealizados = [
 ];
 
 export default function ModalGestaoPedidos() {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
   const user = accessUser();
 
   const renderItem = ({ item }) => (
@@ -66,7 +66,6 @@ export default function ModalGestaoPedidos() {
   return (
     <View style={styles.container}>
       <Button title="Abrir Modal" onPress={() => setModalVisible(true)} />
-
       <Modal
         animationType="slide"
         transparent={true}

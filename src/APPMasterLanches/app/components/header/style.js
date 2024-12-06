@@ -41,6 +41,22 @@ const styles = StyleSheet.create({
         width: "100%",
         height: "100%",
     },
+    wishesButton: {
+        width: 40,
+        height: 40,
+        backgroundColor: "#FFF1A6",
+        justifyContent: "center",
+        alignItems: "center",
+        shadowColor: "#000",
+        shadowOffset: { width: 0, height: 2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
+        elevation: 6,
+    },
+    wishesIcon: {
+        width: "100%",
+        height: "100%",
+    },
 });
 
 export default styles;
