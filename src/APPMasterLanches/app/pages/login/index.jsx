@@ -20,7 +20,7 @@ export default function Login({ navigation }) {
     try {
       await loginUsuario(email, senha);
       console.log("Login bem-sucedido");
-      navigation.navigate("Home");
+      navigation.navigate("Principal");
     } catch (err) {
       console.error("Erro no login:", err); // Melhorar a depuração
       setError("Falha no login. Verifique suas credenciais.");

@@ -1,38 +1,52 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { useNavigation } from '@react-navigation/native';
 import styles from './style';
 import { accessUser } from '../../contexts/UserContext';
 
-const ICONS = [
-    { name: "home", screen: "Home" },
-    { name: "search", screen: "Search" },
-];
-
-const CHANGEABLE_ICONS = [
-    { name: "shopping-cart", screen: "Cart" },
-    { name: "gears", screen: "AdminFunctions" },
-];
+const ICON_MAP = {
+    PaginaInicial: { name: "home", screen: "Principal" },
+    PaginaPesquisa: { name: "search", screen: "Pesquisa" },
+    Carrinho: { name: "shopping-cart", screen: "Carrinho" },
+    "Funções Administração": { name: "gears", screen: "Funções Administração" },
+};
 
 const BottomBar = () => {
-    const {ADM}  = accessUser()
+    const { accessibleScreens } = accessUser();
+    const [icons, setIcons] = useState([]);
     const navigation = useNavigation();
 
-    const baseIconMap = (icon, index) => (
-        <TouchableOpacity
-            key={index}
-            style={icon.name === "home" ? styles.buttonHome : styles.button}
-            onPress={() => navigation.navigate(icon.screen)}
-        >
-            <Icon name={icon.name} size={24} color="#000" />
-        </TouchableOpacity>
-    );
+    useEffect(() => {
+        if (accessibleScreens) {
+            const screens = accessibleScreens.map(screen => ICON_MAP[screen.name]).filter(Boolean);
+            const adjustedScreens = screens.filter(screen => screen).map(icon =>
+                icon.name === "shopping-cart" && accessibleScreens.some(s => s.name === "Funções Administração")
+                    ? ICON_MAP["Funções Administração"]
+                    : icon
+            ); // Remove nulos ou indefinidos
+            setIcons(adjustedScreens.slice(0, 3));
+        }
+    }, [accessibleScreens]);
+
+    // Garante que a home sempre vai estar no meio
+    const sortedIcons = icons.sort((a, b) => {
+        if (a.name === "home") return -1;
+        if (b.name === "home") return 1;
+        return 0;
+    });
 
     return (
         <View style={styles.container}>
-            {ICONS.map((icon, index) => baseIconMap(icon, index))}
-            {baseIconMap(CHANGEABLE_ICONS[ADM ? 1 : 0], ICONS.length)}
+            {sortedIcons.map((icon, index) => (
+                <TouchableOpacity
+                    key={index}
+                    style={icon.name === "home" ? styles.buttonHome : styles.button}
+                    onPress={() => navigation.navigate(icon.screen)}
+                >
+                    <Icon name={icon.name} size={24} color="#000" />
+                </TouchableOpacity>
+            ))}
         </View>
     );
 };

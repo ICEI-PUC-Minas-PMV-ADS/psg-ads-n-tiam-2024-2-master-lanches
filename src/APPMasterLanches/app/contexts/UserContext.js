@@ -1,37 +1,64 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+import React, { createContext, useContext, useState, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { getUsuarioInfo, logout, login, cadastro } from '../../api/usuario';
+import { getUsuarioInfo, logout, login, cadastro } from "../../api/usuario";
 
+const EXPIRATION_TIME = 3 * 24 * 60 * 60 * 1000; // 3 dias em milissegundos
 const UserContext = createContext();
 
 export function UserProvider({ children }) {
-    const [usuario, setUsuario] = useState(null); // Dados do usuário logado
-    const [pagamento, setPagamento] = useState(null); // Pagamento atual
-    const [pedidoAtual, setPedidoAtual] = useState(null); // Pedido em andamento
-    const [historicoPedidos, setHistoricoPedidos] = useState([]); // Histórico de pedidos
+    const [usuario, setUsuario] = useState(null);
+    const [accessibleScreens, setAccessibleScreens] = useState([]);
+    const [isLoading, setIsLoading] = useState(true);
+    const [pagamento, setPagamento] = useState(null); 
+    const [pedidoAtual, setPedidoAtual] = useState(null); 
+    const [historicoPedidos, setHistoricoPedidos] = useState([]);
 
-    // Carrega informações do usuário ao iniciar
     useEffect(() => {
-        const fetchUsuario = async () => {
-            const token = await AsyncStorage.getItem("token");
-            if (!token) return;
-            const dados = await AsyncStorage.getItem("usuario");
-            if (dados)
-            {
-                setUsuario(dados);
-                return;
-            }
-
+        const initializeUser = async () => {
             try {
-                const dadosUsuario = await getUsuarioInfo();
-                setUsuario(dadosUsuario);
-                await AsyncStorage.setItem("usuario", JSON.stringify(dadosUsuario));
+                const lastLogin = await AsyncStorage.getItem("lastLogin");
+                const isExpired =
+                    lastLogin && new Date().getTime() - parseInt(lastLogin, 10) > EXPIRATION_TIME;
+
+                if (isExpired) {
+                    await AsyncStorage.clear();
+                    setIsLoading(false);
+                    return;
+                }
+
+                const userData = await AsyncStorage.getItem("usuario");
+                const screensData = await AsyncStorage.getItem("accessibleScreens");
+
+                if (userData && screensData) {
+                    setUsuario(JSON.parse(userData));
+                    setAccessibleScreens(JSON.parse(screensData));
+                }
             } catch (error) {
-                console.error("Erro ao carregar informações do usuário:", error.message);
+                console.error("Erro ao inicializar usuário:", error);
+            } finally {
+                setIsLoading(false);
             }
         };
-        fetchUsuario();
+
+        initializeUser();
     }, []);
+
+    const loginUsuario = async (email, senha) => {
+        try {
+            const loginData = await login(email, senha);
+            const userInfo = await getUsuarioInfo();
+
+            setUsuario(userInfo);
+            setAccessibleScreens(loginData.role.accessibleScreens);
+
+            await AsyncStorage.setItem("usuario", JSON.stringify(userInfo));
+            await AsyncStorage.setItem("accessibleScreens", JSON.stringify(loginData.role.accessibleScreens));
+            await AsyncStorage.setItem("lastLogin", new Date().getTime().toString());
+        } catch (error) {
+            console.error("Erro ao fazer login:", error);
+            throw error;
+        }
+    };
 
     const salvarPagamento = (novoPagamento) => {
         setPagamento(novoPagamento);
@@ -57,7 +84,6 @@ export function UserProvider({ children }) {
         setHistoricoPedidos((prev) => [...prev, pedido]);
         AsyncStorage.setItem("historicoPedidos", JSON.stringify([...historicoPedidos, pedido]));
     };
-
     const logoutUsuario = async () => {
         try {
             await logout();
@@ -65,6 +91,7 @@ export function UserProvider({ children }) {
             limparPagamento();
             setPedidoAtual(null);
             setHistoricoPedidos([]);
+            setAccessibleScreens([]);
             await AsyncStorage.clear();
         } catch (error) {
             console.error("Erro ao fazer logout:", error.message);
@@ -72,9 +99,10 @@ export function UserProvider({ children }) {
     };
 
     // Método de login
-    const loginUsuario = async (email, senha) => {
+/*     const loginUsuario = async (email, senha) => {
         try {
             const dadosLogin = await login(email, senha);
+            setAccessibleScreens(dadosLogin.role.accessibleScreens)
             const dadosUsuario = await getUsuarioInfo();
             setUsuario(dadosUsuario);
             console.log("Dados Usuario: " + JSON.stringify(usuario));
@@ -84,7 +112,7 @@ export function UserProvider({ children }) {
             console.error("Erro ao fazer login:", error.message);
             throw error;
         }
-    };
+    }; */
 
     // Método de cadastro
     const cadastrarUsuario = async (dadosCadastro) => {
@@ -102,8 +130,6 @@ export function UserProvider({ children }) {
     return (
         <UserContext.Provider
             value={{
-                usuario,
-                setUsuario,
                 pagamento,
                 salvarPagamento,
                 limparPagamento,
@@ -112,9 +138,12 @@ export function UserProvider({ children }) {
                 cancelarPedidoAtual,
                 historicoPedidos,
                 adicionarPedidoHistorico,
-                logoutUsuario,
-                loginUsuario,
                 cadastrarUsuario,
+                usuario,
+                accessibleScreens,
+                loginUsuario,
+                logoutUsuario,
+                isLoading,
             }}
         >
             {children}
@@ -122,7 +151,6 @@ export function UserProvider({ children }) {
     );
 }
 
-// Hook para usar o contexto
 export function accessUser() {
     return useContext(UserContext);
 }
