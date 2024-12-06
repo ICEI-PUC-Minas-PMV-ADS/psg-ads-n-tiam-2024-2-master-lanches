@@ -6,26 +6,21 @@ const styles = StyleSheet.create({
         backgroundColor: '#000000', 
         alignItems: 'center',
     },
-    flatListContainer: {
-        marginTop: Platform.OS === 'ios' || Platform.OS === 'android' ? 40 : 0,
-        justifyContent: 'flex-start',
-        alignItems: 'center',
-        paddingBottom: 80,
-    },
-    categorias: {
-        width: '95%', 
-        flexDirection: 'row',
-        justifyContent: 'space-between',
-        paddingHorizontal: 5,
-        flexWrap: 'wrap',
+    cardContainer: {
+        width: 150,
+        marginHorizontal: 5,
     },
     section: {
-        width: '95%',
-        marginVertical: 15,
+        minWidth: '95%',
+        maxWidth: '95%',
+        marginVertical: 16,
         backgroundColor: '#333',
         borderRadius: 10,
         paddingVertical: 10,
+        paddingHorizontal: 16,
         alignItems: 'center',
+        alignSelf: 'center',
+        minHeight: 150,
     },
     sectionTitle: {
         color: '#fff',
@@ -33,10 +28,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginBottom: 10,
     },
-    text: {
-        color: '#fff',
-        fontSize: 18,
-        fontWeight: 'bold',
+    sectionListContainer: {
+       // paddingBottom: 80, // Não necessario
     },
 });
 

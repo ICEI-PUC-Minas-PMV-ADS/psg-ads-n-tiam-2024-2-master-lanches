@@ -1,14 +1,18 @@
-import React from "react";
-import { View, Image, TouchableOpacity } from "react-native";
-import styles from "./style";
-import DefaultImage from '../../../assets/Default_noLoad.jpg';
+import React, { useState } from 'react';
+import { TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import styles from './style';
 
 function SmallCard({ url, onPress }) {
-    const imageSource = url ? { uri: url } : DefaultImage;
+    const [loading, setLoading] = useState(true);
 
     return (
         <TouchableOpacity onPress={onPress} style={styles.container}>
-            <Image source={imageSource} style={styles.imagem} />
+            {loading && <ActivityIndicator size="small" color="#4CAF50" />}
+            <Image
+                source={{ uri: url || DefaultImage }}
+                style={styles.imagem}
+                onLoadEnd={() => setLoading(false)}
+            />
         </TouchableOpacity>
     );
 }

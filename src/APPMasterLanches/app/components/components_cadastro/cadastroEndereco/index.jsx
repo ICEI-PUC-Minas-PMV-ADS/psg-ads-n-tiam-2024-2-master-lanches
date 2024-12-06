@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, Animated, Keyboard, SafeAreaView} from "react-native";
 import styles from "./style";
-import InputComponent from "../input/form";
-import InputDefault from '../input/inputpadrao';
-import { cadastro } from "../../../api/usuario";
+import InputComponent from "../../input/form";
+import InputDefault from '../../input/inputpadrao';
 
 export default function CadastroEndereco(){
 

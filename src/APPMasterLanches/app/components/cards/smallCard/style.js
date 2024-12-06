@@ -1,19 +1,20 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
-export const styles = StyleSheet.create ({
+const styles = StyleSheet.create({
     container: {
-        width: '30%',
         height: 90,
-        backgroundColor: 'white',
+        backgroundColor: '#fff',
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 20,
+        borderWidth: 1,
+        borderColor: '#ccc',
+        marginHorizontal: 8,
     },
     imagem: {
         width: '100%',
         height: '90%',
         borderRadius: 15,
-        marginBottom: 8,
     },
 });
 

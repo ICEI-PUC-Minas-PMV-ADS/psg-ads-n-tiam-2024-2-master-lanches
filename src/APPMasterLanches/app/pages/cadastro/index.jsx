@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, Animated, Keyboard, } from "react-native";
 import styles from "./style";
 import CustomAccordion from '../../components/CustomAccordion';
-import CadastroEndereco from '../../components/cadastroEndereco';
-import CadastroDadosPessoais from '../../components/cadastroDadosPessoais';
-import CadastroEmail from '../../components/cadastroEmail';
+import CadastroEndereco from '../../components/components_cadastro/cadastroEndereco';
+import CadastroDadosPessoais from '../../components/components_cadastro/cadastroDadosPessoais';
+import CadastroEmail from '../../components/components_cadastro/cadastroEmail';
 import { accessUser } from '../../contexts/UserContext';
 
 export default function Cadastro({ navigation }) {

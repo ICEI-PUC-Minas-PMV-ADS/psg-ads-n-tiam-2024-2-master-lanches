@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { View, Text, FlatList, Image, TouchableOpacity, Modal } from 'react-native';
 import styles from './style'; // Importando os estilos globais
-import { useCart } from '../../../contexts/CartContext';
+import { useProducts } from '../../../contexts/ProductContext';
+import { useNavigation } from '@react-navigation/native';
 
 const bebidas = [
   {
@@ -66,32 +67,34 @@ const bebidas = [
   },
 ];
 
-export default function CategoriaBebidas() {
+export default function Categoria({ route }) {
+  const { nomeCategoria = 'Bebida' } = route.params;
+  const { produtos } = useProducts();
+  const navigation = useNavigation();
 
-  const { addToCart } = useCart();
+  const produtosCategoria = produtos[nomeCategoria]
+
   const renderItem = ({ item }) => (
     <View style={styles.cardContainer}>
-      <Image source={{ uri: item.imagem }} style={styles.image} />
+      <Image source={{ uri: item.imagemUrl }} style={styles.image} />
       <Text style={styles.text}>{item.nome}</Text>
       <Text style={styles.price}>{item.preco}</Text>
-      <TouchableOpacity
-        style={styles.button}
-        onPress={() => addToCart(item)}>
-        <Text style={styles.buttonText}>Adicionar</Text>
-      </TouchableOpacity>
     </View>
   );
 
 
   return (
     <View style={styles.container}>
+      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backButton}>
+        <Text style={styles.backButtonText}>Voltar</Text>
+      </TouchableOpacity>
       <FlatList
-        data={bebidas}
+        data={produtosCategoria}
         renderItem={renderItem}
         keyExtractor={(item) => item.id}
         numColumns={2}
         contentContainerStyle={styles.list}
-        ListHeaderComponent={<Text style={styles.header}>Nossas Bebidas</Text>} />
+        ListHeaderComponent={<Text style={styles.header}>{nomeCategoria}(s)</Text>} />
     </View>
   );
 }

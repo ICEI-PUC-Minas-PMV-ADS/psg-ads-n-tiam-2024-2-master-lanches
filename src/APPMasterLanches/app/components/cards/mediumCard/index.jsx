@@ -1,58 +1,63 @@
 import React, { useState } from 'react';
-import { View, Text, Image, TouchableOpacity, FlatList } from 'react-native';
+import { View, Text, Image, TouchableOpacity, FlatList, Modal, ActivityIndicator } from 'react-native';
 import styles from './style';
 import { useProducts } from '../../../contexts/ProductContext';
-import { useCart } from '../../../contexts/CartContext';
 import DefaultImage from '../../../assets/Default_noLoad.jpg';
+import DetalhesItem from '../../modal/Detalhes';
 
 function MediumCard() {
     const { produtos: produtosContext, refreshProdutos } = useProducts();
-    const { addToCart } = useCart();
+    const allProdutos = Object.values(produtosContext).flat();
     const [loading, setLoading] = useState(false);
-    const allProdutos = Object.values(produtosContext).flat()
+    const [modalVisible, setModalVisible] = useState(false);
+    const [selectedItem, setSelectedItem] = useState(null);
+
     const handleRefresh = async () => {
         setLoading(true);
         await refreshProdutos();
         setLoading(false);
-    };    
+    };
 
     const renderItem = ({ item: produto }) => (
-        <View style={[styles.card, styles.cardSpacing]}>
-            <Image 
-                source={{ uri: produto.imagemUrl || null }} 
-                style={styles.imagem} 
-            />
-            <View style={styles.infoContainer}>
-                <Text style={styles.nome}>{produto.nome}</Text>
-                <Text style={styles.preco}>R$ {produto.preco.toFixed(2)}</Text>
-                <Text style={styles.status}>
-                    {produto.statusDisponibilidade ? "Disponível" : "Indisponível"}
-                </Text>
-                <TouchableOpacity 
-                    style={styles.addButton} 
-                    onPress={() => addToCart(produto)}
-                >
-                    <Text style={styles.addButtonText}>Adicionar</Text>
-                </TouchableOpacity>
+        <TouchableOpacity
+            onPress={() => {
+                setSelectedItem(produto);
+                setModalVisible(true);
+            }}
+        >
+            <View style={styles.card}>
+                {produto ? (
+                    <>
+                        <Image source={{ uri: produto.imagemUrl || DefaultImage }} style={styles.imagem} />
+                        <View style={styles.infoContainer}>
+                            <Text style={styles.nome}>{produto.nome}</Text>
+                            <Text style={styles.preco}>R$ {produto.preco.toFixed(2)}</Text>
+                        </View>
+                    </>
+                ) : (
+                    <ActivityIndicator size="large" color="#4CAF50" />
+                )}
             </View>
-        </View>
+        </TouchableOpacity>
     );
 
     return (
         <View style={styles.container}>
-            {loading ? (
-                <Text style={styles.loadingText}>Carregando produtos...</Text>
-            ) : (
-                <FlatList
-                    data={allProdutos}
-                    renderItem={renderItem}
-                    keyExtractor={(produto, index) => `${produto.id}-${index}`}
-                    contentContainerStyle={styles.cardContainer}
-                    onRefresh={handleRefresh}
-                    refreshing={false}
-                    style={{marginBottom: '15%'}}
-                />
-            )}
+            <Modal
+                transparent
+                visible={modalVisible}
+                onRequestClose={() => setModalVisible(false)}
+            >
+                <DetalhesItem item={selectedItem} onClose={() => setModalVisible(false)} />
+            </Modal>
+            <FlatList
+                data={allProdutos}
+                renderItem={renderItem}
+                keyExtractor={(produto, index) => `${produto.id}-${index}`}
+                contentContainerStyle={styles.cardContainer}
+                refreshing={loading}
+                onRefresh={handleRefresh}
+            />
         </View>
     );
 }

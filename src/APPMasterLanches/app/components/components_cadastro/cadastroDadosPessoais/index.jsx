@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Image, Text, TextInput, TouchableOpacity, View, KeyboardAvoidingView, Animated, Keyboard, SafeAreaView} from "react-native";
 import styles from "./style";
-import InputComponent from "../input/form";
+import InputComponent from "../../input/form";
 
-export default function CadastroEmail(){
-
+export default function CadastroDadosPessoais(){
     return(
         <KeyboardAvoidingView style={styles.container}>
             <View style={styles.boxBottom}>
                 <InputComponent
-                    placeholder="E-mail"
+                    placeholder="Nome Completo"
                     keyboardType="default"
-                    maskType= 'e-mail'
                 />
                 <InputComponent
-                    placeholder="Senha"
-                    keyboardType="default"
-                    isPassword= {true}
+                    placeholder="CPF"
+                    keyboardType="numeric"
+                    maskType="cpf"
+                />
+                <InputComponent
+                    placeholder="Telefone"
+                    keyboardType="numeric"
+                    maskType="phone-cell"
                 />
             </View>
         </KeyboardAvoidingView>

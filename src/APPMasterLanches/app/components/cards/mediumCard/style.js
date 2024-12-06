@@ -1,68 +1,46 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 
 const styles = StyleSheet.create({
-    loadingText: {
-        fontSize: 18,
-        color: '#555',
-        textAlign: 'center',
-        marginVertical: 20,
+    container: {
+        flex: 1,
+        marginTop: 16,
+        marginBottom: 50      
     },
     cardContainer: {
-        marginVertical: 16, // Ajuste para um espaço mais uniforme
+        paddingHorizontal: 16,
     },
     card: {
-        width: '100%', // Usar largura total da tela
-        flexDirection: 'row', // Torna o card horizontal
+        flexDirection: 'row',
+        width: '100%',
         padding: 16,
         backgroundColor: '#fff',
         borderRadius: 15,
-        shadowColor: "#000",
+        marginBottom: 16,
+        shadowColor: '#000',
         shadowOffset: { width: 0, height: 4 },
         shadowOpacity: 0.1,
         shadowRadius: 6,
         elevation: 5,
-        marginBottom: 16, // Espaçamento entre os cards
-        justifyContent: 'space-between', // Espaço adequado entre imagem e informações
+        justifyContent: 'space-between',
     },
     imagem: {
-        width: 100, // Ajuste mais harmônico para a imagem
+        width: 100,
         height: 100,
         borderRadius: 10,
-        marginRight: 16, // Espaço entre a imagem e as informações
+        marginRight: 16,
     },
     infoContainer: {
-        flex: 1, // Preenche o restante do espaço disponível
-        justifyContent: 'space-between', // Organiza os itens dentro da área
+        flex: 1,
+        justifyContent: 'space-between',
     },
     nome: {
         fontSize: 18,
-        fontWeight: '600', // Peso moderado para o nome
+        fontWeight: '600',
         color: '#333',
-        marginBottom: 6, // Ajuste no espaçamento
     },
     preco: {
         fontSize: 16,
         color: '#444',
-        marginBottom: 8,
-    },
-    status: {
-        fontSize: 14,
-        color: '#4CAF50',
-        marginBottom: 12,
-        fontWeight: 'bold', // Destaque para o status
-    },
-    addButton: {
-        backgroundColor: '#4CAF50',
-        borderRadius: 20,
-        paddingVertical: 10,
-        paddingHorizontal: 20,
-        alignSelf: 'flex-start',
-        marginTop: 10,
-    },
-    addButtonText: {
-        color: '#fff',
-        fontSize: 16,
-        fontWeight: 'bold',
     },
 });
 

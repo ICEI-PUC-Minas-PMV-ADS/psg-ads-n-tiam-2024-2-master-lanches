@@ -5,17 +5,17 @@ import { useProducts } from '../../../contexts/ProductContext';
 
 function LargeCard({ produtoId }) {
     const { getProdutoById } = useProducts();
-    const [produto, setProduto] = useState({});
+    const [produto, setProduto] = useState(null);
     const [status, setStatus] = useState({ loading: true, error: null });
+
     useEffect(() => {
         const fetchProduto = async () => {
-            setStatus({ loading: true, error: null });
             try {
-                const produto = await getProdutoById(produtoId);
-                setProduto(produto);
-                console.log('Produto carregado em LargeCard:', produto);
+                setStatus({ loading: true, error: null });
+                const data = await getProdutoById(produtoId);
+                setProduto(data);
             } catch {
-                setStatus({ loading: false, error: 'Erro ao carregar produto' });
+                setStatus({ error: 'Erro ao carregar produto' });
             } finally {
                 setStatus({ loading: false });
             }
@@ -29,27 +29,22 @@ function LargeCard({ produtoId }) {
 
     return (
         <View style={styles.card}>
-            <Image source={{ uri: produto.imagemUrl || DefaultImage }} style={styles.imagem} />
+            <Image source={{ uri: produto.imagemUrl || DefaultImage }} style={styles.imagem} resizeMode="contain" />
             <Text style={styles.nome}>{produto.nome}</Text>
-            <Text style={styles.preco}>Preço: R$ {produto.preco.toFixed(2)}</Text>
+            <Text style={styles.preco}>R$ {produto.preco.toFixed(2)}</Text>
         </View>
     );
 }
 
-function LoadingComponent() {
-    return (
-        <View style={styles.loadingContainer}>
-            <ActivityIndicator size="large" color="#4CAF50" />
-            <Text>Carregando...</Text>
-        </View>
-    );
-}
+const LoadingComponent = () => (
+    <View style={[styles.card, styles.loadingContainer]}>
+        <ActivityIndicator size="large" color="#4CAF50" />
+        <Text style={styles.loadingText}>Carregando...</Text>
+    </View>
+);
 
-function ErrorComponent({ message }) {
-    return <Text style={styles.errorText}>{message}</Text>;
-}
+const ErrorComponent = ({ message }) => (
+    <Text style={styles.errorText}>{message}</Text>
+);
 
-
-export default React.memo(LargeCard, (prevProps, nextProps) => {
-    return prevProps.produtoId === nextProps.produtoId;
-});
+export default React.memo(LargeCard, (prevProps, nextProps) => prevProps.produtoId === nextProps.produtoId);
