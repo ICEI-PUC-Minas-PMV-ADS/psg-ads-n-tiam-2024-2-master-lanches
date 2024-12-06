@@ -13,7 +13,6 @@ export default function InputComponent({
     }) {
     const [value, setValue] = useState("");
     const [secureEntry, setSecureEntry] = useState(isPassword);
-
     const togglePasswordVisibility = () => setSecureEntry(!secureEntry);
 
     const applyMask = (text) => {
@@ -65,6 +64,7 @@ export default function InputComponent({
             secureTextEntry={secureEntry}
             value={value}
             onChangeText={handleChange}
+
             autoCapitalize={capitalize ? 'sentences': 'none'}
             underlineColorAndroid="transparent"
             {...props}

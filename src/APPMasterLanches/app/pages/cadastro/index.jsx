@@ -5,12 +5,14 @@ import CustomAccordion from '../../components/CustomAccordion';
 import CadastroEndereco from '../../components/cadastroEndereco';
 import CadastroDadosPessoais from '../../components/cadastroDadosPessoais';
 import CadastroEmail from '../../components/cadastroEmail';
-import { cadastro } from "../../../api/cliente";
+import { accessUser } from '../../contexts/UserContext';
 
 export default function Cadastro({ navigation }) {
     const [email, setEmail] = useState("");
     const [senha, setSenha] = useState("");
     const [error, setError] = useState("");
+    const { Cadastro } = accessUser ();
+
     const sections = [
       {
         title: "Informações de Endereço",
@@ -29,30 +31,12 @@ export default function Cadastro({ navigation }) {
       }
     ];
 
-    const handleLogin = async () => {
-        setError("");
-        if (!email || !senha) {
-          setError("Por favor, preencha todos os campos.");
-          return;
-        }
-        try {
-          const data = await login(email, senha);
-          console.log("Login bem-sucedido:", data);
-          navigation.navigate("Home");
-        } catch (err) {
-          console.error("Erro no login:", err); // Melhorar a depuração
-          setError("Falha no login. Verifique suas credenciais.");
-        }
-      };
-
  return (
     <KeyboardAvoidingView style={styles.container}>
           <CustomAccordion sections={sections}/>
-          <View style={styles.button}>
-                <TouchableOpacity style={styles.btnCadastro}>
-                    <Text style={styles.textbtnCadastro}>Finalizar Cadastro</Text>
-                </TouchableOpacity>
-            </View>
-    </KeyboardAvoidingView>
+          <TouchableOpacity style={styles.button}>
+              <Text style={styles.buttonText} onPress={ () => Cadastro()}>Finalizar Cadastro</Text>
+          </TouchableOpacity>
+      </KeyboardAvoidingView>
  )    
 }

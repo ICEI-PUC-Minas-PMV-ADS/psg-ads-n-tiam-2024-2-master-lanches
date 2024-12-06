@@ -13,10 +13,10 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
 
-  TextCadastro: {
+  textCadastro: {
 	  fontFamily: 'Roboto',
     fontSize: 21,
-    color: '#FFC107',
+    color: 'white',
     textAlign: 'center',
     fontWeight: 'bold',
 	  width: 320,
@@ -55,6 +55,11 @@ const styles = StyleSheet.create({
     borderRadius: 15,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+
+  buttonText: {
+    color: 'black',
+    fontWeight: 'bold',
   },
 });
 

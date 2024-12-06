@@ -16,7 +16,7 @@ export default function CadastroEmail(){
                 <InputComponent
                     placeholder="Senha"
                     keyboardType="default"
-                    isPassword= "true"
+                    isPassword= {true}
                 />
             </View>
         </KeyboardAvoidingView>
