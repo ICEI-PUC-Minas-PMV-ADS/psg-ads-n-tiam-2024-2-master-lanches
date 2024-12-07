@@ -12,6 +12,7 @@ export function UserProvider({ children }) {
     const [pagamento, setPagamento] = useState(null); 
     const [pedidoAtual, setPedidoAtual] = useState(null); 
     const [historicoPedidos, setHistoricoPedidos] = useState([]);
+    const [userRole, setUserRole] = useState(null);
 
     useEffect(() => {
         const initializeUser = async () => {
@@ -28,10 +29,17 @@ export function UserProvider({ children }) {
 
                 const userData = await AsyncStorage.getItem("usuario");
                 const screensData = await AsyncStorage.getItem("accessibleScreens");
+                const usRo = await AsyncStorage.getItem("user.role");
 
                 if (userData && screensData) {
                     setUsuario(JSON.parse(userData));
                     setAccessibleScreens(JSON.parse(screensData));
+                }
+                if(usRo){
+                    setUserRole(JSON.parse(usRo));
+                }
+                else{
+                    setUserRole('cliente');
                 }
             } catch (error) {
                 console.error("Erro ao inicializar usuário:", error);
@@ -50,6 +58,7 @@ export function UserProvider({ children }) {
 
             setUsuario(userInfo);
             setAccessibleScreens(loginData.role.accessibleScreens);
+            setUserRole(loginData.role.name)
 
             await AsyncStorage.setItem("usuario", JSON.stringify(userInfo));
             await AsyncStorage.setItem("accessibleScreens", JSON.stringify(loginData.role.accessibleScreens));
@@ -144,6 +153,7 @@ export function UserProvider({ children }) {
                 loginUsuario,
                 logoutUsuario,
                 isLoading,
+                userRole,
             }}
         >
             {children}

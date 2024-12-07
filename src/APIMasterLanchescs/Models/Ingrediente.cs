@@ -15,6 +15,8 @@ namespace APIMasterLanchescs.Models
         public double PrecoUnitario { get; set; }
 
         [FirestoreProperty("quantidade")]
-        public double Quantidade { get; set; }
+        public int Quantidade { get; set; }
+        [FirestoreProperty("essencial")]
+        public bool Essencial { get; set; }
     }
 }

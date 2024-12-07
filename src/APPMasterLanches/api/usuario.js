@@ -35,7 +35,7 @@ export const login = async (email, senha) => {
         const response = await api.post("/usuarios/login", { email, senha });
         const { token, role, userID } = response.data;
         await AsyncStorage.setItem("token", token);
-        await AsyncStorage.setItem("user.role", role.Name || "cliente");
+        await AsyncStorage.setItem("user.role", role.name || "cliente");
         await AsyncStorage.setItem("userID", userID.toString());
         return response.data;
     } catch (error) {

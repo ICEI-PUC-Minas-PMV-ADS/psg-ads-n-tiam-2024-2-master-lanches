@@ -7,8 +7,7 @@ import { accessUser } from "../../../contexts/UserContext";
 const StockManagement = ({ setLoaded }) => {
     const [estoque, setEstoque] = useState([]);
     const [loading, setLoading] = useState(true);
-    const { ADM } = accessUser();
-    const userRole = ADM ? "admin" : "user";
+    const { userRole } = accessUser();
 
     useEffect(() => {
         const fetchEstoque = async () => {
@@ -34,7 +33,7 @@ const StockManagement = ({ setLoaded }) => {
     }, [loading]);
 
     const handleUpdate = async (idProduto, quantidade) => {
-        if (userRole !== "admin") {
+        if (userRole !== "Admin") {
             Alert.alert("Permissão negada", "Apenas administradores podem alterar o estoque.");
             return;
         }
@@ -64,7 +63,7 @@ const StockManagement = ({ setLoaded }) => {
             <Text style={styles.itemText}>
                 Quantidade: {item.quantidadeDisponivel}
             </Text>
-            {userRole === "admin" && (
+            {userRole === "Admin" && (
                 <TextInput
                     style={styles.input}
                     placeholder="Nova quantidade"
@@ -85,6 +84,7 @@ const StockManagement = ({ setLoaded }) => {
             ) : (
                 <FlatList
                     data={estoque}
+                    nestedScrollEnabled={true}
                     keyExtractor={(item) => item.idProduto}
                     renderItem={renderItem}
                 />
