@@ -13,6 +13,10 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("quantidade")]
         public int QuantidadeDisponivel { get; set; }
+        public DateTime DataUltimaAtualizacao { get; set; } // Campo adicional para controle
+        public int QuantidadeReservada { get; set; }
+        public DateTime? DataReserva { get; set; }
+        public string Versao {get; set;}
 
         // Campos dinâmicos para extensibilidade
         [FirestoreProperty]

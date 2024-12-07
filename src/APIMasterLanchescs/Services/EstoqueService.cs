@@ -11,86 +11,127 @@ namespace APIMasterLanchescs.Services
         public EstoqueService(FirestoreContext firestoreContext)
         {
             _firestoreDb = firestoreContext.FirestoreDb;
+
+        }
+        public async Task ReservarEstoque(string estoqueId, int quantidade)
+        {
+            var itemEstoque = await FindEstoqueProdutoById(estoqueId);
+            if (itemEstoque == null)
+                throw new KeyNotFoundException("Produto não encontrado no estoque.");
+
+            if (itemEstoque.QuantidadeDisponivel < quantidade)
+                throw new InvalidOperationException("Estoque insuficiente para a reserva.");
+
+            itemEstoque.QuantidadeDisponivel -= quantidade;
+            itemEstoque.QuantidadeReservada += quantidade;
+            itemEstoque.DataReserva = DateTime.UtcNow;
+
+            await _firestoreDb.Collection("estoque").Document(estoqueId).SetAsync(itemEstoque);
         }
 
+        public async Task CancelarReserva(string estoqueId, int quantidade)
+        {
+            var itemEstoque = await FindEstoqueProdutoById(estoqueId);
+            if (itemEstoque == null)
+                throw new KeyNotFoundException("Produto não encontrado no estoque.");
+
+            if (itemEstoque.QuantidadeReservada < quantidade)
+                throw new InvalidOperationException("Quantidade a cancelar maior que o reservado.");
+
+            itemEstoque.QuantidadeDisponivel += quantidade;
+            itemEstoque.QuantidadeReservada -= quantidade;
+
+            await _firestoreDb.Collection("estoque").Document(estoqueId).SetAsync(itemEstoque);
+        }
         public async Task<Estoque> FindEstoqueProdutoById(string estoqueId)
         {
-            var documentSnapshot = await _firestoreDb.Collection("estoque")
-                .Document(estoqueId)
-                .GetSnapshotAsync();
-
+            var documentSnapshot = await _firestoreDb.Collection("estoque").Document(estoqueId).GetSnapshotAsync();
             return documentSnapshot.Exists
                 ? documentSnapshot.ConvertTo<Estoque>()
-                : throw new KeyNotFoundException("Produto não encontrado no estoque.");
+                : null;
+        }
+        public async Task<List<Estoque>> BuscarEstoqueAtualizadoAsync(string versaoAtual)
+        {
+            var snapshot = await _firestoreDb.Collection("estoque")
+                .WhereGreaterThan("Versao", versaoAtual)
+                .GetSnapshotAsync();
+
+            return snapshot.Documents.Select(doc => doc.ConvertTo<Estoque>()).ToList();
+        }
+        public async Task<Estoque> UpdateEstoque(string estoqueId, int quantidade)
+        {
+            var itemEstoque = await FindEstoqueProdutoById(estoqueId);
+            if (itemEstoque == null)
+                throw new KeyNotFoundException("Produto não encontrado no estoque.");
+
+            itemEstoque.QuantidadeDisponivel += quantidade;
+            itemEstoque.DataUltimaAtualizacao = DateTime.UtcNow;
+            itemEstoque.Versao = Guid.NewGuid().ToString(); // Atualiza versão
+
+            await _firestoreDb.Collection("estoque").Document(estoqueId).SetAsync(itemEstoque);
+            return itemEstoque;
         }
 
-        public async Task<Estoque> UpdateEstoque(string estoqueId, Estoque estoque)
+        public async Task UpdateFieldsInAllDocuments(Dictionary<string, object> fieldsToUpdate, string userRole)
         {
-            var documentRef = _firestoreDb.Collection("estoque").Document(estoqueId);
+            if (userRole != "admin")
+                throw new UnauthorizedAccessException("Operação permitida apenas para administradores.");
 
-            var documentSnapshot = await documentRef.GetSnapshotAsync();
-            if (documentSnapshot.Exists)
+            var snapshot = await _firestoreDb.Collection("estoque").GetSnapshotAsync();
+            var batch = _firestoreDb.StartBatch();
+
+            foreach (var document in snapshot.Documents)
             {
-                estoque.CamposExtras["DataUltimaAtualizacao"] = DateTime.UtcNow;
-                await documentRef.UpdateAsync(estoque.CamposExtras);
-                return estoque;
+                batch.Update(document.Reference, fieldsToUpdate);
             }
 
-            throw new KeyNotFoundException("Produto não encontrado no estoque.");
+            await batch.CommitAsync();
+        }
+
+        public async Task InicializarEstoqueSeNecessario(string id, string nome, int quantidadeInicial)
+        {
+            var itemEstoque = await FindEstoqueProdutoById(id);
+            Console.WriteLine("Adicionando: " + nome);
+            if (itemEstoque == null)
+            {
+                var novoEstoque = new Estoque
+                {
+                    IdProduto = id,
+                    NomeProduto = nome,
+                    QuantidadeDisponivel = quantidadeInicial,
+                    DataUltimaAtualizacao = DateTime.UtcNow
+                };
+
+                await _firestoreDb.Collection("estoque").Document(id).SetAsync(novoEstoque);
+            }
         }
 
         public async Task<List<Estoque>> ListAllEstoque()
         {
             var snapshot = await _firestoreDb.Collection("estoque").GetSnapshotAsync();
 
-            return snapshot.Documents
-                .Select(doc =>
-                {
-                    var estoque = doc.ConvertTo<Estoque>();
-                    estoque.CamposExtras = doc.ToDictionary()
-                        .Where(kv => !estoque.GetType().GetProperties().Any(prop => prop.Name.Equals(kv.Key, StringComparison.OrdinalIgnoreCase)))
-                        .ToDictionary(kv => kv.Key, kv => kv.Value);
-                    return estoque;
-                })
-                .OrderBy(e => e.NomeProduto)
-                .ToList();
+            return snapshot.Documents.Select(doc => doc.ConvertTo<Estoque>()).ToList();
         }
 
-        public async Task InitializeEstoqueCollection(int quantidadeDocumentos)
+        public async Task SincronizarEstoqueComProdutos(List<Produto> produtos)
         {
-            var collectionRef = _firestoreDb.Collection("estoque");
-
-            for (int i = 0; i < quantidadeDocumentos; i++)
+            foreach (var produto in produtos)
             {
-                var novoEstoque = new Estoque
+                Console.WriteLine("Produto: " + produto.Nome);
+                foreach (var ingrediente in produto.Ingredientes)
                 {
-                    IdProduto = Guid.NewGuid().ToString(),
-                    NomeProduto = $"Produto {i + 1}",
-                    QuantidadeDisponivel = new Random().Next(1, 100),
-                    CamposExtras = new Dictionary<string, object>
+                    Console.WriteLine("Ingrediente: " + ingrediente.Nome);
+                    await InicializarEstoqueSeNecessario(ingrediente.Id, ingrediente.Nome, ingrediente.Quantidade);
+                }
+
+                if (produto.AdicionaisPossiveis != null)
+                {
+                    foreach (var adicional in produto.AdicionaisPossiveis)
                     {
-                        { "UnidadeMedida", "unidade" },
-                        { "Categoria", "Alimentos" },
-                        { "Validade", DateTime.UtcNow.AddDays(new Random().Next(10, 365)) },
-                        { "DataUltimaAtualizacao", DateTime.UtcNow },
-                        { "Descricao", "Descrição padrão do produto" }
+                        Console.WriteLine("Adicional: " + adicional.Nome);
+                        await InicializarEstoqueSeNecessario(adicional.Id, adicional.Nome, 0);
                     }
-                };
-
-                await collectionRef.AddAsync(novoEstoque);
-            }
-        }
-
-        public async Task UpdateFieldsInAllDocuments(Dictionary<string, object> fieldsToUpdate, string userRole)
-        {
-            if (userRole != "admin")
-                throw new UnauthorizedAccessException("Ação permitida apenas para administradores.");
-
-            var snapshot = await _firestoreDb.Collection("estoque").GetSnapshotAsync();
-
-            foreach (var document in snapshot.Documents)
-            {
-                await document.Reference.UpdateAsync(fieldsToUpdate);
+                }
             }
         }
     }
