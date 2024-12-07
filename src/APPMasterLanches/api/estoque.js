@@ -10,20 +10,18 @@ export const findAllEstoque = async () => {
     }
 };
 
-export const inciarEstoque = async () => {
+export const inicializarEstoque = async () => {
     try {
-        await api.response("/estoques/inicializar")
+        await api.post("/estoques/inicializar");
+    } catch (error) {
+        console.error("Erro ao inicializar estoque:", error.response?.data || error.message);
+        throw new Error("Erro ao inicializar estoque.");
     }
-    catch (error) {
-        console.error("Erro ao iniciar estoque:", error.response?.data || error.message);
-        throw new Error("Erro ao iniciar estoque.");
-    }
-}
+};
 
-// Busca estoque por ID
 export const findEstoqueProdutoById = async (id) => {
     try {
-        const { data } = await api.get(`/estoques/${id}`);
+        const { data } = await api.get(`/estoques/produtos/${id}`);
         return data;
     } catch (error) {
         console.error("Erro ao buscar produto no estoque:", error.response?.data || error.message);
@@ -31,10 +29,9 @@ export const findEstoqueProdutoById = async (id) => {
     }
 };
 
-// Atualiza estoque por ID
-export const updateEstoque = async (id, estoque) => {
+export const updateEstoque = async (id, quantidade) => {
     try {
-        const { data } = await api.put(`/estoques/${id}`, estoque);
+        const { data } = await api.put(`/estoques/produtos/${id}`, quantidade);
         return data;
     } catch (error) {
         console.error("Erro ao atualizar estoque:", error.response?.data || error.message);

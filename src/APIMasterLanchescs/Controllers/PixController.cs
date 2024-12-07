@@ -73,5 +73,19 @@ namespace APIMasterLanchescs.Controllers
 
             return Ok(pagamentos);
         }
+        [HttpGet("{id}")]
+        public IActionResult GetPaymentStatus(int id)
+        {
+            try
+            {
+                var paymentStatus = _paymentService.ConsultarStatus(id);
+                return Ok(paymentStatus);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+        }
+
     }
 }

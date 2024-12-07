@@ -20,5 +20,11 @@ namespace APIMasterLanchescs.Models
         public string PixCode { get; set; } // Código Pix
         public string Status { get; set; } // Status do pagamento
         public string StatusDetail { get; set; } // Detalhes do status
+        public DateTime? Expiration {get; set; }
+    }
+    public class PixPaymentStatus
+    {
+        public string Status { get; set; }
+        public string StatusDetail { get; set; }
     }
 }

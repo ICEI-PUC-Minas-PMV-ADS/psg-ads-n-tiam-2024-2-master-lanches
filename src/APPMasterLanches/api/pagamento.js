@@ -22,16 +22,16 @@ export const createPagamento = async (dadosPagamento) => {
             const cacheData = {
                 PixCode: data.pixCode,
                 QRCode_Path: localPath,
-                expiresAt: Date.now() + 10 * 60 * 1000, // Validade de 10 minutos
+                expiresAt: data.expiration,
             };
 
             await AsyncStorage.setItem(`pix_${data.pixCode}`, JSON.stringify(cacheData));
-
             return {
                 PixCode: data.pixCode,
                 QRCode_Path: localPath,
                 Status: data.status,
                 Details: data.statusDetail,
+                Expiration: data.expiration,
             };
         }
 

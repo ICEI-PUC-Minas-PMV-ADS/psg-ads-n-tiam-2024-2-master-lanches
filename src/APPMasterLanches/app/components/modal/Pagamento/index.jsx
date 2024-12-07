@@ -5,18 +5,38 @@ import {
 } from "react-native";
 // import Clipboard from '@react-native-clipboard/clipboard'; Usa funções nativas
 import * as Clipboard from 'expo-clipboard';
-import { createPagamento } from "../../../../api/pagamento";
+import { createPagamento, cancelPagamento } from "../../../../api/pagamento";
 import styles from "./style";
 import { cleanExpiredCache } from "../../../cleaners/Pix_cache_clean";
+import { accessUser } from '../../../contexts/UserContext';
 
 const ModalPagamento = ({ isVisible, onClose, data, onPagamentoFinalizado }) => {
     const [responseData, setResponseData] = useState(null);
+    const { salvarPagamento } = accessUser();
     const [info, setInfo] = useState(null);
     const [isLoading, setLoading] = useState(false);
     const [timeoutId, setTimeoutId] = useState(null);
     const [remainingTime, setRemainingTime] = useState(null); // Tempo restante
     const [closeCountdown, setCloseCountdown] = useState(null); // Temporizador para fechar após expirar
-
+    /* useEffect(() => {
+        if (responseData && responseData.PixCode) {
+            const interval = setInterval(async () => {
+                try {
+                    const status = await findPagamentoById({ id: responseData.PixCode });
+                    if (status === "approved" || status === "rejected") {
+                        clearInterval(interval);
+                        Alert.alert("Pagamento", `Status: ${status}`);
+                        handleClose();
+                    }
+                } catch (error) {
+                    console.error("Erro ao atualizar status:", error.message);
+                }
+            }, 5000); // A cada 5 segundos
+    
+            return () => clearInterval(interval);
+        }
+    }, [responseData]); */
+    
     useEffect(() => {
         if (isVisible && data && !responseData) {
             const externalReference = "#1234";
@@ -24,18 +44,19 @@ const ModalPagamento = ({ isVisible, onClose, data, onPagamentoFinalizado }) => 
         }
 
         if (responseData) {
-            const expirationTime = new Date().getTime() + 10 * 60 * 1000; // 10 minutos
-            setRemainingTime(expirationTime - new Date().getTime());
-
-            const interval = setInterval(() => {
-                const timeLeft = expirationTime - new Date().getTime();
+            const expirationTime = new Date(responseData.Expiration).getTime();
+            const updateRemainingTime = () => {
+                const now = new Date().getTime();
+                const timeLeft = expirationTime - now;
                 setRemainingTime(timeLeft);
                 if (timeLeft <= 0) {
                     clearInterval(interval);
                     handleTimeout();
                 }
-            }, 1000);
+            };
 
+            updateRemainingTime();
+            const interval = setInterval(updateRemainingTime, 1000);
             return () => clearInterval(interval);
         }
 
@@ -44,7 +65,10 @@ const ModalPagamento = ({ isVisible, onClose, data, onPagamentoFinalizado }) => 
             if (closeCountdown) clearTimeout(closeCountdown);
         };
     }, [isVisible, data, responseData]);
-
+    const validatePaymentData = (data) => {
+        if (!data.amount || data.amount <= 0) throw new Error("Valor inválido.");
+        if (!data.payerEmail || !data.payerEmail.includes("@")) throw new Error("Email inválido.");
+    };    
     const handleCreatePagamento = async () => {
         setLoading(true);
         try {
@@ -64,7 +88,8 @@ const ModalPagamento = ({ isVisible, onClose, data, onPagamentoFinalizado }) => 
             });
             clearTimeout(timer);
             setResponseData(response);
-            onPagamentoFinalizado(response);
+            salvarPagamento(response);
+            //onPagamentoFinalizado(response);
         } catch (error) {
             Alert.alert('Erro', error.message);
         } finally {
@@ -79,6 +104,7 @@ const ModalPagamento = ({ isVisible, onClose, data, onPagamentoFinalizado }) => 
     };
 
     const handleClose = () => {
+        cancelPagamento(responseData.id);
         setResponseData(null);
         onPagamentoFinalizado(null);
         onClose();

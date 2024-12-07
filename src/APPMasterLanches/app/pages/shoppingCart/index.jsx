@@ -3,7 +3,6 @@ import { Text, View, FlatList, TouchableOpacity, Image, Alert } from 'react-nati
 import BottomBar from '../../components/bottomBar';
 import ModalPagamento from '../../components/modal/Pagamento';
 import { useCart } from '../../contexts/CartContext';
-import { accessUser } from '../../contexts/UserContext'; // Contexto de Usuário
 import Header from '../../components/header';
 import styles from './style';
 
@@ -58,7 +57,6 @@ const CartItem = memo(({ item, onIncrement, onDecrement, onRemove }) => (
 
 const ShoppingCart = () => {
     const { cart, incrementItemQuantity, decrementItemQuantity, removeFromCart, clearCart } = useCart();
-    const { savePagamento } = accessUser();
     const [isModalVisible, setModalVisible] = useState(false);
     const [pagamentoInfo, setPagamentoInfo] = useState({});
 
@@ -94,7 +92,6 @@ const ShoppingCart = () => {
 
     const handlePagamentoFinalizado = (pagamentoConcluido) => {
         if (pagamentoConcluido) {
-            savePagamento(pagamentoConcluido); // Salva no UserContext
             clearCart(); // Limpa o carrinho
             Alert.alert('Pagamento Concluído', 'Seu pagamento foi processado com sucesso!');
         }
