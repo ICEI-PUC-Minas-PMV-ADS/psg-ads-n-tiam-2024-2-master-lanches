@@ -37,6 +37,43 @@ const styles = StyleSheet.create({
     width: '28.5%',
     borderRadius: 10,
   },
+  essentialIngredient: {
+    color: '#228B22',
+    fontWeight: 'bold',
+    fontStyle: 'italic',
+  },
+  removableIngredientWrapper: {
+    marginVertical: 5,
+    padding: 5,
+    borderRadius: 5,
+    backgroundColor: '#f5f5f5',
+  },
+  additionalText: {
+    fontSize: 16,
+    marginVertical: 5,
+    color: '#FF6347',
+    fontWeight: '600',
+  },
+  quantityControl: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+  quantityButton: {
+    backgroundColor: '#FFD700',
+    borderRadius: 5,
+    padding: 10,
+    marginHorizontal: 5,
+  },
+  quantityButtonText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#1e1e1e',
+  },
+  quantityText: {
+    fontSize: 18,
+    fontWeight: 'bold',
+    color: '#FFD700',
+  },
   header: {
     flexDirection: 'row',
     height: '18%',
@@ -56,6 +93,15 @@ const styles = StyleSheet.create({
     borderRadius: 10,
     padding: 10,
     marginTop: 10,
+  },
+  ingredientText: {
+    fontSize: 16,
+    marginVertical: 2,
+    color: "#121212",
+  },
+  removedIngredient: {
+    textDecorationLine: "line-through",
+    color: "gray",
   },
   buttonBar: {
     height: '12%',

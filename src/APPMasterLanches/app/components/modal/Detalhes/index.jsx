@@ -1,36 +1,58 @@
 import React, { useState } from 'react';
-import { Text, View, Image, TouchableWithoutFeedback, Pressable, StatusBar } from 'react-native';
+import {
+    Text,
+    View,
+    Image,
+    TouchableWithoutFeedback,
+    Pressable,
+    StatusBar,
+    ScrollView,
+    TouchableOpacity,
+} from 'react-native';
 import styles from './style';
 import ModalAdicionais from '../Adicionais';
-import CustomButton from '../../CustomButton/index';
+import CustomButton from '../../CustomButton';
 import { useCart } from '../../../contexts/CartContext';
 
 export default function DetalhesItem({ item, onClose }) {
     const { addToCart } = useCart();
     const [isModalVisible, setModalVisible] = useState(false);
     const [adicionais, setAdicionais] = useState([]);
-    const isHamburguer = item.nomeCategoria === "Hambúrguer" || item.nomeCategoria === "Vegetariano" ? true : false;
+    const [removedIngredients, setRemovedIngredients] = useState([]);
+    const [quantity, setQuantity] = useState(1);
 
-    // Calcula o preço total (produto base + adicionais)
-    const totalPreco = item.preco + adicionais.reduce((acc, adicional) => acc + adicional.preco, 0);
+    const essentialIngredients = item.ingredientes?.filter((ing) => ing.essencial);
+    const removableIngredients = item.ingredientes?.filter((ing) => !ing.essencial);
+
+    const totalPreco = (item.preco + adicionais.reduce((acc, adicional) => acc + adicional.preco, 0)) * quantity;
 
     const handleOpenAdicionaisModal = () => setModalVisible(true);
-
     const handleCloseAdicionaisModal = () => setModalVisible(false);
 
-    const handleAddAdicionais = (selectedAdicionais) => {
-        setAdicionais(selectedAdicionais); // Atualiza os adicionais
+    const handleAddAdicionais = (selectedAdicionais) => setAdicionais(selectedAdicionais);
+
+    const handleRemoveIngredient = (ingredientName) => {
+        setRemovedIngredients((prev) =>
+            prev.includes(ingredientName)
+                ? prev.filter((name) => name !== ingredientName)
+                : [...prev, ingredientName]
+        );
     };
 
     const handleAddToCart = () => {
-        const cartItem = {
-            ...item,
+        addToCart(
+            { ...item, preco: item.preco },
             adicionais,
-            preco: totalPreco,
-        };
-        addToCart(cartItem, adicionais); // Envia adicionais para o contexto
+            removedIngredients,
+            quantity,
+            totalPreco
+        );
         onClose();
     };
+        
+
+    const incrementQuantity = () => setQuantity((prev) => prev + 1);
+    const decrementQuantity = () => setQuantity((prev) => (prev > 1 ? prev - 1 : prev));
 
     return (
         <TouchableWithoutFeedback onPress={onClose}>
@@ -40,7 +62,7 @@ export default function DetalhesItem({ item, onClose }) {
                     isVisible={isModalVisible}
                     onClose={handleCloseAdicionaisModal}
                     onAddAdicionais={handleAddAdicionais}
-                    item={item}
+                    adicionaisDisponiveis={item.adicionaisPossiveis || []}
                 />
                 <Pressable style={styles.box} onPress={(e) => e.stopPropagation()}>
                     <View style={styles.header}>
@@ -55,54 +77,65 @@ export default function DetalhesItem({ item, onClose }) {
                         </View>
                     </View>
 
-                    {/* Exibição de ingredientes ou descrição */}
-                    {!isHamburguer ? (
-    <View style={styles.descriptionBox}>
-        <Text>Volume: {item.volume} ml</Text>
-    </View>
-) : (
-    <View style={styles.descriptionBox}>
-        {item.ingredientes?.length > 0 && (
-            <>
-                <Text style={styles.title}>Ingredientes:</Text>
-                {item.ingredientes.map((ingrediente, index) => (
-                    <Text key={index} style={styles.ingredienteText}>
-                        {ingrediente.nome}
-                    </Text>
-                ))}
-            </>
-        )}
+                    <ScrollView style={styles.descriptionBox}>
+                        <Text style={styles.title}>Ingredientes:</Text>
+                        {essentialIngredients?.map((ing) => (
+                            <Text key={ing.id} style={[styles.ingredientText, styles.essentialIngredient]}>
+                                {ing.nome} (Essencial)
+                            </Text>
+                        ))}
+                        {removableIngredients?.map((ing) => (
+                            <TouchableOpacity
+                                key={ing.id}
+                                onPress={() => handleRemoveIngredient(ing.nome)}
+                                style={styles.removableIngredientWrapper}
+                            >
+                                <Text
+                                    style={[
+                                        styles.ingredientText,
+                                        removedIngredients.includes(ing.nome) && styles.removedIngredient,
+                                    ]}
+                                >
+                                    {removedIngredients.includes(ing.nome) ? `Não adicionar: ${ing.nome}` : ing.nome}
+                                </Text>
+                            </TouchableOpacity>
+                        ))}
 
-        {adicionais.length > 0 && (
-            <>
-                <Text style={styles.title}>Adicionais:</Text>
-                {adicionais.map((adicional, index) => (
-                    <Text key={index} style={styles.ingredienteText}>
-                        {adicional.nome} - R$ {adicional.preco.toFixed(2)}
-                    </Text>
-                ))}
-            </>
-        )}
-    </View>
-)}
-
-
-                    {/* Botões de ação */}
-                    <View style={styles.buttonBar}>
-                        {isHamburguer && (
-                            <CustomButton
-                                style={styles.buttonBackground}
-                                textStyle={styles.buttonText}
-                                texto="Adicionais"
-                                backgroundColor="#FF6347"
-                                hoverColor="#ab3838"
-                                onPress={handleOpenAdicionaisModal}
-                            />
+                        {adicionais.length > 0 && (
+                            <>
+                                <Text style={styles.title}>Adicionais:</Text>
+                                {adicionais.map((adicional) => (
+                                    <Text key={adicional.id} style={styles.additionalText}>
+                                        {adicional.nome} - R$ {adicional.preco.toFixed(2)}
+                                    </Text>
+                                ))}
+                            </>
                         )}
+
                         <CustomButton
                             style={styles.buttonBackground}
                             textStyle={styles.buttonText}
-                            texto={!isHamburguer ? "Definir Quantidade" : "Adicionar"}
+                            texto="Adicionais"
+                            backgroundColor="#FF6347"
+                            hoverColor="#ab3838"
+                            onPress={handleOpenAdicionaisModal}
+                        />
+                    </ScrollView>
+
+                    <View style={styles.buttonBar}>
+                        <View style={styles.quantityControl}>
+                            <TouchableOpacity onPress={decrementQuantity} style={styles.quantityButton}>
+                                <Text style={styles.quantityButtonText}>-</Text>
+                            </TouchableOpacity>
+                            <Text style={styles.quantityText}>{quantity}</Text>
+                            <TouchableOpacity onPress={incrementQuantity} style={styles.quantityButton}>
+                                <Text style={styles.quantityButtonText}>+</Text>
+                            </TouchableOpacity>
+                        </View>
+                        <CustomButton
+                            style={styles.buttonBackground}
+                            textStyle={styles.buttonText}
+                            texto="Adicionar"
                             backgroundColor="#FF6347"
                             textColor="#fff"
                             hoverColor="#ab3838"

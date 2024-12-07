@@ -3,55 +3,100 @@ import { StyleSheet, Platform } from 'react-native';
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        backgroundColor: '#000000',
-        //paddingTop: 40,
+        backgroundColor: '#121212', // Fundo levemente cinza para suavizar
         paddingHorizontal: 16,
         paddingBottom: 80,
-        // marginTop: Platform.OS === 'ios' || Platform.OS === 'android' ? 40 : 0,
     },
-    cartItem: {
+    cartItemContainer: {
         backgroundColor: '#1e1e1e',
-        padding: 15,
-        marginBottom: 10,
-        borderRadius: 10,
-        borderWidth: 1,
-        borderColor: '#FFD700',
+        borderRadius: 12,
+        marginBottom: 16,
+        padding: 16,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
+        shadowOpacity: 0.3,
+        shadowRadius: 4,
         elevation: 5,
     },
-    cartItemText: {
-        color: '#fff',
+    cartItemContent: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        flex: 1,
+    },
+    itemDetails: {
+        flex: 1,
+        paddingRight: 10,
+    },
+    itemName: {
+        fontSize: 18,
+        fontWeight: 'bold',
+        color: '#FFD700',
+        marginBottom: 6,
+    },
+    itemAdditional: {
+        fontSize: 14,
+        color: '#b3b3b3',
+        marginBottom: 4,
+    },
+    itemRemoved: {
+        fontSize: 14,
+        color: '#b3b3b3',
+        marginBottom: 4,
+    },
+    itemPrice: {
+        fontSize: 14,
+        color: '#ccc',
+        marginBottom: 4,
+    },
+    itemSubtotal: {
         fontSize: 16,
-        lineHeight: 22,
+        fontWeight: 'bold',
+        color: '#fff',
+        marginTop: 8,
+    },
+    actionsContainer: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 10,
+    },
+    quantityContainer: {
+        flexDirection: 'row',
+        alignItems: 'center',
+    },
+    actionButton: {
+        width: 36,
+        height: 36,
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderRadius: 18,
+        marginHorizontal: 8,
+    },
+    actionText: {
+        fontSize: 20,
+        fontWeight: 'bold',
+        color: '#fff',
+    },
+    incrementButton: {
+        backgroundColor: '#4CAF50', // Verde vibrante
+    },
+    decrementButton: {
+        backgroundColor: '#f44336', // Vermelho vibrante
+    },
+    itemQuantity: {
+        fontSize: 20,
+        color: '#FFD700',
+    },
+    removeButton: {
+        marginLeft: 16,
+        paddingHorizontal: 10,
+        paddingVertical: 6,
+        borderRadius: 6,
+        backgroundColor: '#FF5722', // Laranja forte
     },
     removeText: {
         color: '#fff',
-        fontSize: 14,
-        fontWeight: '600',
-    },
-    actionText: {
-        color: '#FFD700',
-        fontSize: 18,
         fontWeight: 'bold',
-        marginHorizontal: 10,
-    },
-    cartActions: {
-        flexDirection: 'row',
-        alignItems: 'center',
-        marginTop: 10,
-        justifyContent: 'space-between',
-    },
-    cartList: {
-        //paddingBottom: 120,
-    },
-    emptyCart: {
-        color: '#888',
-        fontSize: 18,
-        textAlign: 'center',
-        marginTop: 20,
+        fontSize: 14,
     },
     cartFooter: {
         padding: 16,
@@ -59,67 +104,47 @@ const styles = StyleSheet.create({
         borderTopWidth: 1,
         borderTopColor: '#FFD700',
         alignItems: 'center',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: -2 },
+        shadowOpacity: 0.3,
+        shadowRadius: 3.84,
+        elevation: 5,
     },
     totalText: {
-        fontSize: 20,
+        fontSize: 22,
         fontWeight: 'bold',
-        marginBottom: 15,
         color: '#FFD700',
+        marginBottom: 12,
     },
     checkoutButton: {
         backgroundColor: '#FFD700',
-        paddingVertical: 12,
+        paddingVertical: 14,
         paddingHorizontal: 24,
-        borderRadius: 8,
+        borderRadius: 10,
         width: '80%',
         alignItems: 'center',
         justifyContent: 'center',
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.3,
-        shadowRadius: 3.84,
-        elevation: 5,
+        shadowOpacity: 0.4,
+        shadowRadius: 4,
+        elevation: 6,
     },
     checkoutText: {
         color: '#121212',
         fontWeight: 'bold',
-        fontSize: 16,
+        fontSize: 18,
         textAlign: 'center',
     },
-    actionButton: {
-        marginHorizontal: 8,
-        backgroundColor: '#FFD700',
-        padding: 8,
-        borderRadius: 4,
-        alignItems: 'center',
-        justifyContent: 'center',
+    cartList: {
+        paddingTop: 10,
     },
-    actionText: {
-        color: '#000', // Preto para contraste
+    emptyCart: {
+        color: '#888',
         fontSize: 18,
-        fontWeight: 'bold',
+        textAlign: 'center',
+        marginTop: 20,
     },
-    adicionaisText: {
-        color: '#ccc',
-        fontSize: 14,
-        marginVertical: 4,
-    },
-    removeButton: {
-        marginLeft: 16,
-        backgroundColor: '#FF4500', // Laranja escuro
-        padding: 8,
-        borderRadius: 4,
-        alignItems: 'center',
-        justifyContent: 'center',
-    },
-    removeText: {
-        color: '#fff',
-        fontSize: 14,
-        fontWeight: 'bold',
-    },    
-    actionContainer:{
-        flexDirection: 'row'
-    }
 });
 
 export default styles;

@@ -1,5 +1,5 @@
 import React, { memo, useMemo, useState } from 'react';
-import { Text, View, FlatList, TouchableOpacity, Alert } from 'react-native';
+import { Text, View, FlatList, TouchableOpacity, Image, Alert } from 'react-native';
 import BottomBar from '../../components/bottomBar';
 import ModalPagamento from '../../components/modal/Pagamento';
 import { useCart } from '../../contexts/CartContext';
@@ -8,28 +8,48 @@ import Header from '../../components/header';
 import styles from './style';
 
 const CartItem = memo(({ item, onIncrement, onDecrement, onRemove }) => (
-    <View style={styles.cartItem}>
-        <Text style={styles.cartItemText}>{item.nome}</Text>
-        {item.adicionais?.length > 0 ? (
-            <Text style={styles.adicionaisText}>
-                Adicionais: {item.adicionais.map((a) => a.nome).join(', ')}
-            </Text>
-        ) : (
-            <Text style={styles.adicionaisText}>Sem adicionais</Text>
-        )}
-        <Text style={styles.cartItemText}>Preço unitário: R$ {item.preco.toFixed(2)}</Text>
-        <Text style={styles.cartItemText}>Quantidade: {item.quantidade}</Text>
-        <Text style={styles.cartItemText}>Subtotal: R$ {(item.quantidade * item.preco).toFixed(2)}</Text>
-        <View style={styles.cartActions}>
-            <View style={styles.actionContainer}>
-                <TouchableOpacity onPress={() => onIncrement(item.uniqueId)} style={styles.actionButton}>
+    <View style={styles.cartItemContainer}>
+        <View style={styles.cartItemContent}>
+            {/* Informações do produto */}
+            <View style={styles.itemDetails}>
+                <Text style={styles.itemName}>{item.nome}</Text>
+                <Text style={styles.itemAdditional}>
+                    {item.adicionais?.length > 0
+                        ? `Adicionais: ${item.adicionais.map((a) => a.nome).join(', ')}`
+                        : 'Sem adicionais'}
+                </Text>
+                <Text style={styles.itemRemoved}>
+                    {item.removedIngredients?.length > 0
+                        ? `Ingredientes removidos: ${item.removedIngredients.join(', ')}`
+                        : 'Sem ingredientes removidos'}
+                </Text>
+                <Text style={styles.itemPrice}>Preço unitário: R$ {item.preco.toFixed(2)}</Text>
+                <Text style={styles.itemSubtotal}>Subtotal: R$ {(item.quantidade * item.preco).toFixed(2)}</Text>
+            </View>
+        </View>
+
+        {/* Ações (Incrementar, Decrementar, Remover) */}
+        <View style={styles.actionsContainer}>
+            <View style={styles.quantityContainer}>
+
+                <TouchableOpacity
+                    style={[styles.actionButton, styles.incrementButton]}
+                    onPress={() => onIncrement(item.uniqueId)}
+                >
                     <Text style={styles.actionText}>+</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => onDecrement(item.uniqueId)} style={styles.actionButton}>
+                <Text style={styles.itemQuantity}>{item.quantidade}</Text>
+                <TouchableOpacity
+                    style={[styles.actionButton, styles.decrementButton]}
+                    onPress={() => onDecrement(item.uniqueId)}
+                >
                     <Text style={styles.actionText}>-</Text>
                 </TouchableOpacity>
             </View>
-            <TouchableOpacity onPress={() => onRemove(item.uniqueId)} style={styles.removeButton}>
+            <TouchableOpacity
+                style={styles.removeButton}
+                onPress={() => onRemove(item.uniqueId)}
+            >
                 <Text style={styles.removeText}>Remover</Text>
             </TouchableOpacity>
         </View>
@@ -66,7 +86,7 @@ const ShoppingCart = () => {
         const Valor = totalPrice;
         const Descricao = `Pagamento de R$ ${Valor.toFixed(2)} feito por ${userName}`;
         const Email = userMail;
-    
+
         const info = { Pedido, Valor, Descricao, Email };
         setPagamentoInfo(info);
         setModalVisible(true);
