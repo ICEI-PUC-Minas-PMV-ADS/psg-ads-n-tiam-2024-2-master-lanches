@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { View, Text, TouchableOpacity, Image, TextInput, Alert } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import * as ImagePicker from 'expo-image-picker';
+import { useNavigation } from '@react-navigation/native'; // Importação para navegação
 import styles from './style';
 import BottomBar from "../../components/bottomBar";
 import { accessUser } from '../../contexts/UserContext';
@@ -10,7 +11,8 @@ export default function Profile() {
     const [avatar, setAvatar] = useState(null); // Estado para armazenar o caminho da imagem
     const [userName, setUserName] = useState(''); // Estado para armazenar o nome do usuário
     const [showHelp, setShowHelp] = useState(false); // Estado para exibir/ocultar detalhes de ajuda
-    const { usuario } = accessUser()
+    const { usuario } = accessUser();
+    const navigation = useNavigation(); // Hook para navegação
 
     const pickImage = async () => {
         const permissionResult = await ImagePicker.requestMediaLibraryPermissionsAsync();
@@ -55,7 +57,11 @@ export default function Profile() {
 
             {/* Opções do Usuário */}
             <View style={styles.optionsContainer}>
-                <TouchableOpacity style={styles.option}>
+                {/* Navegação para Configurações */}
+                <TouchableOpacity
+                    style={styles.option}
+                    onPress={() => navigation.navigate("Configuracoes")}
+                >
                     <Icon name="settings" size={24} color="#fff" />
                     <Text style={styles.optionText}>Configurações</Text>
                 </TouchableOpacity>
