@@ -3,7 +3,7 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { accessUser } from '../contexts/UserContext';
 import Login from "../pages/login";
 import HomeScreen from "../pages/telaPrincipal";
-import Pesquisa from "../pages/pesquisa";
+import Pesquisa from "../pages/Pesquisa"
 import Cart from "../pages/shoppingCart";
 import AdministrationFunctions from '../pages/funçõesAdministração';
 import Cadastro from '../pages/cadastro';

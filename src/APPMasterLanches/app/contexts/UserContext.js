@@ -29,17 +29,10 @@ export function UserProvider({ children }) {
 
                 const userData = await AsyncStorage.getItem("usuario");
                 const screensData = await AsyncStorage.getItem("accessibleScreens");
-                const usRo = await AsyncStorage.getItem("user.role");
 
                 if (userData && screensData) {
                     setUsuario(JSON.parse(userData));
                     setAccessibleScreens(JSON.parse(screensData));
-                }
-                if(usRo){
-                    setUserRole(JSON.parse(usRo));
-                }
-                else{
-                    setUserRole('cliente');
                 }
             } catch (error) {
                 console.error("Erro ao inicializar usuário:", error);
