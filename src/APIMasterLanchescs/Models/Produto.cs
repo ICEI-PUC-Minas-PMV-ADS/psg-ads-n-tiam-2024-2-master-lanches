@@ -26,8 +26,13 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("ingredientes")]
         public List<Ingrediente> Ingredientes { get; set; }
+
         [FirestoreProperty("adicionais")]
         public List<Adicional> AdicionaisPossiveis { get; set; }
-        public string Versao {get; set;}
+
+        [FirestoreProperty("quantidade")]
+        public int Quantidade { get; set; }
+
+        public string Versao { get; set; }
     }
 }
