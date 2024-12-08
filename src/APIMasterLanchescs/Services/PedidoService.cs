@@ -24,14 +24,19 @@ namespace APIMasterLanchescs.Services
             pedido.Status = "EmEspera";
             pedido.IdPedido = string.IsNullOrEmpty(pedido.IdPedido) ? Guid.NewGuid().ToString() : pedido.IdPedido;
             pedido.DataPedido = DateTime.UtcNow;
-
-            await SavePedido(pedido);
         }
 
         public async Task SavePedido(Pedido pedido)
         {
-            pedido.IdPedido = string.IsNullOrEmpty(pedido.IdPedido) ? Guid.NewGuid().ToString() : pedido.IdPedido;
-            await _pedidoCollection.Document(pedido.IdPedido).SetAsync(pedido);
+            if (pedido.Status == "Entregue" || pedido.Status == "Cancelado")
+            {
+                pedido.IdPedido = string.IsNullOrEmpty(pedido.IdPedido) ? Guid.NewGuid().ToString() : pedido.IdPedido;
+                await _pedidoCollection.Document(pedido.IdPedido).SetAsync(pedido);
+            }
+            else
+            {
+                throw new InvalidOperationException("O pedido só pode ser salvo quando o status for 'Entregue' ou 'Cancelado'.");
+            }
         }
 
         public async Task<List<Pedido>> FindAllPedidos()
@@ -72,7 +77,7 @@ namespace APIMasterLanchescs.Services
                 pedido.Status = novoStatus;
                 pedido.DataUltimaAtualizacao = DateTime.UtcNow;
 
-                await _pedidoCollection.Document(idPedido).SetAsync(pedido, SetOptions.MergeAll);
+                await SavePedido(pedido);
             }
         }
 

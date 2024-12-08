@@ -1,5 +1,4 @@
 ﻿using Google.Cloud.Firestore;
-using System.Collections.Generic;
 
 namespace APIMasterLanchescs.Models
 {
@@ -25,14 +24,15 @@ namespace APIMasterLanchescs.Models
         public bool StatusDisponibilidade { get; set; }
 
         [FirestoreProperty("ingredientes")]
-        public List<Ingrediente> Ingredientes { get; set; }
+        public List<Ingrediente> Ingredientes { get; set; } = new List<Ingrediente>();
 
         [FirestoreProperty("adicionais")]
-        public List<Adicional> AdicionaisPossiveis { get; set; }
+        public List<Adicional> AdicionaisPossiveis { get; set; } = new List<Adicional>();
 
         [FirestoreProperty("quantidade")]
         public int Quantidade { get; set; }
 
-        public string Versao { get; set; }
+        [FirestoreProperty("versao")]
+        public string Versao { get; set; } = string.Empty;
     }
 }
