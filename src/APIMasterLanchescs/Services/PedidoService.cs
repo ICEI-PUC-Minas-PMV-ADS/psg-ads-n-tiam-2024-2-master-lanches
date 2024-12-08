@@ -1,6 +1,10 @@
 using APIMasterLanchescs.Configs.DbContext;
 using APIMasterLanchescs.Models;
 using Google.Cloud.Firestore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace APIMasterLanchescs.Services
 {
@@ -12,25 +16,22 @@ namespace APIMasterLanchescs.Services
         public PedidoService(FirestoreContext firestoreContext)
         {
             _firestoreContext = firestoreContext;
-            _pedidoCollection = _firestoreContext.Db.Collection("pedidos");
+            _pedidoCollection = _firestoreContext.FirestoreDb.Collection("pedido");
         }
 
-        /*Fazer uma funcao para reservar o estoque,
-        fazer funcao 
-        */
         public async Task MakeOrder(Pedido pedido)
         {
             pedido.Status = "EmEspera";
+            pedido.IdPedido = string.IsNullOrEmpty(pedido.IdPedido) ? Guid.NewGuid().ToString() : pedido.IdPedido;
+            pedido.DataPedido = DateTime.UtcNow;
 
+            await SavePedido(pedido);
         }
 
         public async Task SavePedido(Pedido pedido)
         {
-            if(pedido.Status == "Entregue" || "Cancelado")
-
-            pedido.Id = string.IsNullOrEmpty(pedido.Id) ? Guid.NewGuid().ToString() : pedido.Id;
-
-            await _pedidoCollection.Document(pedido.Id).SetAsync(pedido);
+            pedido.IdPedido = string.IsNullOrEmpty(pedido.IdPedido) ? Guid.NewGuid().ToString() : pedido.IdPedido;
+            await _pedidoCollection.Document(pedido.IdPedido).SetAsync(pedido);
         }
 
         public async Task<List<Pedido>> FindAllPedidos()
@@ -39,39 +40,53 @@ namespace APIMasterLanchescs.Services
             return snapshot.Documents.Select(doc => doc.ConvertTo<Pedido>()).ToList();
         }
 
-        public async Task<List<Pedido>> FindAllPedidosByIdCliente(String idUsuario)
+        public async Task<List<Pedido>> FindAllPedidosByIdCliente(string idUsuario)
         {
-            var snapshot = await _pedidoCollection.GetSnapshotAsync();
+            var snapshot = await _pedidoCollection
+                .WhereEqualTo("clienteId", idUsuario)
+                .GetSnapshotAsync();
+
             return snapshot.Documents.Select(doc => doc.ConvertTo<Pedido>()).ToList();
         }
 
         public async Task<Pedido?> FindPedidoById(string idPedido)
         {
-            var docSnapshot = await _pedidoCollection.Document(id).GetSnapshotAsync();
-            if (docSnapshot.Exists)
-            {
-                return docSnapshot.ConvertTo<Pedido>();
-            }
-            return null;
+            var docSnapshot = await _pedidoCollection.Document(idPedido).GetSnapshotAsync();
+            return docSnapshot.Exists ? docSnapshot.ConvertTo<Pedido>() : null;
         }
 
-        /* Alterar somente o status
-        * CLiente e Admin podem alterar status
-        * Porem o admin pode alterar para 
-        */
-        public async Task UpdatePedido(String status, String idUsuario)
+        public async Task UpdatePedidoStatus(string idPedido, string novoStatus, string userRole)
         {
-            if (string.IsNullOrEmpty(pedido.Id))
-                throw new ArgumentException("O ID do pedido não pode ser nulo ou vazio.");
+            var docSnapshot = await _pedidoCollection.Document(idPedido).GetSnapshotAsync();
 
-            var docSnapshot = await _pedidoCollection.Document(pedido.Id).GetSnapshotAsync();
-            if (docSnapshot.Exists)
+            if (!docSnapshot.Exists)
+                throw new KeyNotFoundException("Pedido não encontrado.");
+
+            var pedido = docSnapshot.ConvertTo<Pedido>();
+
+            if (userRole != "admin" && !PermissaoCliente(novoStatus))
+                throw new UnauthorizedAccessException("Cliente não pode alterar para este status.");
+
+            if (userRole == "admin" || PermissaoCliente(novoStatus))
             {
-                await _pedidoCollection.Document(pedido.Id).SetAsync(pedido);
+                pedido.Status = novoStatus;
+                pedido.DataUltimaAtualizacao = DateTime.UtcNow;
+
+                await _pedidoCollection.Document(idPedido).SetAsync(pedido, SetOptions.MergeAll);
             }
-            else
+        }
+
+        private bool PermissaoCliente(string status)
+        {
+            var statusPermitidos = new[] { "Cancelado" };
+            return statusPermitidos.Contains(status);
+        }
+
+        public async Task ReservarEstoqueParaPedido(Pedido pedido, EstoqueService estoqueService)
+        {
+            foreach (var item in pedido.Produtos)
             {
-                throw new KeyNotFoundException("Pedido não encontrado para atualização.");
+                await estoqueService.ReservarEstoque(item.Id, item.Quantidade);
             }
         }
     }
