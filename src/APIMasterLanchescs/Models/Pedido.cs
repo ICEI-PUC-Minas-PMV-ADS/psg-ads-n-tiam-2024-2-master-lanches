@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using System.Collections.Generic;
 
 namespace APIMasterLanchescs.Models
 {
@@ -25,5 +26,11 @@ namespace APIMasterLanchescs.Models
 
         [FirestoreProperty("metodoPagamento")]
         public string MetodoPagamento { get; set; }
+
+        [FirestoreProperty("produtos")]
+        public List<Produto> Produtos { get; set; }
+
+        [FirestoreProperty("dataUltimaAtualizacao")]
+        public DateTime? DataUltimaAtualizacao { get; set; }
     }
 }
