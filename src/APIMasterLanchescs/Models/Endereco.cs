@@ -1,4 +1,5 @@
 ﻿using Google.Cloud.Firestore;
+using APIMasterLanchescs.Models;
 
 namespace APIMasterLanchescs.Models
 {
