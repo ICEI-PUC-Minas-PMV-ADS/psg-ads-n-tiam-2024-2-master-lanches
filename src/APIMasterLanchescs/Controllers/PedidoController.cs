@@ -5,21 +5,29 @@ using Microsoft.AspNetCore.Mvc;
 namespace APIMasterLanchescs.Controllers
 {
     [ApiController]
-    [Route("api/pedidos")]
+    [Route("v1/pedidos")]
+    [Consumes("application/json")]
     public class PedidoController : ControllerBase
     {
         private readonly PedidoService _pedidoService;
+        private readonly EstoqueService _estoqueService;
 
-        public PedidoController(PedidoService pedidoService)
+        public PedidoController(PedidoService pedidoService, EstoqueService estoqueService)
         {
             _pedidoService = pedidoService;
+            _estoqueService = estoqueService;
         }
 
         [HttpPost]
         public async Task<IActionResult> Create([FromBody] Pedido pedido)
         {
-            await _pedidoService.SavePedido(pedido);
-            return CreatedAtAction(nameof(GetById), new { id = pedido.Id }, pedido);
+            if (pedido == null)
+            {
+                return BadRequest(new { message = "Pedido inválido." });
+            }
+
+            await _pedidoService.MakeOrder(pedido);
+            return CreatedAtAction(nameof(GetById), new { id = pedido.IdPedido }, pedido);
         }
 
         [HttpGet]
@@ -40,22 +48,26 @@ namespace APIMasterLanchescs.Controllers
             return Ok(pedido);
         }
 
-        [HttpPut("{id}")]
-        public async Task<IActionResult> Update(string id, [FromBody] Pedido pedido)
+        [HttpGet("cliente/{idUsuario}")]
+        public async Task<IActionResult> GetAllPedidosByClienteId(string idUsuario)
         {
-            if (id != pedido.Id)
+            var pedidos = await _pedidoService.FindAllPedidosByIdCliente(idUsuario);
+            if (pedidos == null || !pedidos.Any())
             {
-                return BadRequest(new { message = "O ID do pedido no corpo da requisição não corresponde ao ID na URL." });
+                return NotFound(new { message = "Nenhum pedido encontrado para este cliente." });
             }
-
-            await _pedidoService.UpdatePedido(pedido);
-            return NoContent();
+            return Ok(pedidos);
         }
 
-        [HttpDelete("{id}")]
-        public async Task<IActionResult> Delete(string id)
+        [HttpPut("{id}/status")]
+        public async Task<IActionResult> UpdateStatus(string id, [FromQuery] string novoStatus, [FromQuery] string userRole)
         {
-            await _pedidoService.DeletePedido(id);
+            if (string.IsNullOrEmpty(novoStatus))
+            {
+                return BadRequest(new { message = "O status do pedido é obrigatório." });
+            }
+
+            await _pedidoService.UpdatePedidoStatus(id, novoStatus, userRole);
             return NoContent();
         }
     }
