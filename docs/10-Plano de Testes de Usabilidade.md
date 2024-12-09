@@ -41,4 +41,15 @@
  * Tentar realizar um pedido sem conexão com a internet.
  * Corrigir um erro ao inserir o endereço.
 
+### 4. Métricas a Serem Avaliadas
+* Eficácia:
+ * O usuário consegue concluir a tarefa?
+* Eficiência:
+ * Quanto tempo leva para completar cada tarefa?
+ * Quantos passos são necessários?
+* Erro:
+ * Quantos erros o usuário comete ao tentar completar uma tarefa?
+* Satisfação:
+ * Qual o nível de satisfação do usuário após realizar a tarefa?
+
 
