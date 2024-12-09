@@ -1,4 +1,6 @@
 # Plano de Testes de Usabilidade
+**Aplicativo:** Master Lanches
+**Objetivo:** Avaliar a usabilidade do aplicativo de delivery da lanchonete Master Lanches, garantindo que os usuários consigam realizar suas tarefas principais de forma fácil, rápida e intuitiva.
 
 ## **CENÁRIOS DE TESTE**
 
@@ -19,3 +21,24 @@
 * Tarefas:
   * Acessar o aplicativo pela primeira vez.
   * Realizar login com e-mail e senha ou redes sociais.
+
+### Cenário 2: Navegar pelo Cardápio
+* Objetivo: Avaliar a navegação intuitiva e categorização de produtos.
+* Tarefas:
+ * Visualizar as categorias disponíveis (hambúrgueres, bebidas, sobremesas, etc.).
+ * Selecionar um item para ver detalhes, ingredientes e preço.
+
+### Cenário 3: Criar um Pedido
+* Objetivo: Testar o fluxo de criação de um pedido no aplicativo.
+* Tarefas:
+ * Adicionar um item ao carrinho.
+ * Alterar a quantidade ou personalizar o pedido.
+ * Finalizar o pedido.
+
+### Cenário 5: Resolver Problemas
+* Objetivo: Testar como o usuário lida com mensagens de erro ou dificuldades.
+* Tarefas:
+ * Tentar realizar um pedido sem conexão com a internet.
+ * Corrigir um erro ao inserir o endereço.
+
+
