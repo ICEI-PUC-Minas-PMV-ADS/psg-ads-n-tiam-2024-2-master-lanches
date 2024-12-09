@@ -1,3 +1,3 @@
 # Apresentação
 
-![Simple Project Timeline](img/apresentacao.png)
+![Simple Project Timeline](img/apresentacao.pdf)
