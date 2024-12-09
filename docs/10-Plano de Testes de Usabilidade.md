@@ -52,4 +52,21 @@
 * Satisfação:
   * Qual o nível de satisfação do usuário após realizar a tarefa?
 
+### 5. Ferramentas e Métodos
+* Métodos:
+  * Observação direta (moderada ou não moderada).
+  * Questionários após cada tarefa para avaliação subjetiva.
+* Ferramentas:
+  * Gravação de tela e áudio para análise posterior.
+
+### 6. Roteiro do Teste
+* Apresentação e instruções ao participante.
+* Execução dos cenários de teste, seguindo as tarefas descritas.
+
+### 7. Resultados Esperados
+* Identificar elementos de design e navegação que precisam ser melhorados.
+* Compreender como os usuários interagem com o aplicativo e ajustar a interface para maior usabilidade.
+* Obter insights para priorizar melhorias antes do lançamento.
+
+
 
