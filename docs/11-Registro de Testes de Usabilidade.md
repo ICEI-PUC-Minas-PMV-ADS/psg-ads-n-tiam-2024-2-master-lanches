@@ -103,6 +103,7 @@ O teste de usabilidade revelou uma experiência de uso geral positiva, com algum
 
 Anexos
 - Capturas de tela de problemas encontrados.
+
 ![Captura de tela 2024-12-08 232720](https://github.com/user-attachments/assets/53794df8-8ba4-4a2a-8276-ea29712cee9d)
 ![Captura de tela 2024-12-08 232808](https://github.com/user-attachments/assets/2d703d25-76f1-4ca9-bc60-e3b762dc0023)
 ![Captura de tela 2024-12-08 232751](https://github.com/user-attachments/assets/5976afb5-ca2b-4ed8-83e3-d2763ecf9442)
