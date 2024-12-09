@@ -1,5 +1,5 @@
 # Plano de Testes de Usabilidade
-**Aplicativo:** Master Lanches </ br>
+**Aplicativo:** Master Lanches <br />
 **Objetivo:** Avaliar a usabilidade do aplicativo de delivery da lanchonete Master Lanches, garantindo que os usuários consigam realizar suas tarefas principais de forma fácil, rápida e intuitiva.
 
 ## **CENÁRIOS DE TESTE**
