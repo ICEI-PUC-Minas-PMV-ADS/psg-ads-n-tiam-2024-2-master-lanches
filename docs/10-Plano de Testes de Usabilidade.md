@@ -25,31 +25,31 @@
 ### Cenário 2: Navegar pelo Cardápio
 * Objetivo: Avaliar a navegação intuitiva e categorização de produtos.
 * Tarefas:
- * Visualizar as categorias disponíveis (hambúrgueres, bebidas, sobremesas, etc.).
- * Selecionar um item para ver detalhes, ingredientes e preço.
+  * Visualizar as categorias disponíveis (hambúrgueres, bebidas, sobremesas, etc.).
+  * Selecionar um item para ver detalhes, ingredientes e preço.
 
 ### Cenário 3: Criar um Pedido
 * Objetivo: Testar o fluxo de criação de um pedido no aplicativo.
 * Tarefas:
- * Adicionar um item ao carrinho.
- * Alterar a quantidade ou personalizar o pedido.
- * Finalizar o pedido.
+  * Adicionar um item ao carrinho.
+  * Alterar a quantidade ou personalizar o pedido.
+  * Finalizar o pedido.
 
 ### Cenário 5: Resolver Problemas
 * Objetivo: Testar como o usuário lida com mensagens de erro ou dificuldades.
 * Tarefas:
- * Tentar realizar um pedido sem conexão com a internet.
- * Corrigir um erro ao inserir o endereço.
+  * Tentar realizar um pedido sem conexão com a internet.
+  * Corrigir um erro ao inserir o endereço.
 
 ### 4. Métricas a Serem Avaliadas
 * Eficácia:
- * O usuário consegue concluir a tarefa?
+  * O usuário consegue concluir a tarefa?
 * Eficiência:
- * Quanto tempo leva para completar cada tarefa?
- * Quantos passos são necessários?
+  * Quanto tempo leva para completar cada tarefa?
+  * Quantos passos são necessários?
 * Erro:
- * Quantos erros o usuário comete ao tentar completar uma tarefa?
+  * Quantos erros o usuário comete ao tentar completar uma tarefa?
 * Satisfação:
- * Qual o nível de satisfação do usuário após realizar a tarefa?
+  * Qual o nível de satisfação do usuário após realizar a tarefa?
 
 
