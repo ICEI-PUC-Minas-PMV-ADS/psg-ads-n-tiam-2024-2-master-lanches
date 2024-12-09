@@ -17,5 +17,5 @@
 #### Cenário 1: Realizar Login
 * Objetivo: Testar a facilidade e eficiência do processo de login.
 * Tarefas:
-  ** Acessar o aplicativo pela primeira vez.
-  ** Realizar login com e-mail e senha ou redes sociais.
+  * Acessar o aplicativo pela primeira vez.
+  * Realizar login com e-mail e senha ou redes sociais.
